@@ -6,6 +6,7 @@ type NavIcon = 'house' | 'search' | 'heart' | 'calendar' | 'bell';
 interface NavItem {
   label: string;
   icon: NavIcon;
+  active: boolean;
 }
 
 @Component({
@@ -16,10 +17,10 @@ interface NavItem {
 })
 export class LayoutComponent {
   readonly navItems: NavItem[] = [
-    { label: 'Главная', icon: 'house' },
-    { label: 'Поиск', icon: 'search' },
-    { label: 'Мой список', icon: 'heart' },
-    { label: 'Календарь', icon: 'calendar' },
-    { label: 'Уведомления', icon: 'bell' },
+    { label: 'Главная', icon: 'house', active: true },
+    { label: 'Поиск', icon: 'search', active: false },
+    { label: 'Мой список', icon: 'heart', active: false },
+    { label: 'Календарь', icon: 'calendar', active: false },
+    { label: 'Уведомления', icon: 'bell', active: false },
   ];
 }
