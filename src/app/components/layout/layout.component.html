@@ -4,7 +4,7 @@
 
     <div class="layout__nav-items">
       @for (item of navItems; track item.label) {
-        <a class="layout__nav-item">
+        <a class="layout__nav-item" [class.active]="item.active">
           @switch (item.icon) {
             @case ('house') { <svg lucideHouse></svg> }
             @case ('search') { <svg lucideSearch></svg> }
