@@ -1,0 +1,33 @@
+:host {
+  display: block;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout__nav {
+  padding: 1rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.layout__content {
+  flex: 1;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+  }
+
+  .layout__nav {
+    border-bottom: none;
+    border-right: 1px solid var(--color-divider);
+  }
+}
