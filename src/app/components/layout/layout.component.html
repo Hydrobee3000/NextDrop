@@ -1,8 +1,24 @@
 <div class="layout">
-	<nav class="layout__nav">
-		<div>Главная</div>
-	</nav>
-	<main class="layout__content">
-		<ng-content></ng-content>
-	</main>
+  <nav class="layout__nav">
+    <span class="layout__brand">NextDrop</span>
+
+    <div class="layout__nav-items">
+      @for (item of navItems; track item.label) {
+        <a class="layout__nav-item">
+          @switch (item.icon) {
+            @case ('house') { <svg lucideHouse></svg> }
+            @case ('search') { <svg lucideSearch></svg> }
+            @case ('heart') { <svg lucideHeart></svg> }
+            @case ('calendar') { <svg lucideCalendar></svg> }
+            @case ('bell') { <svg lucideBell></svg> }
+          }
+          <span class="layout__nav-label">{{ item.label }}</span>
+        </a>
+      }
+    </div>
+  </nav>
+
+  <main class="layout__content">
+    <ng-content></ng-content>
+  </main>
 </div>
