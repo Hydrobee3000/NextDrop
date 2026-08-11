@@ -9,25 +9,113 @@
 }
 
 .layout__nav {
-  padding: 1rem;
+  padding: 0 0 env(safe-area-inset-bottom);
   background: var(--color-surface);
-  color: var(--color-text);
-  border-bottom: 1px solid var(--color-divider);
+  border-top: 1px solid var(--color-divider);
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.layout__brand {
+  display: none;
+}
+
+.layout__nav-items {
+  display: flex;
+  justify-content: space-around;
+}
+
+.layout__nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-1);
+  color: var(--color-neutral-500);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    color: var(--color-text);
+  }
+
+  &:active {
+    color: var(--color-accent);
+  }
+}
+
+.layout__nav-label {
+  font-size: 10px;
 }
 
 .layout__content {
   flex: 1;
-  padding: 1rem;
+  padding: var(--space-4);
+  padding-bottom: calc(64px + var(--space-4));
 }
 
 @media (min-width: 768px) {
   .layout {
     display: grid;
-    grid-template-columns: 240px 1fr;
+    grid-template-rows: 64px 1fr;
   }
 
   .layout__nav {
-    border-bottom: none;
-    border-right: 1px solid var(--color-divider);
+    position: static;
+    inset-inline: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 28px;
+    padding: 0 32px;
+    border-top: none;
+    border-bottom: 1px solid var(--color-divider);
+    background: color-mix(in srgb, var(--color-surface) 85%, var(--color-bg));
+    backdrop-filter: blur(6px);
+  }
+
+  .layout__brand {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .layout__nav-items {
+    flex-direction: row;
+    gap: 26px;
+  }
+
+  .layout__nav-item {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2) 0;
+    position: relative;
+
+    svg {
+      display: none;
+    }
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+
+  .layout__nav-label {
+    font-size: 13.5px;
+  }
+
+  .layout__content {
+    padding: var(--space-6);
+    padding-bottom: var(--space-6);
   }
 }
