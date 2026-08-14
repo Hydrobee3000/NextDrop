@@ -73,7 +73,7 @@
 }
 
 .game-hero__body {
-  padding: var(--space-2);
+  padding: var(--space-1) var(--space-2) var(--space-2);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -83,7 +83,7 @@
 .game-hero__info {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-3);
   min-width: 0;
 }
 
@@ -149,7 +149,7 @@
   }
 
   .game-hero__body {
-    padding: var(--space-3);
+    padding: var(--space-2) var(--space-3) var(--space-3);
     gap: var(--space-3);
   }
 
