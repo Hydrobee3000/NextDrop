@@ -1,0 +1,155 @@
+:host {
+  display: block;
+}
+
+.game-hero {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.game-hero__cover {
+  position: relative;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--color-surface) 5%, transparent 60%);
+  }
+}
+
+.game-hero__initials {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  color: color-mix(in srgb, white 90%, transparent);
+  mix-blend-mode: lighten;
+}
+
+.game-hero__badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-accent-100);
+  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+  border: 1px solid var(--color-accent);
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+
+.game-hero__favorite {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-accent) 20%, var(--color-bg));
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  cursor: pointer;
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.game-hero__body {
+  padding: var(--space-2);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.game-hero__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.game-hero__title {
+  font-size: 16px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-hero__platforms {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.game-hero__countdown {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.game-hero__days {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--color-accent-300);
+  white-space: nowrap;
+
+  span {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+}
+
+.game-hero__date {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  margin-top: 3px;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .game-hero__cover {
+    height: 190px;
+  }
+
+  .game-hero__initials {
+    font-size: 18px;
+  }
+
+  .game-hero__body {
+    padding: var(--space-3);
+    gap: var(--space-3);
+  }
+
+  .game-hero__title {
+    font-size: 19px;
+  }
+
+  .game-hero__days {
+    font-size: 21px;
+  }
+}
