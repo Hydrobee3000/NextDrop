@@ -99,6 +99,14 @@
   display: flex;
   gap: var(--space-1);
   flex-wrap: wrap;
+
+  .tag {
+    background: linear-gradient(135deg, var(--color-accent-700), var(--color-accent-900));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent-100);
+  }
 }
 
 .game-hero__countdown {
