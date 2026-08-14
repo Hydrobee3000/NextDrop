@@ -1,0 +1,25 @@
+<article class="game-hero">
+  <div class="game-hero__cover" [style.background]="coverGradient()">
+    <span class="game-hero__initials">{{ coverInitials() }}</span>
+    <span class="game-hero__badge">Самое ожидаемое</span>
+    <button class="game-hero__favorite" aria-label="В избранное">
+      <svg lucideHeart></svg>
+    </button>
+  </div>
+
+  <div class="game-hero__body">
+    <div class="game-hero__info">
+      <h2 class="game-hero__title">{{ title() }}</h2>
+      <div class="game-hero__platforms">
+        @for (platform of platforms(); track platform) {
+          <span class="tag">{{ platform }}</span>
+        }
+      </div>
+    </div>
+
+    <div class="game-hero__countdown">
+      <span class="game-hero__days">{{ daysUntilRelease() }} <span>дня</span></span>
+      <span class="game-hero__date">{{ releaseDateLabel() }}</span>
+    </div>
+  </div>
+</article>
