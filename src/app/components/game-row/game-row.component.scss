@@ -1,0 +1,67 @@
+:host {
+  display: block;
+}
+
+.game-row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.game-row__cover {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 10px;
+  color: color-mix(in srgb, white 90%, transparent);
+  mix-blend-mode: lighten;
+}
+
+.game-row__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.game-row__title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-row__meta {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.game-row__platforms {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+
+.game-row__dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-text) 35%, transparent);
+}
+
+.game-row__days {
+  font-size: 11px;
+  color: var(--color-accent-300);
+}
