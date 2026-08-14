@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
+import { GameCardComponent } from '../../components/game-card/game-card.component';
 import { GameHeroComponent } from '../../components/game-hero/game-hero.component';
 import { GameRowComponent } from '../../components/game-row/game-row.component';
 import { Game } from '../../models/game';
 
 @Component({
   selector: 'app-home',
-  imports: [GameHeroComponent, GameRowComponent],
+  imports: [GameCardComponent, GameHeroComponent, GameRowComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  readonly filters = ['Все', 'PC', 'PlayStation', 'Xbox', 'Switch'];
+
   readonly games: Game[] = [
     {
       id: 'gta-vi',

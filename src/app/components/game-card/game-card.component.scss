@@ -1,0 +1,52 @@
+:host {
+  display: block;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.game-card__cover {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-card__initials {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 13px;
+  color: color-mix(in srgb, white 90%, transparent);
+  mix-blend-mode: lighten;
+}
+
+.game-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 0 var(--space-3) var(--space-3);
+}
+
+.game-card__title {
+  font-size: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-card__platforms {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.game-card__days {
+  font-size: 11px;
+  color: var(--color-accent);
+}

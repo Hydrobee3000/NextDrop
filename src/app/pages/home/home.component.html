@@ -1,4 +1,11 @@
-<h2>Скоро выходят</h2>
+<div class="home-header">
+  <h2>Скоро выходят</h2>
+  <div class="home-filters">
+    @for (filter of filters; track filter) {
+      <span class="home-filter" [class.active]="filter === 'Все'">{{ filter }}</span>
+    }
+  </div>
+</div>
 
 <div class="home-highlight">
   <app-game-hero
@@ -21,4 +28,18 @@
       />
     }
   </div>
+</div>
+
+<h3>Все ожидаемые</h3>
+
+<div class="game-grid">
+  @for (game of games; track game.id) {
+    <app-game-card
+      [title]="game.title"
+      [platforms]="game.platforms"
+      [coverInitials]="game.coverInitials"
+      [coverGradient]="game.coverGradient"
+      [daysUntilRelease]="game.daysUntilRelease"
+    />
+  }
 </div>

@@ -1,0 +1,17 @@
+<article class="game-card">
+  <div class="game-card__cover" [style.background]="coverGradient()">
+    <span class="game-card__initials">{{ coverInitials() }}</span>
+  </div>
+
+  <div class="game-card__body">
+    <h3 class="game-card__title">{{ title() }}</h3>
+
+    <div class="game-card__platforms">
+      @for (platform of platforms(); track platform) {
+        <span class="tag">{{ platform }}</span>
+      }
+    </div>
+
+    <span class="game-card__days">{{ daysUntilRelease() }} дн.</span>
+  </div>
+</article>
