@@ -43,25 +43,15 @@
   text-overflow: ellipsis;
 }
 
-.game-row__meta {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-}
-
 .game-row__platforms {
   font-size: 11px;
   color: color-mix(in srgb, var(--color-text) 55%, transparent);
 }
 
-.game-row__dot {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--color-text) 35%, transparent);
-}
-
 .game-row__days {
+  flex: none;
   font-size: 11px;
   color: var(--color-accent-300);
+  white-space: nowrap;
+  margin-right: 2px;
 }
