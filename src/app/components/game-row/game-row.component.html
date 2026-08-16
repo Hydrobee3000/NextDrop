@@ -5,10 +5,8 @@
 
   <div class="game-row__info">
     <div class="game-row__title">{{ title() }}</div>
-    <div class="game-row__meta">
-      <span class="game-row__platforms">{{ platforms().join(', ') }}</span>
-      <span class="game-row__dot"></span>
-      <span class="game-row__days">{{ daysUntilRelease() }} дн.</span>
-    </div>
+    <span class="game-row__platforms">{{ platforms().join(', ') }}</span>
   </div>
+
+  <span class="game-row__days">{{ daysUntilRelease() }} дн.</span>
 </div>
