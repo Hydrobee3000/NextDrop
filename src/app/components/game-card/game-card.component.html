@@ -6,12 +6,14 @@
   <div class="game-card__body">
     <h3 class="game-card__title">{{ title() }}</h3>
 
-    <div class="game-card__platforms">
-      @for (platform of platforms(); track platform) {
-        <span class="tag">{{ platform }}</span>
-      }
-    </div>
+    <div class="game-card__meta">
+      <div class="game-card__platforms">
+        @for (platform of platforms(); track platform) {
+          <span class="tag">{{ platform }}</span>
+        }
+      </div>
 
-    <span class="game-card__days">{{ daysUntilRelease() }} дн.</span>
+      <span class="game-card__days">{{ daysUntilRelease() }} дн.</span>
+    </div>
   </div>
 </article>

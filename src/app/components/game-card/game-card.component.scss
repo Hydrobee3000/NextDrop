@@ -40,13 +40,22 @@
   white-space: nowrap;
 }
 
+.game-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1);
+}
+
 .game-card__platforms {
   display: flex;
   gap: var(--space-1);
   flex-wrap: wrap;
+  min-width: 0;
 }
 
 .game-card__days {
+  flex: none;
   font-size: 11px;
   color: var(--color-accent);
 }
