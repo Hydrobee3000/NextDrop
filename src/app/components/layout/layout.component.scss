@@ -83,9 +83,16 @@
     gap: 28px;
     padding: 0 32px;
     border-top: none;
-    border-bottom: 1px solid var(--color-divider);
-    background: color-mix(in srgb, var(--color-surface) 85%, var(--color-bg));
-    backdrop-filter: blur(6px);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 25%, var(--color-divider));
+    background:
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--color-accent-700) 45%, transparent),
+        color-mix(in srgb, var(--color-neutral-900) 45%, transparent)
+      ),
+      color-mix(in srgb, var(--color-surface) 78%, var(--color-bg));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .layout__brand {
