@@ -5,12 +5,20 @@ import { GameCardComponent } from '../../components/game-card/game-card.componen
 import { GameHeroComponent } from '../../components/game-hero/game-hero.component';
 import { GameHeroSkeletonComponent } from '../../components/game-hero-skeleton/game-hero-skeleton.component';
 import { GameRowComponent } from '../../components/game-row/game-row.component';
+import { GameRowSkeletonComponent } from '../../components/game-row-skeleton/game-row-skeleton.component';
 import { Game } from '../../models/game';
 import { GamesApiService } from '../../services/games-api.service';
 
 @Component({
   selector: 'app-home',
-  imports: [AsyncPipe, GameCardComponent, GameHeroComponent, GameHeroSkeletonComponent, GameRowComponent],
+  imports: [
+    AsyncPipe,
+    GameCardComponent,
+    GameHeroComponent,
+    GameHeroSkeletonComponent,
+    GameRowComponent,
+    GameRowSkeletonComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -18,6 +26,7 @@ export class HomeComponent {
   private readonly gamesApi = inject(GamesApiService);
 
   readonly filters = ['Все', 'PC', 'PlayStation', 'Xbox', 'Switch'];
+  readonly skeletonRows = [1, 2, 3];
 
   readonly games$: Observable<Game[]> = this.gamesApi.getUpcomingGames();
 }
