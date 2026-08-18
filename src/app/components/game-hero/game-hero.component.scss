@@ -1,8 +1,12 @@
 :host {
   display: block;
+  height: 100%;
 }
 
 .game-hero {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-surface);
@@ -11,6 +15,7 @@
 
 .game-hero__cover {
   position: relative;
+  flex: none;
   height: 120px;
   display: flex;
   align-items: center;
@@ -73,6 +78,7 @@
 }
 
 .game-hero__body {
+  flex: 1;
   padding: var(--space-1) var(--space-2) var(--space-2);
   display: flex;
   align-items: stretch;
