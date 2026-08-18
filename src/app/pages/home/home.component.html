@@ -54,4 +54,12 @@
       }
     </div>
   </div>
+
+  <h3 class="home-section-title">Все ожидаемые</h3>
+
+  <div class="game-grid">
+    @for (card of skeletonCards; track card) {
+      <app-game-card-skeleton />
+    }
+  </div>
 }
