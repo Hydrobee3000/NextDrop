@@ -1,0 +1,70 @@
+:host {
+  display: block;
+}
+
+.game-row-skeleton {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.game-row-skeleton__cover,
+.game-row-skeleton__title,
+.game-row-skeleton__platforms,
+.game-row-skeleton__days {
+  background: linear-gradient(
+    90deg,
+    var(--color-neutral-800) 25%,
+    var(--color-neutral-700) 37%,
+    var(--color-neutral-800) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+.game-row-skeleton__cover {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+}
+
+.game-row-skeleton__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.game-row-skeleton__title {
+  width: 65%;
+  height: 14px;
+  border-radius: var(--radius-sm);
+}
+
+.game-row-skeleton__platforms {
+  width: 40%;
+  height: 11px;
+  border-radius: var(--radius-sm);
+}
+
+.game-row-skeleton__days {
+  flex: none;
+  width: 40px;
+  height: 11px;
+  border-radius: var(--radius-sm);
+  margin-right: 2px;
+}

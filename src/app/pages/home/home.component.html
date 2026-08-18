@@ -47,5 +47,11 @@
 } @else {
   <div class="home-highlight">
     <app-game-hero-skeleton />
+
+    <div class="home-side-list">
+      @for (row of skeletonRows; track row) {
+        <app-game-row-skeleton />
+      }
+    </div>
   </div>
 }
