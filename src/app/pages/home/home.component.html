@@ -7,19 +7,35 @@
   </div>
 </div>
 
-<div class="home-highlight">
-  <app-game-hero
-    [title]="heroGame.title"
-    [platforms]="heroGame.platforms"
-    [coverInitials]="heroGame.coverInitials"
-    [coverGradient]="heroGame.coverGradient"
-    [daysUntilRelease]="heroGame.daysUntilRelease"
-    [releaseDateLabel]="heroGame.releaseDateLabel"
-  />
+@if (games$ | async; as games) {
+  <div class="home-highlight">
+    <app-game-hero
+      [title]="games[0].title"
+      [platforms]="games[0].platforms"
+      [coverInitials]="games[0].coverInitials"
+      [coverGradient]="games[0].coverGradient"
+      [daysUntilRelease]="games[0].daysUntilRelease"
+      [releaseDateLabel]="games[0].releaseDateLabel"
+    />
 
-  <div class="home-side-list">
-    @for (game of sideGames; track game.id) {
-      <app-game-row
+    <div class="home-side-list">
+      @for (game of games.slice(1, 4); track game.id) {
+        <app-game-row
+          [title]="game.title"
+          [platforms]="game.platforms"
+          [coverInitials]="game.coverInitials"
+          [coverGradient]="game.coverGradient"
+          [daysUntilRelease]="game.daysUntilRelease"
+        />
+      }
+    </div>
+  </div>
+
+  <h3 class="home-section-title">Все ожидаемые</h3>
+
+  <div class="game-grid">
+    @for (game of games; track game.id) {
+      <app-game-card
         [title]="game.title"
         [platforms]="game.platforms"
         [coverInitials]="game.coverInitials"
@@ -28,18 +44,6 @@
       />
     }
   </div>
-</div>
-
-<h3 class="home-section-title">Все ожидаемые</h3>
-
-<div class="game-grid">
-  @for (game of games; track game.id) {
-    <app-game-card
-      [title]="game.title"
-      [platforms]="game.platforms"
-      [coverInitials]="game.coverInitials"
-      [coverGradient]="game.coverGradient"
-      [daysUntilRelease]="game.daysUntilRelease"
-    />
-  }
-</div>
+} @else {
+  <p>Загрузка игр…</p>
+}
