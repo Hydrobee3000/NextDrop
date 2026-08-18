@@ -1,20 +1,24 @@
 :host {
   display: block;
+  height: 100%;
 }
 
 .game-row {
   display: flex;
   gap: var(--space-3);
-  align-items: center;
+  align-items: stretch;
+  min-height: 64px;
+  height: 100%;
   padding: var(--space-2);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--color-surface);
 }
 
 .game-row__cover {
   flex: none;
-  width: 48px;
-  height: 48px;
+  align-self: center;
+  width: 64px;
+  height: 64px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
@@ -31,21 +35,43 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
 }
 
 .game-row__title {
   font-family: var(--font-heading);
   font-weight: 500;
-  font-size: 14px;
+  font-size: 15px;
+  margin-top: var(--space-1);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+.game-row__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1);
+  height: 18px;
+  margin-top: auto;
+}
+
 .game-row__platforms {
-  font-size: 11px;
-  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+  min-width: 0;
+
+  .tag {
+    background: linear-gradient(135deg, var(--color-accent-700), var(--color-accent-900));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent-100);
+    font-size: 9px;
+    padding: 2px 6px;
+  }
 }
 
 .game-row__days {
@@ -53,5 +79,14 @@
   font-size: 11px;
   color: var(--color-accent-300);
   white-space: nowrap;
-  margin-right: 2px;
+}
+
+@media (min-width: 768px) {
+  .game-row {
+    padding: var(--space-3);
+  }
+
+  .game-row__title {
+    font-size: 16px;
+  }
 }

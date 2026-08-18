@@ -5,8 +5,15 @@
 
   <div class="game-row__info">
     <div class="game-row__title">{{ title() }}</div>
-    <span class="game-row__platforms">{{ platforms().join(', ') }}</span>
-  </div>
 
-  <span class="game-row__days">{{ daysUntilRelease() }} дн.</span>
+    <div class="game-row__meta">
+      <div class="game-row__platforms">
+        @for (platform of platforms(); track platform) {
+          <span class="tag">{{ platform }}</span>
+        }
+      </div>
+
+      <span class="game-row__days">{{ daysUntilRelease() }} дн.</span>
+    </div>
+  </div>
 </div>
