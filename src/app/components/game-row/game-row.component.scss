@@ -12,6 +12,7 @@
   padding: var(--space-2);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
+  box-shadow: var(--shadow-md);
 }
 
 .game-row__cover {
@@ -25,6 +26,9 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+.game-row__initials {
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 10px;
