@@ -54,14 +54,12 @@
 }
 
 .game-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  overflow-x: auto;
-  padding-bottom: var(--space-1);
 
   app-game-card {
-    flex: none;
-    width: 140px;
+    min-width: 0;
   }
 }
 
@@ -83,13 +81,7 @@
   }
 
   .game-grid {
-    display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 18px;
-    overflow-x: visible;
-
-    app-game-card {
-      width: auto;
-    }
   }
 }
