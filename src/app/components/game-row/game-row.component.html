@@ -3,7 +3,7 @@
     @if (coverImageUrl(); as imageUrl) {
       <img class="game-row__image" [src]="imageUrl" [alt]="title()" loading="lazy" />
     } @else {
-      <span>{{ coverInitials() }}</span>
+      <span class="game-row__initials">{{ coverInitials() }}</span>
     }
   </div>
 
