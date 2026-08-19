@@ -15,6 +15,7 @@
 }
 
 .game-row__cover {
+  position: relative;
   flex: none;
   align-self: center;
   width: 64px;
@@ -23,11 +24,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 10px;
   color: color-mix(in srgb, white 90%, transparent);
   mix-blend-mode: lighten;
+}
+
+.game-row__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .game-row__info {

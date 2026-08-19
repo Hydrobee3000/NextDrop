@@ -1,6 +1,10 @@
 <article class="game-hero">
   <div class="game-hero__cover" [style.background]="coverGradient()">
-    <span class="game-hero__initials">{{ coverInitials() }}</span>
+    @if (coverImageUrl(); as imageUrl) {
+      <img class="game-hero__image" [src]="imageUrl" [alt]="title()" loading="lazy" />
+    } @else {
+      <span class="game-hero__initials">{{ coverInitials() }}</span>
+    }
     <span class="game-hero__badge">Самое ожидаемое</span>
     <button class="game-hero__favorite" aria-label="В избранное">
       <svg lucideHeart></svg>
