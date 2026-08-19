@@ -55,7 +55,7 @@
 
 .game-grid {
   display: flex;
-  gap: var(--space-3);
+  gap: 10px;
   overflow-x: auto;
   padding-bottom: var(--space-1);
 
@@ -85,6 +85,7 @@
   .game-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
     overflow-x: visible;
 
     app-game-card {
