@@ -12,6 +12,7 @@
     <app-game-hero
       [title]="games[0].title"
       [platforms]="games[0].platforms"
+      [coverImageUrl]="games[0].coverImageUrl"
       [coverInitials]="games[0].coverInitials"
       [coverGradient]="games[0].coverGradient"
       [daysUntilRelease]="games[0].daysUntilRelease"
@@ -23,6 +24,7 @@
         <app-game-row
           [title]="game.title"
           [platforms]="game.platforms"
+          [coverImageUrl]="game.coverImageUrl"
           [coverInitials]="game.coverInitials"
           [coverGradient]="game.coverGradient"
           [daysUntilRelease]="game.daysUntilRelease"
@@ -38,6 +40,7 @@
       <app-game-card
         [title]="game.title"
         [platforms]="game.platforms"
+        [coverImageUrl]="game.coverImageUrl"
         [coverInitials]="game.coverInitials"
         [coverGradient]="game.coverGradient"
         [daysUntilRelease]="game.daysUntilRelease"

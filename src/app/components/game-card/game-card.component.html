@@ -1,6 +1,10 @@
 <article class="game-card">
   <div class="game-card__cover" [style.background]="coverGradient()">
-    <span class="game-card__initials">{{ coverInitials() }}</span>
+    @if (coverImageUrl(); as imageUrl) {
+      <img class="game-card__image" [src]="imageUrl" [alt]="title()" loading="lazy" />
+    } @else {
+      <span class="game-card__initials">{{ coverInitials() }}</span>
+    }
   </div>
 
   <div class="game-card__body">

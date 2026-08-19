@@ -1,6 +1,10 @@
 <div class="game-row">
   <div class="game-row__cover" [style.background]="coverGradient()">
-    <span>{{ coverInitials() }}</span>
+    @if (coverImageUrl(); as imageUrl) {
+      <img class="game-row__image" [src]="imageUrl" [alt]="title()" loading="lazy" />
+    } @else {
+      <span>{{ coverInitials() }}</span>
+    }
   </div>
 
   <div class="game-row__info">

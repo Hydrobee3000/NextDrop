@@ -48,6 +48,7 @@ export class GamesApiService {
       id: String(rawgGame.id),
       title: rawgGame.name,
       platforms: (rawgGame.platforms ?? []).map((entry) => entry.platform.name),
+      coverImageUrl: rawgGame.background_image,
       coverInitials: rawgGame.name.slice(0, 3).toUpperCase(),
       coverGradient: COVER_GRADIENTS[index % COVER_GRADIENTS.length],
       daysUntilRelease,

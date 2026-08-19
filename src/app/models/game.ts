@@ -8,6 +8,8 @@ export interface Game {
   title: string;
   /** Платформы. */
   platforms: string[];
+  /** URL реальной обложки, или null если её нет. */
+  coverImageUrl: string | null;
   /** Инициалы для обложки-заглушки. */
   coverInitials: string;
   /** Градиент для обложки-заглушки. */

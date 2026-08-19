@@ -9,6 +9,7 @@ import { Component, input } from '@angular/core';
 export class GameRowComponent {
   title = input.required<string>();
   platforms = input.required<string[]>();
+  coverImageUrl = input.required<string | null>();
   coverInitials = input.required<string>();
   coverGradient = input.required<string>();
   daysUntilRelease = input.required<number>();
