@@ -1,8 +1,9 @@
 import { Component, input } from '@angular/core';
+import { DaysUntilPipe } from '../../pipes/days-until.pipe';
 
 @Component({
   selector: 'app-game-card',
-  imports: [],
+  imports: [DaysUntilPipe],
   templateUrl: './game-card.component.html',
   styleUrl: './game-card.component.scss'
 })

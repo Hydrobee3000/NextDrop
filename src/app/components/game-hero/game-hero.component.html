@@ -22,7 +22,11 @@
     </div>
 
     <div class="game-hero__countdown">
-      <span class="game-hero__days">{{ daysUntilRelease() }} <span>дня</span></span>
+      @if (daysUntilRelease() < 3) {
+        <span class="game-hero__days">{{ daysUntilRelease() | daysUntil }}</span>
+      } @else {
+        <span class="game-hero__days">{{ daysUntilRelease() }} <span>{{ daysWord() }}</span></span>
+      }
       <span class="game-hero__date">{{ releaseDateLabel() }}</span>
     </div>
   </div>
