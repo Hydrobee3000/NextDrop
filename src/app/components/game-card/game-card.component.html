@@ -13,7 +13,10 @@
     <div class="game-card__meta">
       <div class="game-card__platforms">
         @for (platform of platforms(); track platform) {
-          <span class="tag">{{ platform }}</span>
+          <span class="tag">
+            <app-platform-icon [platform]="platform" />
+            {{ platform }}
+          </span>
         }
       </div>
 
