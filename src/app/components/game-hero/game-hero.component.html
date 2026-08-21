@@ -16,7 +16,10 @@
       <h2 class="game-hero__title">{{ title() }}</h2>
       <div class="game-hero__platforms">
         @for (platform of platforms(); track platform) {
-          <span class="tag">{{ platform }}</span>
+          <span class="tag">
+            <app-platform-icon [platform]="platform" />
+            {{ platform }}
+          </span>
         }
       </div>
     </div>

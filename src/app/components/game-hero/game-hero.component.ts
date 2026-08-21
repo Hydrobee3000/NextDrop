@@ -1,12 +1,13 @@
 import { Component, input } from '@angular/core';
 import { LucideHeart } from '@lucide/angular';
 
+import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
 import { DaysUntilPipe } from '../../pipes/days-until.pipe';
 import { pluralizeRu } from '../../shared/pluralize';
 
 @Component({
   selector: 'app-game-hero',
-  imports: [LucideHeart, DaysUntilPipe],
+  imports: [LucideHeart, DaysUntilPipe, PlatformIconComponent],
   templateUrl: './game-hero.component.html',
   styleUrl: './game-hero.component.scss'
 })

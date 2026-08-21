@@ -13,7 +13,10 @@
     <div class="game-row__meta">
       <div class="game-row__platforms">
         @for (platform of platforms(); track platform) {
-          <span class="tag">{{ platform }}</span>
+          <span class="tag">
+            <app-platform-icon [platform]="platform" />
+            {{ platform }}
+          </span>
         }
       </div>
 

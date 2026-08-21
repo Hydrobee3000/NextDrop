@@ -1,9 +1,10 @@
 import { Component, input } from '@angular/core';
+import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
 import { DaysUntilPipe } from '../../pipes/days-until.pipe';
 
 @Component({
   selector: 'app-game-row',
-  imports: [DaysUntilPipe],
+  imports: [DaysUntilPipe, PlatformIconComponent],
   templateUrl: './game-row.component.html',
   styleUrl: './game-row.component.scss'
 })

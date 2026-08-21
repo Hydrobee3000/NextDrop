@@ -1,0 +1,26 @@
+@if (brandPath(); as d) {
+  <svg viewBox="0 0 24 24" fill="currentColor"><path [attr.d]="d" /></svg>
+} @else {
+  @switch (kind()) {
+    @case ('xbox') {
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M6.5 7c3 4.5 8 4.5 11 0" />
+        <path d="M6.5 17c3-4.5 8-4.5 11 0" />
+      </svg>
+    }
+    @case ('nintendo') {
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="6" height="16" rx="3" />
+        <rect x="15" y="4" width="6" height="16" rx="3" />
+        <circle cx="6" cy="8" r="0.5" fill="currentColor" stroke="none" />
+      </svg>
+    }
+    @default {
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="12" rx="1.5" />
+        <path d="M8 20h8M12 16v4" />
+      </svg>
+    }
+  }
+}
