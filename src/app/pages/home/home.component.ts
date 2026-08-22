@@ -7,6 +7,7 @@ import { GameHeroComponent } from '../../components/game-hero/game-hero.componen
 import { GameHeroSkeletonComponent } from '../../components/game-hero-skeleton/game-hero-skeleton.component';
 import { GameRowComponent } from '../../components/game-row/game-row.component';
 import { GameRowSkeletonComponent } from '../../components/game-row-skeleton/game-row-skeleton.component';
+import { PlatformIconComponent } from '../../components/platform-icon/platform-icon.component';
 import { Game } from '../../models/game';
 import { GamesApiService } from '../../services/games-api.service';
 
@@ -20,6 +21,7 @@ import { GamesApiService } from '../../services/games-api.service';
     GameHeroSkeletonComponent,
     GameRowComponent,
     GameRowSkeletonComponent,
+    PlatformIconComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
