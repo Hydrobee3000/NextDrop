@@ -3,6 +3,6 @@
 }
 
 svg {
-  width: 10px;
-  height: 10px;
+  width: var(--platform-icon-size, 10px);
+  height: var(--platform-icon-size, 10px);
 }

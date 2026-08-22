@@ -19,6 +19,9 @@
 
 .home-filter {
   flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-family: var(--font-heading);
   font-weight: 500;
   font-size: 12px;
@@ -28,6 +31,10 @@
   background: var(--color-surface);
   border: 1px solid var(--color-divider);
   color: color-mix(in srgb, var(--color-text) 75%, transparent);
+
+  app-platform-icon {
+    --platform-icon-size: 14px;
+  }
 
   &.active {
     background: color-mix(in srgb, var(--color-accent) 18%, transparent);

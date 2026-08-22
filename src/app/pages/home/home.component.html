@@ -2,7 +2,12 @@
   <h2>Скоро выходят</h2>
   <div class="home-filters">
     @for (filter of filters; track filter) {
-      <span class="home-filter" [class.active]="filter === 'Все'">{{ filter }}</span>
+      <span class="home-filter" [class.active]="filter === 'Все'">
+        @if (filter !== 'Все') {
+          <app-platform-icon [platform]="filter" />
+        }
+        {{ filter }}
+      </span>
     }
   </div>
 </div>
