@@ -20,7 +20,7 @@ export class GamesApiService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'https://api.rawg.io/api/games';
 
-  getUpcomingGames(): Observable<Game[]> {
+  getUpcomingGames(page: number = 1): Observable<Game[]> {
     const today = new Date().toISOString().slice(0, 10);
     const oneYearAhead = new Date();
     oneYearAhead.setFullYear(oneYearAhead.getFullYear() + 1);
@@ -30,6 +30,7 @@ export class GamesApiService {
       dates: `${today},${oneYearAhead.toISOString().slice(0, 10)}`,
       ordering: 'released',
       page_size: '12',
+      page: String(page),
     };
 
     return this.http
