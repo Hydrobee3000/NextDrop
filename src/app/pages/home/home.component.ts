@@ -45,11 +45,16 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.loadMore();
 
-    this.observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        this.loadMore();
-      }
-    });
+    // rootMargin расширяет зону срабатывания вниз на 800px — подгрузка
+    // стартует заранее, до того как sentinel реально попадёт в экран.
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          this.loadMore();
+        }
+      },
+      { rootMargin: '800px' }
+    );
 
     if (this.scrollSentinel) {
       this.observer.observe(this.scrollSentinel.nativeElement);
