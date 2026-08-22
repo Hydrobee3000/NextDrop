@@ -7,6 +7,7 @@ import { GameRowComponent } from '../../components/game-row/game-row.component';
 import { GameRowSkeletonComponent } from '../../components/game-row-skeleton/game-row-skeleton.component';
 import { PlatformIconComponent } from '../../components/platform-icon/platform-icon.component';
 import { Game } from '../../models/game';
+import { FILTER_PARENT_PLATFORM_ID } from '../../shared/platform-filter';
 import { GamesApiService } from '../../services/games-api.service';
 
 @Component({
@@ -36,6 +37,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   readonly skeletonRows = [1, 2, 3];
   readonly skeletonCards = [1, 2, 3, 4];
 
+  activeFilter = 'Все';
   games: Game[] = [];
   loading = false;
 
@@ -66,6 +68,18 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.observer?.disconnect();
   }
 
+  selectFilter(filter: string): void {
+    if (filter === this.activeFilter) {
+      return;
+    }
+
+    this.activeFilter = filter;
+    this.page = 1;
+    this.hasMore = true;
+    this.games = [];
+    this.loadMore();
+  }
+
   // Подгрузка следующей страницы и добавление её к уже загруженным играм.
   private loadMore(): void {
     if (this.loading || !this.hasMore) {
@@ -73,7 +87,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     }
 
     this.loading = true;
-    this.gamesApi.getUpcomingGames(this.page).subscribe((newGames) => {
+    const parentPlatformId = FILTER_PARENT_PLATFORM_ID[this.activeFilter];
+
+    this.gamesApi.getUpcomingGames(this.page, parentPlatformId).subscribe((newGames) => {
       this.games = [...this.games, ...newGames];
       this.hasMore = newGames.length > 0;
       this.page++;
