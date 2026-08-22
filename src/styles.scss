@@ -101,6 +101,11 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: calc(var(--radius-md) * 0.75);
   background: var(--color-neutral-800);
   color: var(--color-neutral-100);
+  transition: opacity 0.15s ease;
+}
+
+.tag--muted {
+  opacity: 0.35;
 }
 
 /* — buttons — */
