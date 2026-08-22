@@ -12,7 +12,7 @@
   </div>
 </div>
 
-@if (games$ | async; as games) {
+@if (games.length > 0) {
   <div class="home-highlight">
     <app-game-hero
       [title]="games[0].title"
@@ -51,6 +51,12 @@
         [daysUntilRelease]="game.daysUntilRelease"
       />
     }
+
+    @if (loading) {
+      @for (card of skeletonCards; track card) {
+        <app-game-card-skeleton />
+      }
+    }
   </div>
 } @else {
   <div class="home-highlight">
@@ -71,3 +77,5 @@
     }
   </div>
 }
+
+<div #scrollSentinel class="home-scroll-sentinel"></div>
