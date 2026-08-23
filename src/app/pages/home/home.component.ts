@@ -33,7 +33,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   // Пустой div внизу страницы, за которым следит IntersectionObserver.
   @ViewChild('scrollSentinel') private scrollSentinel?: ElementRef<HTMLElement>;
 
-  readonly filters = ['Все', 'PC', 'PlayStation', 'Xbox', 'Switch'];
+  readonly filters = ['Все', 'PC', 'PlayStation', 'Xbox', 'Switch', 'Web', 'Apple', 'Android'];
   readonly skeletonRows = [1, 2, 3];
   readonly skeletonCards = [1, 2, 3, 4];
 

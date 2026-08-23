@@ -20,7 +20,7 @@ export class GamesApiService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'https://api.rawg.io/api/games';
 
-  getUpcomingGames(page: number = 1, parentPlatformId?: number): Observable<Game[]> {
+  getUpcomingGames(page: number = 1, parentPlatformId?: string): Observable<Game[]> {
     const today = new Date().toISOString().slice(0, 10);
     const oneYearAhead = new Date();
     oneYearAhead.setFullYear(oneYearAhead.getFullYear() + 1);
@@ -34,7 +34,7 @@ export class GamesApiService {
     };
 
     if (parentPlatformId !== undefined) {
-      params['parent_platforms'] = String(parentPlatformId);
+      params['parent_platforms'] = parentPlatformId;
     }
 
     return this.http
