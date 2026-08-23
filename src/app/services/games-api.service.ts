@@ -57,8 +57,10 @@ export class GamesApiService {
 
   private toGame(rawgGame: RawgGame, index: number): Game {
     const releaseDate = rawgGame.released ? new Date(rawgGame.released) : null;
+    // Может быть отрицательным для уже вышедших игр — это нормально,
+    // отличаем "сегодня" (0) от "уже вышла" (< 0) в DaysUntilPipe.
     const daysUntilRelease = releaseDate
-      ? Math.max(0, Math.ceil((releaseDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
+      ? Math.ceil((releaseDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
       : 0;
 
     return {
