@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { LucideHouse, LucideSearch, LucideHeart, LucideCalendar, LucideBell } from '@lucide/angular';
+import { LucideHouse, LucideSearch, LucideHeart, LucideCalendar } from '@lucide/angular';
 
-type NavIcon = 'house' | 'search' | 'heart' | 'calendar' | 'bell';
+type NavIcon = 'house' | 'search' | 'heart' | 'calendar';
 
 interface NavItem {
   label: string;
@@ -12,7 +12,7 @@ interface NavItem {
 
 @Component({
   selector: 'app-layout',
-  imports: [LucideHouse, LucideSearch, LucideHeart, LucideCalendar, LucideBell, RouterLink, RouterLinkActive],
+  imports: [LucideHouse, LucideSearch, LucideHeart, LucideCalendar, RouterLink, RouterLinkActive],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
@@ -22,6 +22,5 @@ export class LayoutComponent {
     { label: 'Поиск', icon: 'search', path: '/search' },
     { label: 'Мой список', icon: 'heart' },
     { label: 'Календарь', icon: 'calendar' },
-    { label: 'Уведомления', icon: 'bell' },
   ];
 }
