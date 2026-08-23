@@ -2,12 +2,16 @@ import { getPlatformIconKind } from './platform-icon';
 
 /**
  * ID родительских платформ RAWG (parent_platforms) для чипсов фильтра.
+ * Строка, а не число — для Apple нужно сразу два ID (iOS + macOS) через запятую.
  */
-export const FILTER_PARENT_PLATFORM_ID: Record<string, number> = {
-  PC: 1,
-  PlayStation: 2,
-  Xbox: 3,
-  Switch: 7,
+export const FILTER_PARENT_PLATFORM_ID: Record<string, string> = {
+  PC: '1',
+  PlayStation: '2',
+  Xbox: '3',
+  Switch: '7',
+  Web: '14',
+  Apple: '4,5',
+  Android: '8',
 };
 
 /**
@@ -18,6 +22,9 @@ const FILTER_ICON_KIND: Record<string, string> = {
   PlayStation: 'playstation',
   Xbox: 'xbox',
   Switch: 'nintendo',
+  Web: 'web',
+  Apple: 'apple',
+  Android: 'android',
 };
 
 /**

@@ -20,7 +20,7 @@ export function getPlatformIconKind(platform: string): PlatformIconKind {
   if (lower.includes('xbox')) return 'xbox';
   if (lower.includes('game boy')) return 'gameboy';
   if (lower.includes('nintendo') || lower.includes('switch')) return 'nintendo';
-  if (lower.includes('ios') || lower.includes('macos') || lower.includes('mac')) return 'apple';
+  if (lower.includes('ios') || lower.includes('macos') || lower.includes('mac') || lower.includes('apple')) return 'apple';
   if (lower.includes('android')) return 'android';
   if (lower.includes('linux')) return 'linux';
   if (lower.includes('steamos') || lower.includes('steam deck')) return 'steam';
