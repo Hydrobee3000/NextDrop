@@ -1,4 +1,4 @@
-export type PlatformIconKind = 'playstation' | 'xbox' | 'nintendo' | 'apple' | 'android' | 'linux' | 'steam' | 'pc';
+export type PlatformIconKind = 'playstation' | 'xbox' | 'nintendo' | 'apple' | 'android' | 'linux' | 'steam' | 'web' | 'pc';
 
 /**
  * Конкретный бренд/тип устройства по названию платформы из RAWG.
@@ -13,5 +13,6 @@ export function getPlatformIconKind(platform: string): PlatformIconKind {
   if (lower.includes('android')) return 'android';
   if (lower.includes('linux')) return 'linux';
   if (lower.includes('steamos') || lower.includes('steam deck')) return 'steam';
+  if (lower.includes('web')) return 'web';
   return 'pc';
 }
