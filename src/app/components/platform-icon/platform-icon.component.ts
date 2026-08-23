@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { siPlaystation, siApple, siAndroid, siLinux, siSteam } from 'simple-icons';
+import { LucideGlobe } from '@lucide/angular';
 
 import { getPlatformIconKind, PlatformIconKind } from '../../shared/platform-icon';
 
@@ -13,7 +14,7 @@ const BRAND_PATHS: Partial<Record<PlatformIconKind, string>> = {
 
 @Component({
   selector: 'app-platform-icon',
-  imports: [],
+  imports: [LucideGlobe],
   templateUrl: './platform-icon.component.html',
   styleUrl: './platform-icon.component.scss',
 })
