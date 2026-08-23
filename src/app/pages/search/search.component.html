@@ -1,2 +1,27 @@
 <h2>Поиск</h2>
-<p>Скоро здесь можно будет искать игры.</p>
+
+<input
+  class="search-input"
+  type="text"
+  placeholder="Название игры…"
+  [formControl]="queryControl"
+/>
+
+@if (results$ | async; as results) {
+  @if (results.length > 0) {
+    <div class="search-results">
+      @for (game of results; track game.id) {
+        <app-game-row
+          [title]="game.title"
+          [platforms]="game.platforms"
+          [coverImageUrl]="game.coverImageUrl"
+          [coverInitials]="game.coverInitials"
+          [coverGradient]="game.coverGradient"
+          [daysUntilRelease]="game.daysUntilRelease"
+        />
+      }
+    </div>
+  } @else if (queryControl.value.trim()) {
+    <p class="search-empty">Ничего не нашлось.</p>
+  }
+}

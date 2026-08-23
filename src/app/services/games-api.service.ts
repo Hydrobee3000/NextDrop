@@ -43,6 +43,18 @@ export class GamesApiService {
       .pipe(map((response) => response.results.map((game, index) => this.toGame(game, index))));
   }
 
+  searchGames(query: string): Observable<Game[]> {
+    const params = {
+      key: environment.rawgApiKey,
+      search: query,
+      page_size: '10',
+    };
+
+    return this.http
+      .get<RawgGameListResponse>(this.baseUrl, { params })
+      .pipe(map((response) => response.results.map((game, index) => this.toGame(game, index))));
+  }
+
   private toGame(rawgGame: RawgGame, index: number): Game {
     const releaseDate = rawgGame.released ? new Date(rawgGame.released) : null;
     const daysUntilRelease = releaseDate
