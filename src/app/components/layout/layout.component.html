@@ -4,7 +4,12 @@
 
     <div class="layout__nav-items">
       @for (item of navItems; track item.label) {
-        <a class="layout__nav-item" [class.active]="item.active">
+        <a
+          class="layout__nav-item"
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+        >
           @switch (item.icon) {
             @case ('house') { <svg lucideHouse></svg> }
             @case ('search') { <svg lucideSearch></svg> }
