@@ -18,7 +18,7 @@
         @for (platform of platforms(); track platform) {
           <span class="tag" [class.tag--muted]="!matchesFilter(platform)">
             <app-platform-icon [platform]="platform" />
-            {{ platform }}
+            <span class="tag__label">{{ platform }}</span>
           </span>
         }
       </div>

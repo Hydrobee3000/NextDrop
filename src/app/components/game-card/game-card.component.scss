@@ -77,6 +77,10 @@
     color: var(--color-accent-100);
     font-size: 9px;
     padding: 2px 6px;
+
+    .tag__label {
+      display: none;
+    }
   }
 }
 
@@ -84,4 +88,10 @@
   flex: none;
   font-size: 11px;
   color: var(--color-accent-300);
+}
+
+@media (min-width: 768px) {
+  .game-card__platforms .tag__label {
+    display: inline;
+  }
 }

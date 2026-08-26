@@ -129,6 +129,10 @@
     color: var(--color-accent-100);
     font-size: 10px;
     padding: 2px 8px;
+
+    .tag__label {
+      display: none;
+    }
   }
 }
 
@@ -183,5 +187,9 @@
 
   .game-hero__days {
     font-size: 21px;
+  }
+
+  .game-hero__platforms .tag__label {
+    display: inline;
   }
 }
