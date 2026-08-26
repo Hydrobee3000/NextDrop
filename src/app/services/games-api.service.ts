@@ -43,12 +43,16 @@ export class GamesApiService {
       .pipe(map((response) => response.results.map((game, index) => this.toGame(game, index))));
   }
 
-  searchGames(query: string): Observable<Game[]> {
-    const params = {
+  searchGames(query: string, parentPlatformId?: string): Observable<Game[]> {
+    const params: Record<string, string> = {
       key: environment.rawgApiKey,
       search: query,
       page_size: '10',
     };
+
+    if (parentPlatformId !== undefined) {
+      params['parent_platforms'] = parentPlatformId;
+    }
 
     return this.http
       .get<RawgGameListResponse>(this.baseUrl, { params })

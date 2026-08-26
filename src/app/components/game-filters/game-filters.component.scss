@@ -1,0 +1,49 @@
+:host {
+  display: block;
+}
+
+.game-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.game-filters h2 {
+  margin: 0;
+}
+
+.game-filters__chips {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+}
+
+.game-filters__chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 12px;
+  padding: 7px 13px;
+  border-radius: 20px;
+  white-space: nowrap;
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  color: color-mix(in srgb, var(--color-text) 75%, transparent);
+
+  app-platform-icon {
+    --platform-icon-size: 14px;
+  }
+
+  &.active {
+    background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    border-color: var(--color-accent);
+    color: var(--color-accent-100);
+  }
+}
