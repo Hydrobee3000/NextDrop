@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
 import { GameCardComponent } from '../../components/game-card/game-card.component';
 import { GameCardSkeletonComponent } from '../../components/game-card-skeleton/game-card-skeleton.component';
+import { GameFiltersComponent } from '../../components/game-filters/game-filters.component';
 import { GameHeroComponent } from '../../components/game-hero/game-hero.component';
 import { GameHeroSkeletonComponent } from '../../components/game-hero-skeleton/game-hero-skeleton.component';
 import { GameRowComponent } from '../../components/game-row/game-row.component';
 import { GameRowSkeletonComponent } from '../../components/game-row-skeleton/game-row-skeleton.component';
-import { PlatformIconComponent } from '../../components/platform-icon/platform-icon.component';
 import { Game } from '../../models/game';
 import { FILTER_PARENT_PLATFORM_ID } from '../../shared/platform-filter';
 import { GamesApiService } from '../../services/games-api.service';
@@ -15,11 +15,11 @@ import { GamesApiService } from '../../services/games-api.service';
   imports: [
     GameCardComponent,
     GameCardSkeletonComponent,
+    GameFiltersComponent,
     GameHeroComponent,
     GameHeroSkeletonComponent,
     GameRowComponent,
     GameRowSkeletonComponent,
-    PlatformIconComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -33,7 +33,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   // Пустой div внизу страницы, за которым следит IntersectionObserver.
   @ViewChild('scrollSentinel') private scrollSentinel?: ElementRef<HTMLElement>;
 
-  readonly filters = ['Все', 'PC', 'PlayStation', 'Xbox', 'Switch', 'Web', 'Apple', 'Android'];
   readonly skeletonRows = [1, 2, 3];
   readonly skeletonCards = [1, 2, 3, 4];
 

@@ -1,16 +1,4 @@
-<div class="home-header">
-  <h2>Скоро выходят</h2>
-  <div class="home-filters">
-    @for (filter of filters; track filter) {
-      <span class="home-filter" [class.active]="filter === activeFilter" (click)="selectFilter(filter)">
-        @if (filter !== 'Все') {
-          <app-platform-icon [platform]="filter" />
-        }
-        {{ filter }}
-      </span>
-    }
-  </div>
-</div>
+<app-game-filters title="Скоро выходят" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
 
 @if (games.length > 0) {
   <div class="home-highlight">
