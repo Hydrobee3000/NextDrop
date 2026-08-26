@@ -88,12 +88,19 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.loading = true;
     const parentPlatformId = FILTER_PARENT_PLATFORM_ID[this.activeFilter];
 
-    this.gamesApi.getUpcomingGames(this.page, parentPlatformId).subscribe((newGames) => {
-      this.games = [...this.games, ...newGames];
-      this.hasMore = newGames.length > 0;
-      this.page++;
-      this.loading = false;
-      this.recheckSentinel();
+    this.gamesApi.getUpcomingGames(this.page, parentPlatformId).subscribe({
+      next: (newGames) => {
+        this.games = [...this.games, ...newGames];
+        this.hasMore = newGames.length > 0;
+        this.page++;
+        this.loading = false;
+        this.recheckSentinel();
+      },
+      // RAWG отдаёт 400 "Invalid page.", когда страниц больше нет — просто останавливаемся.
+      error: () => {
+        this.hasMore = false;
+        this.loading = false;
+      },
     });
   }
 

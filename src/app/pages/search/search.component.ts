@@ -94,12 +94,19 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
     this.loading = true;
     const parentPlatformId = FILTER_PARENT_PLATFORM_ID[this.activeFilter];
 
-    this.gamesApi.searchGames(this.currentQuery, this.page, parentPlatformId).subscribe((newResults) => {
-      this.results = [...this.results, ...newResults];
-      this.hasMore = newResults.length > 0;
-      this.page++;
-      this.loading = false;
-      this.recheckSentinel();
+    this.gamesApi.searchGames(this.currentQuery, this.page, parentPlatformId).subscribe({
+      next: (newResults) => {
+        this.results = [...this.results, ...newResults];
+        this.hasMore = newResults.length > 0;
+        this.page++;
+        this.loading = false;
+        this.recheckSentinel();
+      },
+      // RAWG отдаёт 400 "Invalid page.", когда страниц больше нет — просто останавливаемся.
+      error: () => {
+        this.hasMore = false;
+        this.loading = false;
+      },
     });
   }
 }
