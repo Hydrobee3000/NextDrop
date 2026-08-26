@@ -17,10 +17,13 @@
 }
 
 .search-results {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: var(--space-2);
-  max-width: 640px;
+
+  app-game-row {
+    min-width: 0;
+  }
 }
 
 .search-empty {
