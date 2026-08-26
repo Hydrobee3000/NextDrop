@@ -1,43 +1,105 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, startWith } from 'rxjs/operators';
 
 import { GameFiltersComponent } from '../../components/game-filters/game-filters.component';
 import { GameRowComponent } from '../../components/game-row/game-row.component';
+import { GameRowSkeletonComponent } from '../../components/game-row-skeleton/game-row-skeleton.component';
 import { Game } from '../../models/game';
 import { FILTER_PARENT_PLATFORM_ID } from '../../shared/platform-filter';
 import { GamesApiService } from '../../services/games-api.service';
 
 @Component({
   selector: 'app-search',
-  imports: [ReactiveFormsModule, AsyncPipe, GameFiltersComponent, GameRowComponent],
+  imports: [ReactiveFormsModule, GameFiltersComponent, GameRowComponent, GameRowSkeletonComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
-export class SearchComponent {
+export class SearchComponent implements AfterViewInit, OnDestroy {
   private readonly gamesApi = inject(GamesApiService);
-  private readonly activeFilter$ = new BehaviorSubject<string>('Все');
+  private observer?: IntersectionObserver;
+  private querySub?: Subscription;
+  private currentQuery = '';
+  private page = 1;
+  private hasMore = true;
+
+  // Пустой div внизу страницы, за которым следит IntersectionObserver.
+  @ViewChild('scrollSentinel') private scrollSentinel?: ElementRef<HTMLElement>;
 
   readonly queryControl = new FormControl('', { nonNullable: true });
-  activeFilter = 'Все';
+  readonly skeletonRows = [1, 2, 3];
 
-  readonly results$: Observable<Game[]> = combineLatest([
-    this.queryControl.valueChanges.pipe(startWith(''), debounceTime(300), distinctUntilChanged()),
-    this.activeFilter$,
-  ]).pipe(
-    switchMap(([query, filter]) => {
-      const trimmed = query.trim();
-      if (!trimmed) {
-        return of([]);
-      }
-      return this.gamesApi.searchGames(trimmed, FILTER_PARENT_PLATFORM_ID[filter]);
-    })
-  );
+  activeFilter = 'Все';
+  results: Game[] = [];
+  loading = false;
+
+  ngAfterViewInit(): void {
+    this.querySub = this.queryControl.valueChanges
+      .pipe(startWith(''), debounceTime(300), distinctUntilChanged())
+      .subscribe((query) => this.startSearch(query.trim()));
+
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          this.loadMore();
+        }
+      },
+      { rootMargin: '800px' }
+    );
+
+    if (this.scrollSentinel) {
+      this.observer.observe(this.scrollSentinel.nativeElement);
+    }
+  }
+
+  // Форсирует повторную проверку видимости sentinel.
+  private recheckSentinel(): void {
+    if (!this.hasMore || !this.scrollSentinel || !this.observer) {
+      return;
+    }
+
+    const element = this.scrollSentinel.nativeElement;
+    this.observer.unobserve(element);
+    this.observer.observe(element);
+  }
+
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
+    this.querySub?.unsubscribe();
+  }
 
   selectFilter(filter: string): void {
     this.activeFilter = filter;
-    this.activeFilter$.next(filter);
+    this.startSearch(this.currentQuery);
+  }
+
+  // Новый запрос/фильтр — сбрасываем накопленные результаты и грузим первую страницу.
+  private startSearch(query: string): void {
+    this.currentQuery = query;
+    this.page = 1;
+    this.hasMore = true;
+    this.results = [];
+
+    if (query) {
+      this.loadMore();
+    }
+  }
+
+  private loadMore(): void {
+    if (this.loading || !this.hasMore || !this.currentQuery) {
+      return;
+    }
+
+    this.loading = true;
+    const parentPlatformId = FILTER_PARENT_PLATFORM_ID[this.activeFilter];
+
+    this.gamesApi.searchGames(this.currentQuery, this.page, parentPlatformId).subscribe((newResults) => {
+      this.results = [...this.results, ...newResults];
+      this.hasMore = newResults.length > 0;
+      this.page++;
+      this.loading = false;
+      this.recheckSentinel();
+    });
   }
 }

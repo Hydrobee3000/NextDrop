@@ -43,11 +43,12 @@ export class GamesApiService {
       .pipe(map((response) => response.results.map((game, index) => this.toGame(game, index))));
   }
 
-  searchGames(query: string, parentPlatformId?: string): Observable<Game[]> {
+  searchGames(query: string, page: number = 1, parentPlatformId?: string): Observable<Game[]> {
     const params: Record<string, string> = {
       key: environment.rawgApiKey,
       search: query,
       page_size: '10',
+      page: String(page),
     };
 
     if (parentPlatformId !== undefined) {

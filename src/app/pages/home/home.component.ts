@@ -93,6 +93,18 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       this.hasMore = newGames.length > 0;
       this.page++;
       this.loading = false;
+      this.recheckSentinel();
     });
+  }
+
+  // Форсирует повторную проверку видимости sentinel.
+  private recheckSentinel(): void {
+    if (!this.hasMore || !this.scrollSentinel || !this.observer) {
+      return;
+    }
+
+    const element = this.scrollSentinel.nativeElement;
+    this.observer.unobserve(element);
+    this.observer.observe(element);
   }
 }
