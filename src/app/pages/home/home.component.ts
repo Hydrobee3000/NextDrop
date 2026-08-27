@@ -29,6 +29,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private observer?: IntersectionObserver;
   private page = 1;
   private hasMore = true;
+  private fetching = false;
 
   // Пустой div внизу страницы, за которым следит IntersectionObserver.
   @ViewChild('scrollSentinel') private scrollSentinel?: ElementRef<HTMLElement>;
@@ -38,7 +39,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   activeFilter = 'Все';
   games: Game[] = [];
-  loading = false;
+  loading = true;
 
   /**
    * Дожидается рендера шаблона.
@@ -81,10 +82,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   // Подгрузка следующей страницы и добавление её к уже загруженным играм.
   private loadMore(): void {
-    if (this.loading || !this.hasMore) {
+    if (this.fetching || !this.hasMore) {
       return;
     }
 
+    this.fetching = true;
     this.loading = true;
     const parentPlatformId = FILTER_PARENT_PLATFORM_ID[this.activeFilter];
 
@@ -93,12 +95,14 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         this.games = [...this.games, ...newGames];
         this.hasMore = newGames.length > 0;
         this.page++;
+        this.fetching = false;
         this.loading = false;
         this.recheckSentinel();
       },
       // RAWG отдаёт 400 "Invalid page.", когда страниц больше нет — просто останавливаемся.
       error: () => {
         this.hasMore = false;
+        this.fetching = false;
         this.loading = false;
       },
     });

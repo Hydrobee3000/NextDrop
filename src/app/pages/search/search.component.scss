@@ -1,5 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .search-input-wrap {
   position: relative;
+  flex: none;
   max-width: 480px;
   margin-bottom: var(--space-6);
 }
@@ -43,6 +50,13 @@
 }
 
 .search-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 500;
   color: color-mix(in srgb, var(--color-text) 55%, transparent);
 }
 
