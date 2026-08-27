@@ -1,11 +1,14 @@
-<app-game-filters title="Поиск" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
+<app-game-filters title="Поиск игры" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
 
-<input
-  class="search-input"
-  type="text"
-  placeholder="Название игры…"
-  [formControl]="queryControl"
-/>
+<div class="search-input-wrap">
+  <svg class="search-input-icon" lucideSearch></svg>
+  <input
+    class="search-input"
+    type="text"
+    placeholder="Название игры…"
+    [formControl]="queryControl"
+  />
+</div>
 
 @if (results.length > 0) {
   <div class="search-results">

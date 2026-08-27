@@ -1,8 +1,23 @@
+.search-input-wrap {
+  position: relative;
+  max-width: 480px;
+  margin-bottom: var(--space-6);
+}
+
+.search-input-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  pointer-events: none;
+}
+
 .search-input {
   width: 100%;
-  max-width: 480px;
-  padding: 10px 14px;
-  margin-bottom: var(--space-6);
+  padding: 10px 14px 10px 38px;
   font: inherit;
   font-size: 15px;
   color: var(--color-text);

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { LucideSearch } from '@lucide/angular';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, startWith } from 'rxjs/operators';
 
@@ -12,7 +13,7 @@ import { GamesApiService } from '../../services/games-api.service';
 
 @Component({
   selector: 'app-search',
-  imports: [ReactiveFormsModule, GameFiltersComponent, GameRowComponent, GameRowSkeletonComponent],
+  imports: [ReactiveFormsModule, LucideSearch, GameFiltersComponent, GameRowComponent, GameRowSkeletonComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
