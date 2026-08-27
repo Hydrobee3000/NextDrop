@@ -1,21 +1,26 @@
 <article class="game-hero">
-  <div class="game-hero__cover" [style.background]="coverGradient()">
-    @if (coverImageUrl(); as imageUrl) {
-      <img class="game-hero__image" [src]="imageUrl" [alt]="title()" loading="lazy" />
+  <div class="game-hero__cover" [style.background]="game().coverGradient">
+    @if (game().coverImageUrl; as imageUrl) {
+      <img class="game-hero__image" [src]="imageUrl" [alt]="game().title" loading="lazy" />
     } @else {
-      <span class="game-hero__initials">{{ coverInitials() }}</span>
+      <span class="game-hero__initials">{{ game().coverInitials }}</span>
     }
     <span class="game-hero__badge">Самое ожидаемое</span>
-    <button class="game-hero__favorite" aria-label="В избранное">
+    <button
+      class="game-hero__favorite"
+      [class.active]="isFavorite()"
+      [attr.aria-label]="isFavorite() ? 'Убрать из избранного' : 'В избранное'"
+      (click)="toggleFavorite($event)"
+    >
       <svg lucideHeart></svg>
     </button>
   </div>
 
   <div class="game-hero__body">
     <div class="game-hero__info">
-      <h2 class="game-hero__title">{{ title() }}</h2>
+      <h2 class="game-hero__title">{{ game().title }}</h2>
       <div class="game-hero__platforms">
-        @for (platform of platforms(); track platform) {
+        @for (platform of game().platforms; track platform) {
           <span
             class="tag"
             [class.tag--muted]="!matchesFilter(platform)"
@@ -29,12 +34,12 @@
     </div>
 
     <div class="game-hero__countdown">
-      @if (daysUntilRelease() < 3) {
-        <span class="game-hero__days">{{ daysUntilRelease() | daysUntil }}</span>
+      @if (game().daysUntilRelease < 3) {
+        <span class="game-hero__days">{{ game().daysUntilRelease | daysUntil }}</span>
       } @else {
-        <span class="game-hero__days">{{ daysUntilRelease() }} <span>{{ daysWord() }}</span></span>
+        <span class="game-hero__days">{{ game().daysUntilRelease }} <span>{{ daysWord() }}</span></span>
       }
-      <span class="game-hero__date">{{ releaseDateLabel() }}</span>
+      <span class="game-hero__date">{{ game().releaseDateLabel }}</span>
     </div>
   </div>
 </article>
