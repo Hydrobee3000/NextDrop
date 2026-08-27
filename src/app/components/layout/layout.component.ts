@@ -20,7 +20,7 @@ export class LayoutComponent {
   readonly navItems: NavItem[] = [
     { label: 'Главная', icon: 'house', path: '/' },
     { label: 'Поиск', icon: 'search', path: '/search' },
-    { label: 'Мой список', icon: 'heart' },
+    { label: 'Мой список', icon: 'heart', path: '/favorites' },
     { label: 'Календарь', icon: 'calendar' },
   ];
 }

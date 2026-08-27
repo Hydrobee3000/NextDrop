@@ -1,0 +1,20 @@
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+
+  app-game-card {
+    min-width: 0;
+  }
+}
+
+.favorites-empty {
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+
+@media (min-width: 768px) {
+  .game-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+}

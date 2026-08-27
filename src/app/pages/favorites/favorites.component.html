@@ -1,0 +1,11 @@
+<app-game-filters title="Мой список" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
+
+@if (games.length > 0) {
+  <div class="game-grid">
+    @for (game of games; track game.id) {
+      <app-game-card [game]="game" [activeFilter]="activeFilter" />
+    }
+  </div>
+} @else {
+  <p class="favorites-empty">Пока пусто — добавляйте игры в избранное, нажимая на сердечко на карточке.</p>
+}

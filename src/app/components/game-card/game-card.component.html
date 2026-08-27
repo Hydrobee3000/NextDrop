@@ -1,18 +1,27 @@
 <article class="game-card">
-  <div class="game-card__cover" [style.background]="coverGradient()">
-    @if (coverImageUrl(); as imageUrl) {
-      <img class="game-card__image" [src]="imageUrl" [alt]="title()" loading="lazy" />
+  <div class="game-card__cover" [style.background]="game().coverGradient">
+    @if (game().coverImageUrl; as imageUrl) {
+      <img class="game-card__image" [src]="imageUrl" [alt]="game().title" loading="lazy" />
     } @else {
-      <span class="game-card__initials">{{ coverInitials() }}</span>
+      <span class="game-card__initials">{{ game().coverInitials }}</span>
     }
+
+    <button
+      class="game-card__favorite"
+      [class.active]="isFavorite()"
+      [attr.aria-label]="isFavorite() ? 'Убрать из избранного' : 'В избранное'"
+      (click)="toggleFavorite($event)"
+    >
+      <svg lucideHeart></svg>
+    </button>
   </div>
 
   <div class="game-card__body">
-    <h3 class="game-card__title">{{ title() }}</h3>
+    <h3 class="game-card__title">{{ game().title }}</h3>
 
     <div class="game-card__meta">
       <div class="game-card__platforms">
-        @for (platform of platforms(); track platform) {
+        @for (platform of game().platforms; track platform) {
           <span
             class="tag"
             [class.tag--muted]="!matchesFilter(platform)"
@@ -24,7 +33,7 @@
         }
       </div>
 
-      <span class="game-card__days">{{ daysUntilRelease() | daysUntil }}</span>
+      <span class="game-card__days">{{ game().daysUntilRelease | daysUntil }}</span>
     </div>
   </div>
 </article>

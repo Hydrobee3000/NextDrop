@@ -42,6 +42,37 @@
   mix-blend-mode: lighten;
 }
 
+.game-card__favorite {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 1;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+  border: 1px solid var(--color-divider);
+  color: var(--color-text);
+  cursor: pointer;
+
+  svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  &.active {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+
+    svg {
+      fill: var(--color-accent);
+    }
+  }
+}
+
 .game-card__body {
   display: flex;
   flex-direction: column;
