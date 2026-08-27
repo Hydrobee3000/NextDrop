@@ -1,0 +1,55 @@
+name: Deploy
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Write environment files with the real RAWG API key
+        env:
+          RAWG_API_KEY: ${{ secrets.RAWG_API_KEY }}
+        run: |
+          printf "export const environment = {\n  rawgApiKey: '%s',\n};\n" "$RAWG_API_KEY" > src/environments/environment.ts
+          cp src/environments/environment.ts src/environments/environment.development.ts
+
+      - run: npm run build -- --base-href /NextDrop/
+
+      - name: Add SPA fallback for GitHub Pages
+        run: cp dist/nextdrop/browser/index.html dist/nextdrop/browser/404.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/nextdrop/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
