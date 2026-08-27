@@ -60,11 +60,8 @@
 .game-row__title {
   font-family: var(--font-heading);
   font-weight: 500;
-  font-size: 15px;
+  font-size: 13px;
   margin-top: var(--space-1);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .game-row__meta {
@@ -111,9 +108,12 @@
 
   .game-row__title {
     font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .game-row__platforms .tag__label {
+  .game-row__platforms .tag .tag__label {
     display: inline;
   }
 }
