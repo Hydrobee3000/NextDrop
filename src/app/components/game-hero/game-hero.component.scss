@@ -94,7 +94,7 @@
 
 .game-hero__body {
   flex: 1;
-  padding: var(--space-1) var(--space-2) var(--space-2);
+  padding: var(--space-1) var(--space-2) var(--space-1);
   display: flex;
   align-items: stretch;
   justify-content: space-between;
@@ -109,11 +109,8 @@
 }
 
 .game-hero__title {
-  font-size: 16px;
+  font-size: 13px;
   margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .game-hero__platforms {
@@ -149,20 +146,20 @@
 .game-hero__days {
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1;
   color: var(--color-accent-300);
   white-space: nowrap;
 
   span {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
     color: var(--color-text);
   }
 }
 
 .game-hero__date {
-  font-size: 12px;
+  font-size: 10px;
   color: color-mix(in srgb, var(--color-text) 55%, transparent);
   white-space: nowrap;
 }
@@ -183,13 +180,24 @@
 
   .game-hero__title {
     font-size: 19px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .game-hero__days {
     font-size: 21px;
+
+    span {
+      font-size: 12px;
+    }
   }
 
-  .game-hero__platforms .tag__label {
+  .game-hero__date {
+    font-size: 12px;
+  }
+
+  .game-hero__platforms .tag .tag__label {
     display: inline;
   }
 }
