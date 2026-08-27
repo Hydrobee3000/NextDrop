@@ -3,6 +3,7 @@ import { LucideHeart } from '@lucide/angular';
 
 import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
 import { DaysUntilPipe } from '../../pipes/days-until.pipe';
+import { getPlatformIconKind } from '../../shared/platform-icon';
 import { pluralizeRu } from '../../shared/pluralize';
 import { platformMatchesFilter } from '../../shared/platform-filter';
 
@@ -28,5 +29,9 @@ export class GameHeroComponent {
 
   matchesFilter(platform: string): boolean {
     return platformMatchesFilter(platform, this.activeFilter());
+  }
+
+  iconKind(platform: string): string {
+    return getPlatformIconKind(platform);
   }
 }

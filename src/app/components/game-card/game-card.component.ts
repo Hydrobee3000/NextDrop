@@ -1,6 +1,7 @@
 import { Component, input } from '@angular/core';
 import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
 import { DaysUntilPipe } from '../../pipes/days-until.pipe';
+import { getPlatformIconKind } from '../../shared/platform-icon';
 import { platformMatchesFilter } from '../../shared/platform-filter';
 
 @Component({
@@ -20,5 +21,9 @@ export class GameCardComponent {
 
   matchesFilter(platform: string): boolean {
     return platformMatchesFilter(platform, this.activeFilter());
+  }
+
+  iconKind(platform: string): string {
+    return getPlatformIconKind(platform);
   }
 }
