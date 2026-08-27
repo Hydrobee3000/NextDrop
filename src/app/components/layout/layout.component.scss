@@ -81,7 +81,7 @@
     flex-direction: row;
     align-items: center;
     gap: 28px;
-    padding: 0 32px;
+    padding: 0 25px;
     border-top: none;
     border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 25%, var(--color-divider));
     background:
@@ -96,11 +96,25 @@
   }
 
   .layout__brand {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 16px;
     letter-spacing: -0.01em;
+  }
+
+  .layout__brand-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .layout__brand-next {
+    color: var(--color-text);
+  }
+
+  .layout__brand-drop {
     color: #a387ff;
   }
 
