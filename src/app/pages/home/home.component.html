@@ -24,7 +24,7 @@
       }
     }
   </div>
-} @else {
+} @else if (loading) {
   <div class="home-highlight">
     <app-game-hero-skeleton />
 
@@ -42,6 +42,8 @@
       <app-game-card-skeleton />
     }
   </div>
+} @else {
+  <p class="home-empty">Ничего не нашлось :(</p>
 }
 
 <div #scrollSentinel class="home-scroll-sentinel"></div>

@@ -1,3 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .game-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -9,6 +15,13 @@
 }
 
 .favorites-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 500;
   color: color-mix(in srgb, var(--color-text) 55%, transparent);
 }
 
