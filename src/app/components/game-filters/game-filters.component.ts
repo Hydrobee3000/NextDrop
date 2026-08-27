@@ -12,7 +12,7 @@ export class GameFiltersComponent {
   activeFilter = input.required<string>();
   activeFilterChange = output<string>();
 
-  readonly filters = ['Все', 'PC', 'PlayStation', 'Xbox', 'Switch', 'Web', 'Apple', 'Android'];
+  readonly filters = ['Все', 'PC', 'PlayStation', 'Xbox', 'Switch'];
 
   select(filter: string): void {
     if (filter !== this.activeFilter()) {
