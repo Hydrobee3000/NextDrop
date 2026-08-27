@@ -13,7 +13,11 @@
     <div class="game-card__meta">
       <div class="game-card__platforms">
         @for (platform of platforms(); track platform) {
-          <span class="tag" [class.tag--muted]="!matchesFilter(platform)">
+          <span
+            class="tag"
+            [class.tag--muted]="!matchesFilter(platform)"
+            [attr.data-icon-kind]="iconKind(platform)"
+          >
             <app-platform-icon [platform]="platform" />
             <span class="tag__label">{{ platform }}</span>
           </span>

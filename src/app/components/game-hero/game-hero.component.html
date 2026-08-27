@@ -16,7 +16,11 @@
       <h2 class="game-hero__title">{{ title() }}</h2>
       <div class="game-hero__platforms">
         @for (platform of platforms(); track platform) {
-          <span class="tag" [class.tag--muted]="!matchesFilter(platform)">
+          <span
+            class="tag"
+            [class.tag--muted]="!matchesFilter(platform)"
+            [attr.data-icon-kind]="iconKind(platform)"
+          >
             <app-platform-icon [platform]="platform" />
             <span class="tag__label">{{ platform }}</span>
           </span>

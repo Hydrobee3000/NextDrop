@@ -79,6 +79,12 @@
       display: none;
     }
   }
+
+  @each $kind in playstation, xbox, nintendo, gameboy, apple, android, linux, steam, web, pc {
+    .tag[data-icon-kind='#{$kind}'] ~ .tag[data-icon-kind='#{$kind}'] {
+      display: none;
+    }
+  }
 }
 
 .game-card__days {
@@ -105,5 +111,13 @@
 
   .game-card__platforms .tag .tag__label {
     display: inline;
+  }
+
+  .game-card__platforms {
+    @each $kind in playstation, xbox, nintendo, gameboy, apple, android, linux, steam, web, pc {
+      .tag[data-icon-kind='#{$kind}'] ~ .tag[data-icon-kind='#{$kind}'] {
+        display: inline-flex;
+      }
+    }
   }
 }

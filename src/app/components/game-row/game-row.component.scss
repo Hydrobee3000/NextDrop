@@ -92,6 +92,12 @@
       display: none;
     }
   }
+
+  @each $kind in playstation, xbox, nintendo, gameboy, apple, android, linux, steam, web, pc {
+    .tag[data-icon-kind='#{$kind}'] ~ .tag[data-icon-kind='#{$kind}'] {
+      display: none;
+    }
+  }
 }
 
 .game-row__days {
@@ -115,5 +121,13 @@
 
   .game-row__platforms .tag .tag__label {
     display: inline;
+  }
+
+  .game-row__platforms {
+    @each $kind in playstation, xbox, nintendo, gameboy, apple, android, linux, steam, web, pc {
+      .tag[data-icon-kind='#{$kind}'] ~ .tag[data-icon-kind='#{$kind}'] {
+        display: inline-flex;
+      }
+    }
   }
 }
