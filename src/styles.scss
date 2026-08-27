@@ -60,7 +60,7 @@ body {
   font-size: 15px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  scrollbar-color: var(--color-accent-700) var(--color-bg);
+  scrollbar-color: #a387ff var(--color-bg);
 }
 
 ::-webkit-scrollbar {
@@ -73,13 +73,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-accent-700);
+  background: #a387ff;
   border-radius: 20px;
   border: 2px solid var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+  background: var(--color-accent-300);
 }
 
 h1, h2, h3, h4, h5, h6 {
