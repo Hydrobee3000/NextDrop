@@ -8,12 +8,20 @@ import { GameFiltersComponent } from '../../components/game-filters/game-filters
 import { GameRowComponent } from '../../components/game-row/game-row.component';
 import { GameRowSkeletonComponent } from '../../components/game-row-skeleton/game-row-skeleton.component';
 import { Game } from '../../models/game';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 import { FILTER_PARENT_PLATFORM_ID } from '../../shared/platform-filter';
 import { GamesApiService } from '../../services/games-api.service';
 
 @Component({
   selector: 'app-search',
-  imports: [ReactiveFormsModule, LucideSearch, GameFiltersComponent, GameRowComponent, GameRowSkeletonComponent],
+  imports: [
+    ReactiveFormsModule,
+    LucideSearch,
+    GameFiltersComponent,
+    GameRowComponent,
+    GameRowSkeletonComponent,
+    TranslatePipe,
+  ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
@@ -31,7 +39,7 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   readonly queryControl = new FormControl('', { nonNullable: true });
   readonly skeletonRows = [1, 2, 3];
 
-  activeFilter = 'Все';
+  activeFilter = 'all';
   results: Game[] = [];
   loading = false;
 

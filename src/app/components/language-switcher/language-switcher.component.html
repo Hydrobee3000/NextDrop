@@ -1,0 +1,16 @@
+<div class="language-switcher">
+  <button
+    class="language-switcher__option"
+    [class.active]="locale() === 'ru'"
+    (click)="setLocale('ru')"
+  >
+    RU
+  </button>
+  <button
+    class="language-switcher__option"
+    [class.active]="locale() === 'en'"
+    (click)="setLocale('en')"
+  >
+    EN
+  </button>
+</div>

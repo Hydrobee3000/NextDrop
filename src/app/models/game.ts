@@ -16,6 +16,6 @@ export interface Game {
   coverGradient: string;
   /** Дней до релиза. */
   daysUntilRelease: number;
-  /** Дата релиза в читаемом виде. */
-  releaseDateLabel: string;
+  /** Дата релиза (YYYY-MM-DD), или null если не объявлена — форматируется под текущий язык через LocalizedDatePipe. */
+  releaseDate: string | null;
 }

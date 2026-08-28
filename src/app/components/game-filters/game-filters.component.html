@@ -1,5 +1,9 @@
 <div class="game-filters">
-  <h2>{{ title() }}</h2>
+  <div class="game-filters__title-row">
+    <h2>{{ titleKey() | translate }}</h2>
+    <app-language-switcher class="game-filters__language-switcher" />
+  </div>
+
   <div class="game-filters__chips">
     @for (filter of filters; track filter) {
       <span
@@ -7,10 +11,10 @@
         [class.active]="filter === activeFilter()"
         (click)="select(filter)"
       >
-        @if (filter !== 'Все') {
+        @if (filter !== 'all') {
           <app-platform-icon [platform]="filter" />
         }
-        {{ filter }}
+        {{ 'filter.' + filter | translate }}
       </span>
     }
   </div>

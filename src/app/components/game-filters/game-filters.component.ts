@@ -1,18 +1,20 @@
 import { Component, input, output } from '@angular/core';
+import { LanguageSwitcherComponent } from '../language-switcher/language-switcher.component';
 import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'app-game-filters',
-  imports: [PlatformIconComponent],
+  imports: [LanguageSwitcherComponent, PlatformIconComponent, TranslatePipe],
   templateUrl: './game-filters.component.html',
   styleUrl: './game-filters.component.scss'
 })
 export class GameFiltersComponent {
-  title = input.required<string>();
+  titleKey = input.required<string>();
   activeFilter = input.required<string>();
   activeFilterChange = output<string>();
 
-  readonly filters = ['Все', 'PC', 'PlayStation', 'Xbox', 'Switch'];
+  readonly filters = ['all', 'pc', 'playstation', 'xbox', 'switch'];
 
   select(filter: string): void {
     if (filter !== this.activeFilter()) {

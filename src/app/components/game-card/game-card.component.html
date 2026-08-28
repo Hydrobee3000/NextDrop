@@ -9,7 +9,7 @@
     <button
       class="game-card__favorite"
       [class.active]="isFavorite()"
-      [attr.aria-label]="isFavorite() ? 'Убрать из избранного' : 'В избранное'"
+      [attr.aria-label]="favoriteLabel()"
       (click)="toggleFavorite($event)"
     >
       <svg lucideHeart></svg>

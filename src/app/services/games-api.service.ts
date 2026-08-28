@@ -76,9 +76,7 @@ export class GamesApiService {
       coverInitials: rawgGame.name.slice(0, 3).toUpperCase(),
       coverGradient: COVER_GRADIENTS[index % COVER_GRADIENTS.length],
       daysUntilRelease,
-      releaseDateLabel: releaseDate
-        ? releaseDate.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
-        : 'Дата уточняется',
+      releaseDate: rawgGame.released,
     };
   }
 }

@@ -6,7 +6,7 @@
     </span>
 
     <div class="layout__nav-items">
-      @for (item of navItems; track item.label) {
+      @for (item of navItems; track item.labelKey) {
         <a
           class="layout__nav-item"
           [routerLink]="item.path"
@@ -18,10 +18,12 @@
             @case ('search') { <svg lucideSearch></svg> }
             @case ('heart') { <svg lucideHeart></svg> }
           }
-          <span class="layout__nav-label">{{ item.label }}</span>
+          <span class="layout__nav-label">{{ item.labelKey | translate }}</span>
         </a>
       }
     </div>
+
+    <app-language-switcher class="layout__language-switcher" />
   </nav>
 
   <main class="layout__content">
