@@ -1,4 +1,4 @@
-<app-game-filters title="Мой список" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
+<app-game-filters titleKey="favorites.title" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
 
 @if (games.length > 0) {
   <div class="game-grid">
@@ -7,5 +7,5 @@
     }
   </div>
 } @else {
-  <p class="favorites-empty">Тут тоже пусто :(</p>
+  <p class="favorites-empty">{{ 'favorites.empty' | translate }}</p>
 }

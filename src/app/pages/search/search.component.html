@@ -1,11 +1,11 @@
-<app-game-filters title="Поиск игры" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
+<app-game-filters titleKey="search.title" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
 
 <div class="search-input-wrap">
   <svg class="search-input-icon" lucideSearch></svg>
   <input
     class="search-input"
     type="text"
-    placeholder="Введите название игры"
+    [attr.placeholder]="'search.placeholder' | translate"
     [formControl]="queryControl"
   />
 </div>
@@ -29,7 +29,7 @@
     }
   </div>
 } @else if (queryControl.value.trim()) {
-  <p class="search-empty">Ничего не нашлось :(</p>
+  <p class="search-empty">{{ 'search.empty' | translate }}</p>
 }
 
 <div #scrollSentinel class="search-scroll-sentinel"></div>

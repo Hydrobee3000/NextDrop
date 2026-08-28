@@ -13,3 +13,10 @@ export function pluralizeRu(count: number, forms: [one: string, few: string, man
   }
   return forms[2];
 }
+
+/**
+ * Английское склонение числительных (1 day, 2 days).
+ */
+export function pluralizeEn(count: number, forms: [one: string, other: string]): string {
+  return count === 1 ? forms[0] : forms[1];
+}

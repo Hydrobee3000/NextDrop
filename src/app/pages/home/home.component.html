@@ -1,4 +1,4 @@
-<app-game-filters title="Скоро выходят" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
+<app-game-filters titleKey="home.title" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
 
 @if (games.length > 0) {
   <div class="home-highlight">
@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <h3 class="home-section-title">Все ожидаемые</h3>
+  <h3 class="home-section-title">{{ 'home.sectionTitle' | translate }}</h3>
 
   <div class="game-grid">
     @for (game of games; track game.id) {
@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <h3 class="home-section-title">Все ожидаемые</h3>
+  <h3 class="home-section-title">{{ 'home.sectionTitle' | translate }}</h3>
 
   <div class="game-grid">
     @for (card of skeletonCards; track card) {
@@ -43,7 +43,7 @@
     }
   </div>
 } @else {
-  <p class="home-empty">Ничего не нашлось :(</p>
+  <p class="home-empty">{{ 'home.empty' | translate }}</p>
 }
 
 <div #scrollSentinel class="home-scroll-sentinel"></div>

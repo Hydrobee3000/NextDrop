@@ -5,11 +5,11 @@
     } @else {
       <span class="game-hero__initials">{{ game().coverInitials }}</span>
     }
-    <span class="game-hero__badge">Самое ожидаемое</span>
+    <span class="game-hero__badge">{{ 'hero.badge' | translate }}</span>
     <button
       class="game-hero__favorite"
       [class.active]="isFavorite()"
-      [attr.aria-label]="isFavorite() ? 'Убрать из избранного' : 'В избранное'"
+      [attr.aria-label]="favoriteLabel()"
       (click)="toggleFavorite($event)"
     >
       <svg lucideHeart></svg>
@@ -39,7 +39,7 @@
       } @else {
         <span class="game-hero__days">{{ game().daysUntilRelease }} <span>{{ daysWord() }}</span></span>
       }
-      <span class="game-hero__date">{{ game().releaseDateLabel }}</span>
+      <span class="game-hero__date">{{ game().releaseDate | localizedDate }}</span>
     </div>
   </div>
 </article>

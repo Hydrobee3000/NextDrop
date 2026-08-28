@@ -7,6 +7,7 @@ import { GameHeroSkeletonComponent } from '../../components/game-hero-skeleton/g
 import { GameRowComponent } from '../../components/game-row/game-row.component';
 import { GameRowSkeletonComponent } from '../../components/game-row-skeleton/game-row-skeleton.component';
 import { Game } from '../../models/game';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 import { FILTER_PARENT_PLATFORM_ID } from '../../shared/platform-filter';
 import { GamesApiService } from '../../services/games-api.service';
 
@@ -20,6 +21,7 @@ import { GamesApiService } from '../../services/games-api.service';
     GameHeroSkeletonComponent,
     GameRowComponent,
     GameRowSkeletonComponent,
+    TranslatePipe,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -37,7 +39,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   readonly skeletonRows = [1, 2, 3];
   readonly skeletonCards = [1, 2, 3, 4];
 
-  activeFilter = 'Все';
+  activeFilter = 'all';
   games: Game[] = [];
   loading = true;
 
