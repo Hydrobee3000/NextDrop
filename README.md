@@ -1,60 +1,71 @@
-# Nextdrop
-Release countdown tracker for upcoming video games.
+[<img src="docs/logo.svg" alt="NextDrop" height="64" />](https://hydrobee3000.github.io/NextDrop/)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.27.
+A countdown tracker for upcoming video game releases.
 
-## Development server
+**Live demo:** https://hydrobee3000.github.io/NextDrop/
 
-To start a local development server, run:
+## Tech stack
 
-```bash
-ng serve
-```
+| Tool | Purpose |
+| --- | --- |
+| [Angular 19](https://angular.dev) | UI framework |
+| [TypeScript](https://www.typescriptlang.org) | Type safety |
+| [RxJS](https://rxjs.dev) | HTTP calls, search debouncing |
+| Angular Signals | Local state |
+| SCSS | Component styles |
+| [RAWG.io API](https://rawg.io/apidocs) | Game data |
+| [@lucide/angular](https://github.com/lucide-icons/lucide) | UI icons |
+| [simple-icons](https://simpleicons.org/) | Platform logos |
+| [GitHub Actions](https://github.com/features/actions) | CI/CD |
+| [GitHub Pages](https://pages.github.com) | Hosting |
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Getting started
 
-## Code scaffolding
+### Prerequisites
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Node.js 20+
+- A free [RAWG API key](https://rawg.io/apidocs)
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Setup
 
 ```bash
-ng build
+npm install
+cp src/environments/environment.ts.example src/environments/environment.ts
+cp src/environments/environment.development.ts.example src/environments/environment.development.ts
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Edit both files and replace `YOUR_RAWG_API_KEY` with your real key. These files are gitignored — never commit a real key.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Run
 
 ```bash
-ng test
+npm start
 ```
 
-## Running end-to-end tests
+Open `http://localhost:4200/`. The app reloads automatically as you edit source files.
 
-For end-to-end (e2e) testing, run:
+## Available scripts
 
-```bash
-ng e2e
+| Script | Description |
+| --- | --- |
+| `npm start` | Start a local dev server at `http://localhost:4200/`. |
+| `npm run build` | Production build, output in `dist/nextdrop/browser`. |
+| `npm run watch` | Development build in watch mode. |
+| `npm test` | Run unit tests with Karma. |
+
+## CI/CD
+
+- **CI** (`.github/workflows/ci.yml`) runs on every push/PR to `main`: typecheck + production build.
+- **Deploy** (`.github/workflows/deploy.yml`) publishes to GitHub Pages, triggered manually (`gh workflow run deploy.yml`) after cutting a release — not on every commit.
+
+## Project structure
+
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+src/app/
+├── components/   # Reusable UI: game cards, filters, nav, platform icons, language switcher
+├── pages/        # Routed pages: home, search, favorites
+├── services/     # GamesApiService (RAWG), FavoritesService, I18nService
+├── pipes/        # daysUntil, translate, localizedDate
+├── models/       # Game, RawgGame, Locale
+└── shared/       # Platform-filter/icon helpers, pluralization, translation dictionary
+```
