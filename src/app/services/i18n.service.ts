@@ -6,7 +6,12 @@ const STORAGE_KEY = 'nextdrop:locale';
 
 function loadLocale(): Locale {
   const stored = localStorage.getItem(STORAGE_KEY);
-  return stored === 'en' ? 'en' : 'ru';
+  if (stored === 'ru' || stored === 'en') {
+    return stored;
+  }
+
+  // Первый заход — берём язык системы, дальше уже сохранённый выбор.
+  return navigator.language.toLowerCase().startsWith('ru') ? 'ru' : 'en';
 }
 
 @Injectable({ providedIn: 'root' })
