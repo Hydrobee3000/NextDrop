@@ -1,6 +1,6 @@
-# NextDrop
+[<img src="docs/logo.svg" alt="NextDrop" height="64" />](https://hydrobee3000.github.io/NextDrop/)
 
-A countdown tracker for upcoming video game releases. Browse what's coming out soon, search the full catalog, filter by platform, and save games you're waiting for — all backed by live data from [RAWG.io](https://rawg.io/apidocs).
+A countdown tracker for upcoming video game releases.
 
 **Live demo:** https://hydrobee3000.github.io/NextDrop/
 
