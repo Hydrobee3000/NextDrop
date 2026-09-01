@@ -1,0 +1,62 @@
+@if (game(); as g) {
+  <div class="game-detail-backdrop" (click)="close()">
+    <div class="game-detail-dialog" (click)="$event.stopPropagation()">
+      <div class="game-detail-dialog__aside">
+        <div class="game-detail-dialog__hero" [style.background]="g.coverGradient">
+          @if (g.coverImageUrl; as imageUrl) {
+            <img class="game-detail-dialog__image" [src]="imageUrl" [alt]="g.title" />
+          } @else {
+            <span class="game-detail-dialog__initials">{{ g.coverInitials }}</span>
+          }
+
+          <button
+            class="game-detail-dialog__close-mobile"
+            (click)="close()"
+            [attr.aria-label]="'detail.close' | translate"
+          >
+            <svg lucideX></svg>
+          </button>
+        </div>
+
+        <button
+          class="game-detail-dialog__favorite-btn"
+          [class.active]="isFavorite(g.id)"
+          (click)="toggleFavorite()"
+        >
+          <svg lucideHeart></svg>
+          {{ favoriteLabel(g.id) }}
+        </button>
+      </div>
+
+      <div class="game-detail-dialog__main">
+        <div class="game-detail-dialog__main-head">
+          <h2 class="game-detail-dialog__title">{{ g.title }}</h2>
+          <button
+            class="game-detail-dialog__close"
+            (click)="close()"
+            [attr.aria-label]="'detail.close' | translate"
+          >
+            <svg lucideX></svg>
+          </button>
+        </div>
+
+        <div class="game-detail-dialog__release">
+          <span class="game-detail-dialog__release-label">{{ 'detail.release' | translate }}</span>
+          <div class="game-detail-dialog__release-row">
+            <span class="game-detail-dialog__release-date">{{ g.releaseDate | localizedDate }}</span>
+            <span class="game-detail-dialog__release-days">{{ g.daysUntilRelease | daysUntil }}</span>
+          </div>
+        </div>
+
+        <div class="game-detail-dialog__platforms">
+          @for (platform of g.platforms; track platform) {
+            <span class="tag">
+              <app-platform-icon [platform]="platform" />
+              {{ platform }}
+            </span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}

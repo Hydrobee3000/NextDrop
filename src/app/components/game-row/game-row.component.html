@@ -1,4 +1,4 @@
-<div class="game-row">
+<div class="game-row" (click)="openDetail()">
   <div class="game-row__cover" [style.background]="game().coverGradient">
     @if (game().coverImageUrl; as imageUrl) {
       <img class="game-row__image" [src]="imageUrl" [alt]="game().title" loading="lazy" />
