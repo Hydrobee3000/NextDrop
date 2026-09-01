@@ -25,3 +25,19 @@ export interface RawgGameListResponse {
   /** Игры на текущей странице. */
   results: RawgGame[];
 }
+
+/**
+ * Ответ RAWG API по деталям одной игры (GET /games/{id}).
+ */
+export interface RawgGameDetail {
+  /** Описание игры без HTML-разметки. */
+  description_raw: string;
+  /** Жанры. */
+  genres: { id: number; name: string; slug: string }[];
+  /** Разработчики. */
+  developers: { id: number; name: string; slug: string }[];
+  /** Издатели. */
+  publishers: { id: number; name: string; slug: string }[];
+  /** Оценка Metacritic, или null если её нет. */
+  metacritic: number | null;
+}

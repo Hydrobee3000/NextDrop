@@ -18,19 +18,43 @@
           </button>
         </div>
 
-        <button
-          class="game-detail-dialog__favorite-btn"
-          [class.active]="isFavorite(g.id)"
-          (click)="toggleFavorite()"
-        >
-          <svg lucideHeart></svg>
-          {{ favoriteLabel(g.id) }}
-        </button>
+        <div class="game-detail-dialog__aside-bottom">
+          <button
+            class="game-detail-dialog__favorite-btn"
+            [class.active]="isFavorite(g.id)"
+            (click)="toggleFavorite()"
+          >
+            <svg lucideHeart></svg>
+            {{ favoriteLabel(g.id) }}
+          </button>
+
+          <div class="game-detail-dialog__platforms">
+            @for (platform of g.platforms; track platform) {
+              <span class="tag">
+                <app-platform-icon [platform]="platform" />
+                {{ platform }}
+              </span>
+            }
+          </div>
+        </div>
       </div>
 
       <div class="game-detail-dialog__main">
         <div class="game-detail-dialog__main-head">
-          <h2 class="game-detail-dialog__title">{{ g.title }}</h2>
+          <div class="game-detail-dialog__heading">
+            <h2 class="game-detail-dialog__title">{{ g.title }}</h2>
+
+            @if (loading()) {
+              <span class="game-detail-dialog__byline-skeleton"></span>
+            } @else {
+              @if (details(); as headDetails) {
+                @if (byline(headDetails); as gameByline) {
+                  <p class="game-detail-dialog__byline">{{ gameByline }}</p>
+                }
+              }
+            }
+          </div>
+
           <button
             class="game-detail-dialog__close"
             (click)="close()"
@@ -40,22 +64,66 @@
           </button>
         </div>
 
-        <div class="game-detail-dialog__release">
-          <span class="game-detail-dialog__release-label">{{ 'detail.release' | translate }}</span>
-          <div class="game-detail-dialog__release-row">
-            <span class="game-detail-dialog__release-date">{{ g.releaseDate | localizedDate }}</span>
-            <span class="game-detail-dialog__release-days">{{ g.daysUntilRelease | daysUntil }}</span>
+        <div class="game-detail-dialog__kpi">
+          <div class="game-detail-dialog__release">
+            <span class="game-detail-dialog__release-label">{{ 'detail.release' | translate }}</span>
+            <div class="game-detail-dialog__release-row">
+              <span class="game-detail-dialog__release-date">{{ g.releaseDate | localizedDate }}</span>
+              <span class="game-detail-dialog__release-days">{{ g.daysUntilRelease | daysUntil }}</span>
+            </div>
           </div>
-        </div>
 
-        <div class="game-detail-dialog__platforms">
-          @for (platform of g.platforms; track platform) {
-            <span class="tag">
-              <app-platform-icon [platform]="platform" />
-              {{ platform }}
-            </span>
+          @if (loading()) {
+            <div class="game-detail-dialog__score game-detail-dialog__score--loading"></div>
+          } @else {
+            @if (details(); as kpiDetails) {
+              @if (kpiDetails.metacritic !== null) {
+                <div class="game-detail-dialog__score">
+                  <span class="game-detail-dialog__score-label">{{ 'detail.metacritic' | translate }}</span>
+                  <div class="game-detail-dialog__score-value">
+                    <span>{{ kpiDetails.metacritic }}</span>
+                    <span class="game-detail-dialog__score-max">/ 100</span>
+                  </div>
+                  <div class="game-detail-dialog__score-bar">
+                    <div class="game-detail-dialog__score-bar-fill" [style.width.%]="kpiDetails.metacritic"></div>
+                  </div>
+                </div>
+              }
+            }
           }
         </div>
+
+        @if (loading()) {
+          <div class="game-detail-dialog__skeleton">
+            <span class="game-detail-dialog__skeleton-line"></span>
+            <span class="game-detail-dialog__skeleton-line"></span>
+            <span class="game-detail-dialog__skeleton-line game-detail-dialog__skeleton-line--short"></span>
+          </div>
+        } @else {
+          @if (details(); as d) {
+            @if (d.description) {
+              <div class="game-detail-dialog__description-wrap">
+                <p class="game-detail-dialog__description" [class.game-detail-dialog__description--expanded]="descriptionExpanded()">
+                  {{ d.description }}
+                </p>
+
+                @if (showDescriptionToggle(d.description)) {
+                  <button class="game-detail-dialog__description-toggle" (click)="toggleDescription()">
+                    {{ (descriptionExpanded() ? 'detail.showLess' : 'detail.showMore') | translate }}
+                  </button>
+                }
+              </div>
+            }
+
+            @if (d.genres.length) {
+              <div class="game-detail-dialog__genres">
+                @for (genre of d.genres; track genre) {
+                  <span class="tag">{{ genre }}</span>
+                }
+              </div>
+            }
+          }
+        }
       </div>
     </div>
   </div>

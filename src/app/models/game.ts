@@ -19,3 +19,19 @@ export interface Game {
   /** Дата релиза (YYYY-MM-DD), или null если не объявлена — форматируется под текущий язык через LocalizedDatePipe. */
   releaseDate: string | null;
 }
+
+/**
+ * Дополнительные детали игры, подгружаемые отдельным запросом (GET /games/{id}).
+ */
+export interface GameDetails {
+  /** Описание игры (обычно только на английском — RAWG не локализует его). */
+  description: string;
+  /** Жанры. */
+  genres: string[];
+  /** Разработчики. */
+  developers: string[];
+  /** Издатели. */
+  publishers: string[];
+  /** Оценка Metacritic, или null если её нет. */
+  metacritic: number | null;
+}
