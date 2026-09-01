@@ -21,6 +21,9 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
 
     'detail.release': 'Релиз',
     'detail.close': 'Закрыть',
+    'detail.metacritic': 'Metacritic',
+    'detail.showMore': 'Показать полностью',
+    'detail.showLess': 'Свернуть',
 
     'favorite.add': 'В избранное',
     'favorite.remove': 'Убрать из избранного',
@@ -61,6 +64,9 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
 
     'detail.release': 'Release',
     'detail.close': 'Close',
+    'detail.metacritic': 'Metacritic',
+    'detail.showMore': 'Show more',
+    'detail.showLess': 'Show less',
 
     'favorite.add': 'Add to favorites',
     'favorite.remove': 'Remove from favorites',

@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { Game } from '../models/game';
-import { RawgGame, RawgGameListResponse } from '../models/rawg-game';
+import { Game, GameDetails } from '../models/game';
+import { RawgGame, RawgGameDetail, RawgGameListResponse } from '../models/rawg-game';
 
 // набор градиентов.
 const COVER_GRADIENTS = [
@@ -58,6 +58,20 @@ export class GamesApiService {
     return this.http
       .get<RawgGameListResponse>(this.baseUrl, { params })
       .pipe(map((response) => response.results.map((game, index) => this.toGame(game, index))));
+  }
+
+  getGameDetails(id: string): Observable<GameDetails> {
+    const params = { key: environment.rawgApiKey };
+
+    return this.http.get<RawgGameDetail>(`${this.baseUrl}/${id}`, { params }).pipe(
+      map((detail) => ({
+        description: detail.description_raw,
+        genres: detail.genres.map((genre) => genre.name),
+        developers: detail.developers.map((developer) => developer.name),
+        publishers: detail.publishers.map((publisher) => publisher.name),
+        metacritic: detail.metacritic,
+      })),
+    );
   }
 
   private toGame(rawgGame: RawgGame, index: number): Game {
