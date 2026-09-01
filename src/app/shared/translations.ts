@@ -19,6 +19,9 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
 
     'hero.badge': 'Самое ожидаемое',
 
+    'detail.release': 'Релиз',
+    'detail.close': 'Закрыть',
+
     'favorite.add': 'В избранное',
     'favorite.remove': 'Убрать из избранного',
 
@@ -55,6 +58,9 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'favorites.empty': 'Empty here too :(',
 
     'hero.badge': 'Most anticipated',
+
+    'detail.release': 'Release',
+    'detail.close': 'Close',
 
     'favorite.add': 'Add to favorites',
     'favorite.remove': 'Remove from favorites',

@@ -43,6 +43,7 @@ Thumbs.db
 
 # Design references (not part of the app)
 /design
+*.dc.html
 
 # Local environment files with real API keys — commit only the .example templates
 src/environments/environment.ts

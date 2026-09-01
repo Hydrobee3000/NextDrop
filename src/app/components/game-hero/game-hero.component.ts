@@ -7,6 +7,7 @@ import { LocalizedDatePipe } from '../../pipes/localized-date.pipe';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { Game } from '../../models/game';
 import { FavoritesService } from '../../services/favorites.service';
+import { GameDetailService } from '../../services/game-detail.service';
 import { I18nService } from '../../services/i18n.service';
 import { getPlatformIconKind } from '../../shared/platform-icon';
 import { pluralizeEn, pluralizeRu } from '../../shared/pluralize';
@@ -20,6 +21,7 @@ import { platformMatchesFilter } from '../../shared/platform-filter';
 })
 export class GameHeroComponent {
   private readonly favoritesService = inject(FavoritesService);
+  private readonly detailService = inject(GameDetailService);
   private readonly i18n = inject(I18nService);
 
   game = input.required<Game>();
@@ -49,5 +51,9 @@ export class GameHeroComponent {
 
   favoriteLabel(): string {
     return this.i18n.t(this.isFavorite() ? 'favorite.remove' : 'favorite.add');
+  }
+
+  openDetail(): void {
+    this.detailService.open(this.game());
   }
 }

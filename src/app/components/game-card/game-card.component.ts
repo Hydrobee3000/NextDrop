@@ -5,6 +5,7 @@ import { PlatformIconComponent } from '../platform-icon/platform-icon.component'
 import { DaysUntilPipe } from '../../pipes/days-until.pipe';
 import { Game } from '../../models/game';
 import { FavoritesService } from '../../services/favorites.service';
+import { GameDetailService } from '../../services/game-detail.service';
 import { I18nService } from '../../services/i18n.service';
 import { getPlatformIconKind } from '../../shared/platform-icon';
 import { platformMatchesFilter } from '../../shared/platform-filter';
@@ -17,6 +18,7 @@ import { platformMatchesFilter } from '../../shared/platform-filter';
 })
 export class GameCardComponent {
   private readonly favoritesService = inject(FavoritesService);
+  private readonly detailService = inject(GameDetailService);
   private readonly i18n = inject(I18nService);
 
   game = input.required<Game>();
@@ -39,5 +41,9 @@ export class GameCardComponent {
 
   favoriteLabel(): string {
     return this.i18n.t(this.isFavorite() ? 'favorite.remove' : 'favorite.add');
+  }
+
+  openDetail(): void {
+    this.detailService.open(this.game());
   }
 }
