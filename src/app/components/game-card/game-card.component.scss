@@ -5,7 +5,7 @@
 .game-card {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 1px;
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   cursor: pointer;
@@ -78,7 +78,14 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  padding: 0 var(--space-3) var(--space-2);
+  padding: var(--space-2) var(--space-3) var(--space-2);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-accent-700) 45%, transparent),
+      color-mix(in srgb, var(--color-neutral-900) 45%, transparent)
+    ),
+    color-mix(in srgb, var(--color-surface) 78%, var(--color-bg));
 }
 
 .game-card__title {
@@ -127,7 +134,7 @@
 
 @media (min-width: 768px) {
   .game-card__body {
-    padding: 0 var(--space-3) var(--space-3);
+    padding: var(--space-2) var(--space-3) var(--space-3);
   }
 
   .game-card__title {
