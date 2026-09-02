@@ -36,7 +36,6 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
 
     'days.today': 'Сегодня',
     'days.tomorrow': 'Завтра',
-    'days.dayAfterTomorrow': 'Послезавтра',
     'days.released': 'Уже вышла',
     'day.one': 'день',
     'day.few': 'дня',
@@ -79,7 +78,6 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
 
     'days.today': 'Today',
     'days.tomorrow': 'Tomorrow',
-    'days.dayAfterTomorrow': 'Day after tomorrow',
     'days.released': 'Already out',
     'day.one': 'day',
     'day.other': 'days',
