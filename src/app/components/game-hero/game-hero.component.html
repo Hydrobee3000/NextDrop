@@ -34,7 +34,7 @@
     </div>
 
     <div class="game-hero__countdown">
-      @if (game().daysUntilRelease < 3) {
+      @if (game().daysUntilRelease < 2) {
         <span class="game-hero__days">{{ game().daysUntilRelease | daysUntil }}</span>
       } @else {
         <span class="game-hero__days">{{ game().daysUntilRelease }} <span>{{ daysWord() }}</span></span>

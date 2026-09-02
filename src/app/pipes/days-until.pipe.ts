@@ -5,7 +5,7 @@ import { pluralizeEn, pluralizeRu } from '../shared/pluralize';
 
 /**
  * Человекочитаемая метка для количества дней до релиза:
- * < 0 → "Уже вышла", 0 → "Сегодня", 1 → "Завтра", 2 → "Послезавтра", иначе "N дней".
+ * < 0 → "Уже вышла", 0 → "Сегодня", 1 → "Завтра", иначе "N дней" с верным склонением.
  */
 @Pipe({ name: 'daysUntil', pure: false })
 export class DaysUntilPipe implements PipeTransform {
@@ -15,7 +15,6 @@ export class DaysUntilPipe implements PipeTransform {
     if (days < 0) return this.i18n.t('days.released');
     if (days === 0) return this.i18n.t('days.today');
     if (days === 1) return this.i18n.t('days.tomorrow');
-    if (days === 2) return this.i18n.t('days.dayAfterTomorrow');
 
     const word =
       this.i18n.locale() === 'ru'
