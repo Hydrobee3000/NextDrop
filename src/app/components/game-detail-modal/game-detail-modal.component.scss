@@ -219,6 +219,39 @@
   color: var(--color-accent-300);
 }
 
+.game-detail-dialog__clock {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.game-detail-dialog__clock-cell {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 4px;
+  border-radius: var(--radius-sm);
+  background: var(--color-neutral-800);
+  text-align: center;
+}
+
+.game-detail-dialog__clock-value {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.15;
+  color: var(--color-accent-200);
+}
+
+.game-detail-dialog__clock-label {
+  display: block;
+  margin-top: 2px;
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+
 .game-detail-dialog__score {
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);

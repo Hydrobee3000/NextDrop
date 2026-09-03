@@ -1,5 +1,8 @@
-import { Component, HostListener, effect, inject, signal } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { Component, HostListener, computed, effect, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { LucideHeart, LucideX } from '@lucide/angular';
+import { interval, map, startWith } from 'rxjs';
 
 import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
 import { DaysUntilPipe } from '../../pipes/days-until.pipe';
@@ -15,9 +18,23 @@ import { getPlatformIconKind } from '../../shared/platform-icon';
 // проверка переполнения потребовала бы измерения DOM, а так вполне достаточно.
 const DESCRIPTION_TOGGLE_THRESHOLD = 240;
 
+interface Countdown {
+  days: number;
+  hours: number;
+  minutes: number;
+}
+
 @Component({
   selector: 'app-game-detail-modal',
-  imports: [LucideHeart, LucideX, DaysUntilPipe, LocalizedDatePipe, PlatformIconComponent, TranslatePipe],
+  imports: [
+    LucideHeart,
+    LucideX,
+    DaysUntilPipe,
+    LocalizedDatePipe,
+    DecimalPipe,
+    PlatformIconComponent,
+    TranslatePipe,
+  ],
   templateUrl: './game-detail-modal.component.html',
   styleUrl: './game-detail-modal.component.scss'
 })
@@ -26,11 +43,38 @@ export class GameDetailModalComponent {
   private readonly favoritesService = inject(FavoritesService);
   private readonly i18n = inject(I18nService);
 
+  // Тикает раз в секунду — источник "текущего времени" для обратного отсчёта.
+  // RxJS interval + toSignal вместо ручного setInterval: подписка/отписка сами
+  // управляются жизненным циклом компонента.
+  private readonly now = toSignal(interval(1000).pipe(startWith(0), map(() => Date.now())), {
+    initialValue: Date.now(),
+  });
+
   game = this.detailService.game;
   details = this.detailService.details;
   loading = this.detailService.loading;
 
   descriptionExpanded = signal(false);
+
+  // Живой отсчёт до релиза (дни/часы/минуты) — только пока дата ещё не наступила.
+  countdown = computed<Countdown | null>(() => {
+    const releaseDate = this.game()?.releaseDate;
+    if (!releaseDate) {
+      return null;
+    }
+
+    const target = new Date(`${releaseDate}T00:00:00`).getTime();
+    const diff = target - this.now();
+    if (diff <= 0) {
+      return null;
+    }
+
+    return {
+      days: Math.floor(diff / 86_400_000),
+      hours: Math.floor((diff % 86_400_000) / 3_600_000),
+      minutes: Math.floor((diff % 3_600_000) / 60_000),
+    };
+  });
 
   constructor() {
     effect(() => {

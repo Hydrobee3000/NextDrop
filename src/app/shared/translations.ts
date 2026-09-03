@@ -25,6 +25,10 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'detail.showMore': 'Показать полностью',
     'detail.showLess': 'Свернуть',
 
+    'countdown.days': 'дней',
+    'countdown.hours': 'часов',
+    'countdown.minutes': 'минут',
+
     'favorite.add': 'В избранное',
     'favorite.remove': 'Убрать из избранного',
 
@@ -66,6 +70,10 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'detail.metacritic': 'Metacritic',
     'detail.showMore': 'Show more',
     'detail.showLess': 'Show less',
+
+    'countdown.days': 'days',
+    'countdown.hours': 'hrs',
+    'countdown.minutes': 'min',
 
     'favorite.add': 'Add to favorites',
     'favorite.remove': 'Remove from favorites',

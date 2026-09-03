@@ -69,8 +69,27 @@
             <span class="game-detail-dialog__release-label">{{ 'detail.release' | translate }}</span>
             <div class="game-detail-dialog__release-row">
               <span class="game-detail-dialog__release-date">{{ g.releaseDate | localizedDate }}</span>
-              <span class="game-detail-dialog__release-days">{{ g.daysUntilRelease | daysUntil }}</span>
+              @if (!countdown()) {
+                <span class="game-detail-dialog__release-days">{{ g.daysUntilRelease | daysUntil }}</span>
+              }
             </div>
+
+            @if (countdown(); as c) {
+              <div class="game-detail-dialog__clock">
+                <div class="game-detail-dialog__clock-cell">
+                  <span class="game-detail-dialog__clock-value">{{ c.days | number: '2.0-0' }}</span>
+                  <span class="game-detail-dialog__clock-label">{{ 'countdown.days' | translate }}</span>
+                </div>
+                <div class="game-detail-dialog__clock-cell">
+                  <span class="game-detail-dialog__clock-value">{{ c.hours | number: '2.0-0' }}</span>
+                  <span class="game-detail-dialog__clock-label">{{ 'countdown.hours' | translate }}</span>
+                </div>
+                <div class="game-detail-dialog__clock-cell">
+                  <span class="game-detail-dialog__clock-value">{{ c.minutes | number: '2.0-0' }}</span>
+                  <span class="game-detail-dialog__clock-label">{{ 'countdown.minutes' | translate }}</span>
+                </div>
+              </div>
+            }
           </div>
 
           @if (loading()) {
