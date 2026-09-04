@@ -325,12 +325,12 @@
   display: flex;
   gap: var(--space-2);
   margin-top: var(--space-6);
-  padding-bottom: var(--space-2);
   overflow-x: auto;
   cursor: grab;
+  scrollbar-width: none;
 
   &::-webkit-scrollbar {
-    height: 6px;
+    display: none;
   }
 
   &--dragging {
