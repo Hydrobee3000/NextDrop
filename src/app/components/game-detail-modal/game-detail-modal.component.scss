@@ -321,6 +321,27 @@
   }
 }
 
+.game-detail-dialog__screenshots {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.game-detail-dialog__screenshot {
+  flex: none;
+  width: 180px;
+  height: 101px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-divider);
+  object-fit: cover;
+}
+
 .game-detail-dialog__description-wrap {
   margin-top: var(--space-6);
 }

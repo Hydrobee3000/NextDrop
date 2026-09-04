@@ -41,3 +41,13 @@ export interface RawgGameDetail {
   /** Оценка Metacritic, или null если её нет. */
   metacritic: number | null;
 }
+
+/**
+ * Ответ эндпоинта скриншотов игры (GET /games/{id}/screenshots).
+ */
+export interface RawgScreenshotsResponse {
+  /** Общее количество скриншотов. */
+  count: number;
+  /** Скриншоты. */
+  results: { id: number; image: string }[];
+}
