@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { Game, GameDetails } from '../models/game';
-import { RawgGame, RawgGameDetail, RawgGameListResponse } from '../models/rawg-game';
+import { RawgGame, RawgGameDetail, RawgGameListResponse, RawgScreenshotsResponse } from '../models/rawg-game';
 
 // набор градиентов.
 const COVER_GRADIENTS = [
@@ -63,13 +63,17 @@ export class GamesApiService {
   getGameDetails(id: string): Observable<GameDetails> {
     const params = { key: environment.rawgApiKey };
 
-    return this.http.get<RawgGameDetail>(`${this.baseUrl}/${id}`, { params }).pipe(
-      map((detail) => ({
+    const detail$ = this.http.get<RawgGameDetail>(`${this.baseUrl}/${id}`, { params });
+    const screenshots$ = this.http.get<RawgScreenshotsResponse>(`${this.baseUrl}/${id}/screenshots`, { params });
+
+    return forkJoin([detail$, screenshots$]).pipe(
+      map(([detail, screenshots]) => ({
         description: detail.description_raw,
         genres: detail.genres.map((genre) => genre.name),
         developers: detail.developers.map((developer) => developer.name),
         publishers: detail.publishers.map((publisher) => publisher.name),
         metacritic: detail.metacritic,
+        screenshots: screenshots.results.map((screenshot) => screenshot.image),
       })),
     );
   }

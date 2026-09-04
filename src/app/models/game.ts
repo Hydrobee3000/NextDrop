@@ -34,4 +34,6 @@ export interface GameDetails {
   publishers: string[];
   /** Оценка Metacritic, или null если её нет. */
   metacritic: number | null;
+  /** URL скриншотов игры. */
+  screenshots: string[];
 }

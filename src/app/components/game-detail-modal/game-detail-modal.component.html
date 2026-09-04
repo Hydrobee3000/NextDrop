@@ -120,6 +120,14 @@
           </div>
         } @else {
           @if (details(); as d) {
+            @if (d.screenshots.length) {
+              <div class="game-detail-dialog__screenshots">
+                @for (screenshot of d.screenshots; track screenshot) {
+                  <img class="game-detail-dialog__screenshot" [src]="screenshot" [alt]="g.title" loading="lazy" />
+                }
+              </div>
+            }
+
             @if (d.description) {
               <div class="game-detail-dialog__description-wrap">
                 <p class="game-detail-dialog__description" [class.game-detail-dialog__description--expanded]="descriptionExpanded()">
