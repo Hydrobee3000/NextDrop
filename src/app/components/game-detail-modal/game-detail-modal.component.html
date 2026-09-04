@@ -121,9 +121,23 @@
         } @else {
           @if (details(); as d) {
             @if (d.screenshots.length) {
-              <div class="game-detail-dialog__screenshots">
+              <div
+                class="game-detail-dialog__screenshots"
+                [class.game-detail-dialog__screenshots--dragging]="isDraggingScreenshots()"
+                #screenshotsRow
+                (pointerdown)="onScreenshotsPointerDown($event, screenshotsRow)"
+                (pointermove)="onScreenshotsPointerMove($event, screenshotsRow)"
+                (pointerup)="onScreenshotsPointerUp($event, screenshotsRow)"
+                (pointercancel)="onScreenshotsPointerUp($event, screenshotsRow)"
+              >
                 @for (screenshot of d.screenshots; track screenshot) {
-                  <img class="game-detail-dialog__screenshot" [src]="screenshot" [alt]="g.title" loading="lazy" />
+                  <img
+                    class="game-detail-dialog__screenshot"
+                    [src]="screenshot"
+                    [alt]="g.title"
+                    loading="lazy"
+                    draggable="false"
+                  />
                 }
               </div>
             }

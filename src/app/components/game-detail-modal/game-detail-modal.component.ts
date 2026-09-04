@@ -56,6 +56,10 @@ export class GameDetailModalComponent {
 
   descriptionExpanded = signal(false);
 
+  isDraggingScreenshots = signal(false);
+  private dragStartX = 0;
+  private dragStartScrollLeft = 0;
+
   // Живой отсчёт до релиза (дни/часы/минуты) — только пока дата ещё не наступила.
   countdown = computed<Countdown | null>(() => {
     const releaseDate = this.game()?.releaseDate;
@@ -115,6 +119,36 @@ export class GameDetailModalComponent {
 
   toggleDescription(): void {
     this.descriptionExpanded.update((expanded) => !expanded);
+  }
+
+  // Перетаскивание мышью для ленты скриншотов, как нативный тач-свайп на телефоне
+  // (сам тач не трогаем — у него уже есть родной скролл).
+  onScreenshotsPointerDown(event: PointerEvent, row: HTMLElement): void {
+    if (event.pointerType !== 'mouse') {
+      return;
+    }
+
+    this.isDraggingScreenshots.set(true);
+    this.dragStartX = event.clientX;
+    this.dragStartScrollLeft = row.scrollLeft;
+    row.setPointerCapture(event.pointerId);
+  }
+
+  onScreenshotsPointerMove(event: PointerEvent, row: HTMLElement): void {
+    if (!this.isDraggingScreenshots()) {
+      return;
+    }
+
+    row.scrollLeft = this.dragStartScrollLeft - (event.clientX - this.dragStartX);
+  }
+
+  onScreenshotsPointerUp(event: PointerEvent, row: HTMLElement): void {
+    if (!this.isDraggingScreenshots()) {
+      return;
+    }
+
+    this.isDraggingScreenshots.set(false);
+    row.releasePointerCapture(event.pointerId);
   }
 
   close(): void {
