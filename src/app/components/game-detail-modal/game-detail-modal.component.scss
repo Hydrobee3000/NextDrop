@@ -327,9 +327,19 @@
   margin-top: var(--space-6);
   padding-bottom: var(--space-2);
   overflow-x: auto;
+  cursor: grab;
 
   &::-webkit-scrollbar {
     height: 6px;
+  }
+
+  &--dragging {
+    cursor: grabbing;
+    user-select: none;
+
+    .game-detail-dialog__screenshot {
+      pointer-events: none;
+    }
   }
 }
 
