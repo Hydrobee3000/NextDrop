@@ -66,12 +66,14 @@
 
         <div class="game-detail-dialog__kpi">
           <div class="game-detail-dialog__release">
-            <span class="game-detail-dialog__release-label">{{ 'detail.release' | translate }}</span>
-            <div class="game-detail-dialog__release-row">
-              <span class="game-detail-dialog__release-date">{{ g.releaseDate | localizedDate }}</span>
-              @if (!countdown()) {
-                <span class="game-detail-dialog__release-days">{{ g.daysUntilRelease | daysUntil }}</span>
-              }
+            <div class="game-detail-dialog__release-info">
+              <span class="game-detail-dialog__release-label">{{ 'detail.release' | translate }}</span>
+              <div class="game-detail-dialog__release-row">
+                <span class="game-detail-dialog__release-date">{{ g.releaseDate | localizedDate }}</span>
+                @if (!countdown()) {
+                  <span class="game-detail-dialog__release-days">{{ g.daysUntilRelease | daysUntil }}</span>
+                }
+              </div>
             </div>
 
             @if (countdown(); as c) {
