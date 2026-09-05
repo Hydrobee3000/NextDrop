@@ -1,5 +1,15 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, HostListener, computed, effect, inject, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  afterRenderEffect,
+  computed,
+  effect,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { LucideHeart, LucideX } from '@lucide/angular';
 import { interval, map, startWith } from 'rxjs';
@@ -22,6 +32,11 @@ interface Countdown {
   days: number;
   hours: number;
   minutes: number;
+}
+
+interface ScrollProgress {
+  scrollable: boolean;
+  percent: number;
 }
 
 @Component({
@@ -60,6 +75,10 @@ export class GameDetailModalComponent {
   private dragStartX = 0;
   private dragStartScrollLeft = 0;
 
+  private readonly screenshotsRow = viewChild<ElementRef<HTMLElement>>('screenshotsRow');
+  // Прогресс прокрутки ленты скриншотов (0% — в начале, 100% — долистали до конца).
+  screenshotsScroll = signal<ScrollProgress>({ scrollable: false, percent: 0 });
+
   // Живой отсчёт до релиза (дни/часы/минуты) — только пока дата ещё не наступила.
   countdown = computed<Countdown | null>(() => {
     const releaseDate = this.game()?.releaseDate;
@@ -87,6 +106,15 @@ export class GameDetailModalComponent {
       // При открытии другой игры сворачиваем обратно предыдущее описание.
       this.game();
       this.descriptionExpanded.set(false);
+    });
+
+    // Замеряем индикатор прокрутки сразу после того, как лента скриншотов
+    // отрисовалась (появилась в DOM или сменился список игры).
+    afterRenderEffect(() => {
+      const row = this.screenshotsRow()?.nativeElement;
+      if (row) {
+        this.updateScreenshotsScroll(row);
+      }
     });
   }
 
@@ -149,6 +177,24 @@ export class GameDetailModalComponent {
 
     this.isDraggingScreenshots.set(false);
     row.releasePointerCapture(event.pointerId);
+  }
+
+  // Срабатывает и на драг мышью (row.scrollLeft = ... сам генерирует scroll),
+  // и на нативный тач-свайп/колесо — единая точка обновления индикатора.
+  onScreenshotsScroll(row: HTMLElement): void {
+    this.updateScreenshotsScroll(row);
+  }
+
+  private updateScreenshotsScroll(row: HTMLElement): void {
+    const { scrollLeft, scrollWidth, clientWidth } = row;
+    const maxScrollLeft = scrollWidth - clientWidth;
+
+    if (maxScrollLeft <= 0) {
+      this.screenshotsScroll.set({ scrollable: false, percent: 0 });
+      return;
+    }
+
+    this.screenshotsScroll.set({ scrollable: true, percent: (scrollLeft / maxScrollLeft) * 100 });
   }
 
   close(): void {

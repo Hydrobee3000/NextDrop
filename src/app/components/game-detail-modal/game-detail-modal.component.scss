@@ -352,6 +352,18 @@
   object-fit: cover;
 }
 
+.game-detail-dialog__screenshots-track {
+  height: 3px;
+  margin-top: var(--space-2);
+}
+
+.game-detail-dialog__screenshots-fill {
+  height: 100%;
+  min-width: 6px;
+  border-radius: 2px;
+  background: var(--color-accent);
+}
+
 .game-detail-dialog__description-wrap {
   margin-top: var(--space-6);
 }

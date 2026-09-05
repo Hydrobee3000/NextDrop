@@ -129,6 +129,7 @@
                 (pointermove)="onScreenshotsPointerMove($event, screenshotsRow)"
                 (pointerup)="onScreenshotsPointerUp($event, screenshotsRow)"
                 (pointercancel)="onScreenshotsPointerUp($event, screenshotsRow)"
+                (scroll)="onScreenshotsScroll(screenshotsRow)"
               >
                 @for (screenshot of d.screenshots; track screenshot) {
                   <img
@@ -140,6 +141,12 @@
                   />
                 }
               </div>
+
+              @if (screenshotsScroll().scrollable) {
+                <div class="game-detail-dialog__screenshots-track">
+                  <div class="game-detail-dialog__screenshots-fill" [style.width.%]="screenshotsScroll().percent"></div>
+                </div>
+              }
             }
 
             @if (d.description) {
