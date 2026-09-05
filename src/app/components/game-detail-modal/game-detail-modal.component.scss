@@ -185,12 +185,21 @@
 
 .game-detail-dialog__release {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: var(--space-3);
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-accent-800);
   background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+}
+
+.game-detail-dialog__release-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
 }
 
 .game-detail-dialog__release-label {
@@ -204,7 +213,6 @@
 .game-detail-dialog__release-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-2);
 }
 
@@ -221,14 +229,18 @@
 
 .game-detail-dialog__clock {
   display: flex;
-  gap: var(--space-2);
-  margin-top: var(--space-1);
+  flex: none;
+  gap: 5px;
 }
 
 .game-detail-dialog__clock-cell {
-  flex: 1;
-  min-width: 0;
-  padding: 5px 4px;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 5px;
+  min-width: 38px;
+  padding: 5px 6px;
   border-radius: var(--radius-sm);
   background: var(--color-neutral-800);
   text-align: center;
@@ -238,15 +250,15 @@
   display: block;
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 15px;
-  line-height: 1.15;
+  font-size: 16px;
+  line-height: 1;
   color: var(--color-accent-200);
 }
 
 .game-detail-dialog__clock-label {
   display: block;
-  margin-top: 2px;
-  font-size: 8.5px;
+  line-height: 1;
+  font-size: 9.5px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-text) 55%, transparent);
