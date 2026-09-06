@@ -70,14 +70,35 @@ export class GameDetailModalComponent {
   loading = this.detailService.loading;
 
   descriptionExpanded = signal(false);
+  selectedMediaIndex = signal(0);
 
-  isDraggingScreenshots = signal(false);
+  // Обложка + подгруженные скриншоты — единая галерея: первый кадр всегда обложка,
+  // если она есть, дальше скриншоты в порядке ответа RAWG.
+  media = computed<string[]>(() => {
+    const g = this.game();
+    const screenshots = this.details()?.screenshots ?? [];
+    return [g?.coverImageUrl, ...screenshots].filter((url): url is string => !!url);
+  });
+
+  heroImage = computed<string | null>(() => {
+    const media = this.media();
+    if (!media.length) {
+      return null;
+    }
+    return media[Math.min(this.selectedMediaIndex(), media.length - 1)];
+  });
+
+  isDraggingThumbs = signal(false);
+  private dragPointerId: number | null = null;
   private dragStartX = 0;
   private dragStartScrollLeft = 0;
+  private dragThresholdExceeded = false;
+  // Меньше этого сдвига в пикселях — считаем обычным кликом, не перетаскиванием.
+  private readonly DRAG_THRESHOLD_PX = 4;
 
-  private readonly screenshotsRow = viewChild<ElementRef<HTMLElement>>('screenshotsRow');
-  // Прогресс прокрутки ленты скриншотов (0% — в начале, 100% — долистали до конца).
-  screenshotsScroll = signal<ScrollProgress>({ scrollable: false, percent: 0 });
+  private readonly thumbsRow = viewChild<ElementRef<HTMLElement>>('thumbsRow');
+  // Прогресс прокрутки ленты миниатюр (0% — в начале, 100% — долистали до конца).
+  thumbsScroll = signal<ScrollProgress>({ scrollable: false, percent: 0 });
 
   // Живой отсчёт до релиза (дни/часы/минуты) — только пока дата ещё не наступила.
   countdown = computed<Countdown | null>(() => {
@@ -103,17 +124,18 @@ export class GameDetailModalComponent {
     effect(() => {
       // Не даём странице скроллиться под открытой модалкой.
       document.body.style.overflow = this.game() ? 'hidden' : '';
-      // При открытии другой игры сворачиваем обратно предыдущее описание.
+      // При открытии другой игры сбрасываем состояние предыдущей.
       this.game();
       this.descriptionExpanded.set(false);
+      this.selectedMediaIndex.set(0);
     });
 
-    // Замеряем индикатор прокрутки сразу после того, как лента скриншотов
+    // Замеряем индикатор прокрутки сразу после того, как лента миниатюр
     // отрисовалась (появилась в DOM или сменился список игры).
     afterRenderEffect(() => {
-      const row = this.screenshotsRow()?.nativeElement;
+      const row = this.thumbsRow()?.nativeElement;
       if (row) {
-        this.updateScreenshotsScroll(row);
+        this.updateThumbsScroll(row);
       }
     });
   }
@@ -149,52 +171,73 @@ export class GameDetailModalComponent {
     this.descriptionExpanded.update((expanded) => !expanded);
   }
 
-  // Перетаскивание мышью для ленты скриншотов, как нативный тач-свайп на телефоне
-  // (сам тач не трогаем — у него уже есть родной скролл).
-  onScreenshotsPointerDown(event: PointerEvent, row: HTMLElement): void {
+  selectMedia(index: number): void {
+    this.selectedMediaIndex.set(index);
+  }
+
+  // Перетаскивание мышью для ленты миниатюр, как нативный тач-свайп на телефоне
+  // (сам тач не трогаем — у него уже есть родной скролл). Указатель захватываем
+  // (setPointerCapture) только когда сдвиг превысил порог, то есть это точно драг,
+  // а не клик — иначе перехват уводил бы click с кнопки-миниатюры на саму ленту.
+  onThumbsPointerDown(event: PointerEvent, row: HTMLElement): void {
     if (event.pointerType !== 'mouse') {
       return;
     }
 
-    this.isDraggingScreenshots.set(true);
+    this.dragPointerId = event.pointerId;
+    this.dragThresholdExceeded = false;
     this.dragStartX = event.clientX;
     this.dragStartScrollLeft = row.scrollLeft;
-    row.setPointerCapture(event.pointerId);
   }
 
-  onScreenshotsPointerMove(event: PointerEvent, row: HTMLElement): void {
-    if (!this.isDraggingScreenshots()) {
+  onThumbsPointerMove(event: PointerEvent, row: HTMLElement): void {
+    if (event.pointerType !== 'mouse' || event.pointerId !== this.dragPointerId) {
       return;
     }
 
-    row.scrollLeft = this.dragStartScrollLeft - (event.clientX - this.dragStartX);
+    const delta = event.clientX - this.dragStartX;
+
+    if (!this.dragThresholdExceeded) {
+      if (Math.abs(delta) < this.DRAG_THRESHOLD_PX) {
+        return;
+      }
+      this.dragThresholdExceeded = true;
+      this.isDraggingThumbs.set(true);
+      row.setPointerCapture(event.pointerId);
+    }
+
+    row.scrollLeft = this.dragStartScrollLeft - delta;
   }
 
-  onScreenshotsPointerUp(event: PointerEvent, row: HTMLElement): void {
-    if (!this.isDraggingScreenshots()) {
+  onThumbsPointerUp(event: PointerEvent, row: HTMLElement): void {
+    if (event.pointerType !== 'mouse' || event.pointerId !== this.dragPointerId) {
       return;
     }
 
-    this.isDraggingScreenshots.set(false);
-    row.releasePointerCapture(event.pointerId);
+    if (this.dragThresholdExceeded) {
+      row.releasePointerCapture(event.pointerId);
+    }
+
+    this.dragPointerId = null;
+    this.isDraggingThumbs.set(false);
   }
 
   // Срабатывает и на драг мышью (row.scrollLeft = ... сам генерирует scroll),
   // и на нативный тач-свайп/колесо — единая точка обновления индикатора.
-  onScreenshotsScroll(row: HTMLElement): void {
-    this.updateScreenshotsScroll(row);
+  onThumbsScroll(row: HTMLElement): void {
+    this.updateThumbsScroll(row);
   }
 
-  private updateScreenshotsScroll(row: HTMLElement): void {
+  private updateThumbsScroll(row: HTMLElement): void {
     const { scrollLeft, scrollWidth, clientWidth } = row;
     const maxScrollLeft = scrollWidth - clientWidth;
 
     if (maxScrollLeft <= 0) {
-      this.screenshotsScroll.set({ scrollable: false, percent: 0 });
+      this.thumbsScroll.set({ scrollable: false, percent: 0 });
       return;
     }
 
-    this.screenshotsScroll.set({ scrollable: true, percent: (scrollLeft / maxScrollLeft) * 100 });
+    this.thumbsScroll.set({ scrollable: true, percent: (scrollLeft / maxScrollLeft) * 100 });
   }
 
   close(): void {
