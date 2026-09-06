@@ -85,7 +85,7 @@
   display: flex;
   flex: none;
   gap: var(--space-2);
-  padding: var(--space-3) var(--space-4) 0;
+  padding: var(--space-3) var(--space-4);
   overflow-x: auto;
   cursor: grab;
   scrollbar-width: none;
@@ -121,7 +121,7 @@
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
   }
 
@@ -145,7 +145,7 @@
 }
 
 .game-detail-dialog__body {
-  padding: var(--space-4);
+  padding: var(--space-2) var(--space-4) var(--space-4);
 }
 
 .game-detail-dialog__main-head {
@@ -461,7 +461,7 @@
   }
 
   .game-detail-dialog__body {
-    padding: var(--space-6);
+    padding: var(--space-3) var(--space-6) var(--space-6);
   }
 
   .game-detail-dialog__title {
