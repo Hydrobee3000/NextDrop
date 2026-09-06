@@ -36,13 +36,6 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, var(--color-neutral-900) 5%, transparent 70%);
-  }
 }
 
 .game-detail-dialog__image {
