@@ -1,33 +1,67 @@
 @if (game(); as g) {
   <div class="game-detail-backdrop" (click)="close()">
     <div class="game-detail-dialog" (click)="$event.stopPropagation()">
-      <div class="game-detail-dialog__aside">
-        <div class="game-detail-dialog__hero" [style.background]="g.coverGradient">
-          @if (g.coverImageUrl; as imageUrl) {
-            <img class="game-detail-dialog__image" [src]="imageUrl" [alt]="g.title" />
-          } @else {
-            <span class="game-detail-dialog__initials">{{ g.coverInitials }}</span>
-          }
+      <div class="game-detail-dialog__hero" [style.background]="g.coverGradient">
+        @if (heroImage(); as imageUrl) {
+          <img class="game-detail-dialog__image" [src]="imageUrl" [alt]="g.title" />
+        } @else {
+          <span class="game-detail-dialog__initials">{{ g.coverInitials }}</span>
+        }
 
-          <button
-            class="game-detail-dialog__close-mobile"
-            (click)="close()"
-            [attr.aria-label]="'detail.close' | translate"
-          >
-            <svg lucideX></svg>
-          </button>
+        <button
+          class="game-detail-dialog__close"
+          (click)="close()"
+          [attr.aria-label]="'detail.close' | translate"
+        >
+          <svg lucideX></svg>
+        </button>
+      </div>
+
+      @if (media().length > 1) {
+        <div
+          class="game-detail-dialog__thumbs"
+          [class.game-detail-dialog__thumbs--dragging]="isDraggingThumbs()"
+          #thumbsRow
+          (pointerdown)="onThumbsPointerDown($event, thumbsRow)"
+          (pointermove)="onThumbsPointerMove($event, thumbsRow)"
+          (pointerup)="onThumbsPointerUp($event, thumbsRow)"
+          (pointercancel)="onThumbsPointerUp($event, thumbsRow)"
+          (scroll)="onThumbsScroll(thumbsRow)"
+        >
+          @for (item of media(); track item; let idx = $index) {
+            <button
+              class="game-detail-dialog__thumb"
+              [class.game-detail-dialog__thumb--active]="idx === selectedMediaIndex()"
+              (click)="selectMedia(idx)"
+            >
+              <img [src]="item" [alt]="g.title" draggable="false" loading="lazy" />
+            </button>
+          }
         </div>
 
-        <div class="game-detail-dialog__aside-bottom">
-          <button
-            class="game-detail-dialog__favorite-btn"
-            [class.active]="isFavorite(g.id)"
-            (click)="toggleFavorite()"
-          >
-            <svg lucideHeart></svg>
-            {{ favoriteLabel(g.id) }}
-          </button>
+        @if (thumbsScroll().scrollable) {
+          <div class="game-detail-dialog__thumbs-track">
+            <div class="game-detail-dialog__thumbs-fill" [style.width.%]="thumbsScroll().percent"></div>
+          </div>
+        }
+      }
 
+      <div class="game-detail-dialog__body">
+        <div class="game-detail-dialog__main-head">
+          <h2 class="game-detail-dialog__title">{{ g.title }}</h2>
+
+          @if (loading()) {
+            <span class="game-detail-dialog__byline-skeleton"></span>
+          } @else {
+            @if (details(); as headDetails) {
+              @if (byline(headDetails); as gameByline) {
+                <p class="game-detail-dialog__byline">{{ gameByline }}</p>
+              }
+            }
+          }
+        </div>
+
+        <div class="game-detail-dialog__actions">
           <div class="game-detail-dialog__platforms">
             @for (platform of g.platforms; track platform) {
               <span class="tag">
@@ -36,31 +70,14 @@
               </span>
             }
           </div>
-        </div>
-      </div>
-
-      <div class="game-detail-dialog__main">
-        <div class="game-detail-dialog__main-head">
-          <div class="game-detail-dialog__heading">
-            <h2 class="game-detail-dialog__title">{{ g.title }}</h2>
-
-            @if (loading()) {
-              <span class="game-detail-dialog__byline-skeleton"></span>
-            } @else {
-              @if (details(); as headDetails) {
-                @if (byline(headDetails); as gameByline) {
-                  <p class="game-detail-dialog__byline">{{ gameByline }}</p>
-                }
-              }
-            }
-          </div>
 
           <button
-            class="game-detail-dialog__close"
-            (click)="close()"
-            [attr.aria-label]="'detail.close' | translate"
+            class="game-detail-dialog__favorite-btn"
+            [class.active]="isFavorite(g.id)"
+            (click)="toggleFavorite()"
           >
-            <svg lucideX></svg>
+            <svg lucideHeart></svg>
+            {{ favoriteLabel(g.id) }}
           </button>
         </div>
 
@@ -122,35 +139,6 @@
           </div>
         } @else {
           @if (details(); as d) {
-            @if (d.screenshots.length) {
-              <div
-                class="game-detail-dialog__screenshots"
-                [class.game-detail-dialog__screenshots--dragging]="isDraggingScreenshots()"
-                #screenshotsRow
-                (pointerdown)="onScreenshotsPointerDown($event, screenshotsRow)"
-                (pointermove)="onScreenshotsPointerMove($event, screenshotsRow)"
-                (pointerup)="onScreenshotsPointerUp($event, screenshotsRow)"
-                (pointercancel)="onScreenshotsPointerUp($event, screenshotsRow)"
-                (scroll)="onScreenshotsScroll(screenshotsRow)"
-              >
-                @for (screenshot of d.screenshots; track screenshot) {
-                  <img
-                    class="game-detail-dialog__screenshot"
-                    [src]="screenshot"
-                    [alt]="g.title"
-                    loading="lazy"
-                    draggable="false"
-                  />
-                }
-              </div>
-
-              @if (screenshotsScroll().scrollable) {
-                <div class="game-detail-dialog__screenshots-track">
-                  <div class="game-detail-dialog__screenshots-fill" [style.width.%]="screenshotsScroll().percent"></div>
-                </div>
-              }
-            }
-
             @if (d.description) {
               <div class="game-detail-dialog__description-wrap">
                 <p class="game-detail-dialog__description" [class.game-detail-dialog__description--expanded]="descriptionExpanded()">
