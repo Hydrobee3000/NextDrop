@@ -113,6 +113,11 @@ export class GameDetailModalComponent {
   // скроллбар ОС, игнорирующий кастомные стили.
   dialogScroll = signal<DialogScroll>({ visible: false, thumbHeightPercent: 100, thumbTopPercent: 0 });
 
+  isDraggingScrollbar = signal(false);
+  private scrollbarDragPointerId: number | null = null;
+  private scrollbarDragStartY = 0;
+  private scrollbarDragStartScrollTop = 0;
+
   // Живой отсчёт до релиза (дни/часы/минуты) — только пока дата ещё не наступила.
   countdown = computed<Countdown | null>(() => {
     const releaseDate = this.game()?.releaseDate;
@@ -281,6 +286,57 @@ export class GameDetailModalComponent {
     const thumbHeightPercent = Math.max((clientHeight / scrollHeight) * 100, 8);
     const thumbTopPercent = (scrollTop / maxScrollTop) * (100 - thumbHeightPercent);
     this.dialogScroll.set({ visible: true, thumbHeightPercent, thumbTopPercent });
+  }
+
+  // Перетаскивание своего бегунка мышью/тачем — ведёт себя как настоящий скроллбар,
+  // просто без стрелок сверху/снизу.
+  onScrollbarThumbPointerDown(event: PointerEvent, thumb: HTMLElement, dialog: HTMLElement): void {
+    event.stopPropagation();
+    event.preventDefault();
+
+    this.scrollbarDragPointerId = event.pointerId;
+    this.isDraggingScrollbar.set(true);
+    this.scrollbarDragStartY = event.clientY;
+    this.scrollbarDragStartScrollTop = dialog.scrollTop;
+    thumb.setPointerCapture(event.pointerId);
+  }
+
+  onScrollbarThumbPointerMove(event: PointerEvent, dialog: HTMLElement, track: HTMLElement): void {
+    if (event.pointerId !== this.scrollbarDragPointerId) {
+      return;
+    }
+
+    const trackHeight = track.clientHeight;
+    const thumbHeight = (this.dialogScroll().thumbHeightPercent / 100) * trackHeight;
+    const travel = Math.max(trackHeight - thumbHeight, 1);
+    const maxScrollTop = dialog.scrollHeight - dialog.clientHeight;
+    const deltaY = event.clientY - this.scrollbarDragStartY;
+
+    dialog.scrollTop = this.scrollbarDragStartScrollTop + (deltaY / travel) * maxScrollTop;
+  }
+
+  onScrollbarThumbPointerUp(event: PointerEvent, thumb: HTMLElement): void {
+    if (event.pointerId !== this.scrollbarDragPointerId) {
+      return;
+    }
+
+    this.scrollbarDragPointerId = null;
+    this.isDraggingScrollbar.set(false);
+    thumb.releasePointerCapture(event.pointerId);
+  }
+
+  // Клик по треку мимо бегунка — прыжок к этой позиции, как у обычного скроллбара.
+  onScrollbarTrackClick(event: MouseEvent, dialog: HTMLElement, track: HTMLElement): void {
+    const trackRect = track.getBoundingClientRect();
+    const trackHeight = track.clientHeight;
+    const thumbHeight = (this.dialogScroll().thumbHeightPercent / 100) * trackHeight;
+    const travel = Math.max(trackHeight - thumbHeight, 1);
+    const maxScrollTop = dialog.scrollHeight - dialog.clientHeight;
+
+    const clickY = event.clientY - trackRect.top;
+    const targetThumbTop = Math.min(Math.max(clickY - thumbHeight / 2, 0), travel);
+
+    dialog.scrollTop = (targetThumbTop / travel) * maxScrollTop;
   }
 
   close(): void {
