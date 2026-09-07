@@ -39,6 +39,12 @@ interface ScrollProgress {
   percent: number;
 }
 
+interface DialogScroll {
+  visible: boolean;
+  thumbHeightPercent: number;
+  thumbTopPercent: number;
+}
+
 @Component({
   selector: 'app-game-detail-modal',
   imports: [
@@ -100,6 +106,13 @@ export class GameDetailModalComponent {
   // Прогресс прокрутки ленты миниатюр (0% — в начале, 100% — долистали до конца).
   thumbsScroll = signal<ScrollProgress>({ scrollable: false, percent: 0 });
 
+  private readonly dialogEl = viewChild<ElementRef<HTMLElement>>('dialogEl');
+  // Свой индикатор вертикального скролла модалки — родной скроллбар скрыт совсем,
+  // потому что на части систем/браузеров он рисует стрелки, которые никакой CSS
+  // (::-webkit-scrollbar-button) не убирает — вероятно, принудительный классический
+  // скроллбар ОС, игнорирующий кастомные стили.
+  dialogScroll = signal<DialogScroll>({ visible: false, thumbHeightPercent: 100, thumbTopPercent: 0 });
+
   // Живой отсчёт до релиза (дни/часы/минуты) — только пока дата ещё не наступила.
   countdown = computed<Countdown | null>(() => {
     const releaseDate = this.game()?.releaseDate;
@@ -136,6 +149,17 @@ export class GameDetailModalComponent {
       const row = this.thumbsRow()?.nativeElement;
       if (row) {
         this.updateThumbsScroll(row);
+      }
+    });
+
+    // То же самое для индикатора прокрутки всей модалки — пересчитываем и когда
+    // контент дозагрузился (details()/loading() меняют высоту содержимого).
+    afterRenderEffect(() => {
+      this.loading();
+      this.details();
+      const dialog = this.dialogEl()?.nativeElement;
+      if (dialog) {
+        this.updateDialogScroll(dialog);
       }
     });
   }
@@ -238,6 +262,25 @@ export class GameDetailModalComponent {
     }
 
     this.thumbsScroll.set({ scrollable: true, percent: (scrollLeft / maxScrollLeft) * 100 });
+  }
+
+  onDialogScroll(dialog: HTMLElement): void {
+    this.updateDialogScroll(dialog);
+  }
+
+  private updateDialogScroll(dialog: HTMLElement): void {
+    const { scrollTop, scrollHeight, clientHeight } = dialog;
+    const maxScrollTop = scrollHeight - clientHeight;
+
+    if (maxScrollTop <= 0) {
+      this.dialogScroll.set({ visible: false, thumbHeightPercent: 100, thumbTopPercent: 0 });
+      return;
+    }
+
+    // Не даём бегунку становиться совсем крошечным на длинных страницах.
+    const thumbHeightPercent = Math.max((clientHeight / scrollHeight) * 100, 8);
+    const thumbTopPercent = (scrollTop / maxScrollTop) * (100 - thumbHeightPercent);
+    this.dialogScroll.set({ visible: true, thumbHeightPercent, thumbTopPercent });
   }
 
   close(): void {
