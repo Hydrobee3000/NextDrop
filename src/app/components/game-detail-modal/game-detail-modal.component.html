@@ -172,11 +172,21 @@
       </div>
 
       @if (dialogScroll().visible) {
-        <div class="game-detail-dialog-scrollbar">
+        <div
+          class="game-detail-dialog-scrollbar"
+          #scrollbarTrack
+          (click)="onScrollbarTrackClick($event, dialogEl, scrollbarTrack)"
+        >
           <div
             class="game-detail-dialog-scrollbar-thumb"
+            [class.game-detail-dialog-scrollbar-thumb--dragging]="isDraggingScrollbar()"
             [style.height.%]="dialogScroll().thumbHeightPercent"
             [style.top.%]="dialogScroll().thumbTopPercent"
+            (pointerdown)="onScrollbarThumbPointerDown($event, $any($event.target), dialogEl)"
+            (pointermove)="onScrollbarThumbPointerMove($event, dialogEl, scrollbarTrack)"
+            (pointerup)="onScrollbarThumbPointerUp($event, $any($event.target))"
+            (pointercancel)="onScrollbarThumbPointerUp($event, $any($event.target))"
+            (click)="$event.stopPropagation()"
           ></div>
         </div>
       }
