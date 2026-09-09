@@ -3,35 +3,29 @@
 }
 
 .language-switcher {
-  display: flex;
-  gap: 2px;
-  padding: 3px;
-  border-radius: var(--radius-md);
-  background: var(--color-bg);
-  border: 2px solid var(--color-neutral-700);
-}
-
-.language-switcher__option {
-  flex: none;
   cursor: pointer;
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 11px;
-  padding: 4px 8px;
-  border-radius: calc(var(--radius-md) - 3px);
-  border: 1px solid transparent;
-  background: transparent;
-  color: color-mix(in srgb, var(--color-text) 55%, transparent);
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  border: 2px solid var(--color-neutral-700);
+  color: var(--color-text);
+  box-shadow: var(--tactile-shadow-sm);
+  transition: border-color 0.15s ease;
 
   &:hover {
-    color: var(--color-text);
+    border-color: var(--color-neutral-500);
   }
 
-  &.active {
-    background: var(--color-neutral-800);
-    border-color: var(--color-neutral-700);
-    color: var(--color-lime);
-    box-shadow: var(--tactile-shadow-sm);
+  &:focus-visible {
+    outline: none;
+    border-color: var(--color-lime);
+  }
+
+  option {
+    background: var(--color-bg);
+    color: var(--color-text);
   }
 }

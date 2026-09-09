@@ -13,7 +13,8 @@ export class LanguageSwitcherComponent {
 
   locale = this.i18n.locale;
 
-  setLocale(locale: Locale): void {
+  onChange(event: Event): void {
+    const locale = (event.target as HTMLSelectElement).value as Locale;
     this.i18n.setLocale(locale);
   }
 }
