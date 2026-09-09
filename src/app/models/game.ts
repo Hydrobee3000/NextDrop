@@ -21,6 +21,15 @@ export interface Game {
 }
 
 /**
+ * Страница списка игр — сами игры плюс общее число найденных RAWG (по всем страницам,
+ * не только текущей).
+ */
+export interface GamesPage {
+  games: Game[];
+  count: number;
+}
+
+/**
  * Дополнительные детали игры, подгружаемые отдельным запросом (GET /games/{id}).
  */
 export interface GameDetails {
