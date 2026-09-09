@@ -9,14 +9,14 @@
   font-size: 11px;
   padding: 6px 10px;
   border-radius: var(--radius-md);
-  background: var(--color-bg);
-  border: 2px solid var(--color-neutral-700);
+  background: var(--color-slate-bg);
+  border: 2px solid var(--color-slate-border);
   color: var(--color-text);
   box-shadow: var(--tactile-shadow-sm);
   transition: border-color 0.15s ease;
 
   &:hover {
-    border-color: var(--color-neutral-500);
+    border-color: var(--color-slate-text);
   }
 
   &:focus-visible {
@@ -25,7 +25,7 @@
   }
 
   option {
-    background: var(--color-bg);
+    background: var(--color-slate-bg);
     color: var(--color-text);
   }
 }
