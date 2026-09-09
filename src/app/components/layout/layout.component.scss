@@ -145,8 +145,13 @@
   .layout__nav-item {
     flex-direction: row;
     align-items: center;
-    padding: var(--space-2) 0;
-    position: relative;
+    padding: 6px 14px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: background 0.15s ease, color 0.15s ease;
 
     svg {
       display: none;
@@ -154,20 +159,18 @@
 
     &:hover {
       color: var(--color-text);
+      background: var(--color-neutral-800);
     }
 
     &.active {
-      color: var(--color-text);
+      color: var(--color-bg);
+      background: var(--color-lime);
+      border: 2px solid var(--color-bg);
+      box-shadow: var(--tactile-shadow-md);
+      padding: 4px 12px;
 
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -1px;
-        height: 2px;
-        background: var(--color-accent);
-        border-radius: 2px;
+      &:hover {
+        background: var(--color-lime-hover);
       }
     }
   }
