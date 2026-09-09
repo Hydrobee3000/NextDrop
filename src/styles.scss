@@ -28,6 +28,14 @@
   --color-accent-800: #423a6a;
   --color-accent-900: #2b2741;
 
+  // Лаймовый акцент для "тактильного" стиля (толстая обводка + жёсткая офсетная
+  // тень) — обкатываем поэлементно, начиная с кнопок шапки, поэтому пока отдельно
+  // от --color-accent, а не заменяет его.
+  --color-lime: #c3f400;
+  --color-lime-hover: #b0dc00;
+  --tactile-shadow-sm: 0 1px 0 0 #000;
+  --tactile-shadow-md: 0 2px 0 0 #000;
+
   --font-heading: "Inter", system-ui, sans-serif;
   --font-heading-weight: 500;
   --font-body: "Inter", system-ui, sans-serif;
