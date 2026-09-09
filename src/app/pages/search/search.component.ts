@@ -41,6 +41,7 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
 
   activeFilter = 'all';
   results: Game[] = [];
+  totalCount = 0;
   loading = false;
 
   ngAfterViewInit(): void {
@@ -89,6 +90,7 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
     this.page = 1;
     this.hasMore = true;
     this.results = [];
+    this.totalCount = 0;
 
     if (query) {
       this.loadMore();
@@ -104,8 +106,9 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
     const parentPlatformId = FILTER_PARENT_PLATFORM_ID[this.activeFilter];
 
     this.gamesApi.searchGames(this.currentQuery, this.page, parentPlatformId).subscribe({
-      next: (newResults) => {
+      next: ({ games: newResults, count }) => {
         this.results = [...this.results, ...newResults];
+        this.totalCount = count;
         this.hasMore = newResults.length > 0;
         this.page++;
         this.loading = false;

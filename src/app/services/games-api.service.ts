@@ -4,7 +4,7 @@ import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { Game, GameDetails } from '../models/game';
+import { Game, GameDetails, GamesPage } from '../models/game';
 import { RawgGame, RawgGameDetail, RawgGameListResponse, RawgScreenshotsResponse } from '../models/rawg-game';
 
 // набор градиентов.
@@ -20,7 +20,7 @@ export class GamesApiService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = 'https://api.rawg.io/api/games';
 
-  getUpcomingGames(page: number = 1, parentPlatformId?: string): Observable<Game[]> {
+  getUpcomingGames(page: number = 1, parentPlatformId?: string): Observable<GamesPage> {
     const today = new Date().toISOString().slice(0, 10);
     const oneYearAhead = new Date();
     oneYearAhead.setFullYear(oneYearAhead.getFullYear() + 1);
@@ -37,13 +37,16 @@ export class GamesApiService {
       params['parent_platforms'] = parentPlatformId;
     }
 
-    return this.http
-      .get<RawgGameListResponse>(this.baseUrl, { params })
-      // Маппим сырой ответ RAWG в наш формат Game[].
-      .pipe(map((response) => response.results.map((game, index) => this.toGame(game, index))));
+    return this.http.get<RawgGameListResponse>(this.baseUrl, { params }).pipe(
+      // Маппим сырой ответ RAWG в формат: игры плюс общее число найденных.
+      map((response) => ({
+        games: response.results.map((game, index) => this.toGame(game, index)),
+        count: response.count,
+      })),
+    );
   }
 
-  searchGames(query: string, page: number = 1, parentPlatformId?: string): Observable<Game[]> {
+  searchGames(query: string, page: number = 1, parentPlatformId?: string): Observable<GamesPage> {
     const params: Record<string, string> = {
       key: environment.rawgApiKey,
       search: query,
@@ -55,9 +58,12 @@ export class GamesApiService {
       params['parent_platforms'] = parentPlatformId;
     }
 
-    return this.http
-      .get<RawgGameListResponse>(this.baseUrl, { params })
-      .pipe(map((response) => response.results.map((game, index) => this.toGame(game, index))));
+    return this.http.get<RawgGameListResponse>(this.baseUrl, { params }).pipe(
+      map((response) => ({
+        games: response.results.map((game, index) => this.toGame(game, index)),
+        count: response.count,
+      })),
+    );
   }
 
   getGameDetails(id: string): Observable<GameDetails> {

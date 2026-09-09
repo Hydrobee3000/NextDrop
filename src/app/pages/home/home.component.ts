@@ -41,6 +41,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   activeFilter = 'all';
   games: Game[] = [];
+  totalCount = 0;
   loading = true;
 
   /**
@@ -79,6 +80,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.page = 1;
     this.hasMore = true;
     this.games = [];
+    this.totalCount = 0;
     this.loadMore();
   }
 
@@ -93,8 +95,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     const parentPlatformId = FILTER_PARENT_PLATFORM_ID[this.activeFilter];
 
     this.gamesApi.getUpcomingGames(this.page, parentPlatformId).subscribe({
-      next: (newGames) => {
+      next: ({ games: newGames, count }) => {
         this.games = [...this.games, ...newGames];
+        this.totalCount = count;
         this.hasMore = newGames.length > 0;
         this.page++;
         this.fetching = false;
