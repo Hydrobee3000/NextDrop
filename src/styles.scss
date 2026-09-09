@@ -28,13 +28,26 @@
   --color-accent-800: #423a6a;
   --color-accent-900: #2b2741;
 
-  // Лаймовый акцент для "тактильного" стиля (толстая обводка + жёсткая офсетная
-  // тень) — обкатываем поэлементно, начиная с кнопок шапки, поэтому пока отдельно
-  // от --color-accent, а не заменяет его.
+  // Палитра "тактильного" стиля (design/makets/obsidian_signal/DESIGN.md) —
+  // точные значения макета, обкатываем поэлементно, поэтому пока отдельно от
+  // --color-accent/--color-neutral-*, а не заменяет их.
   --color-lime: #c3f400;
   --color-lime-hover: #b0dc00;
+  --color-cyan: #00eefc;
+  --color-cyan-dim: #00c9db;
+  --color-peach: #ffb59a;
+  --color-rose: #f43f5e;
+
+  // Тёмный slate-фон из макета — темнее и чище наших --color-neutral-*.
+  --color-slate-bg: #020617;
+  --color-slate-surface: #0f172a;
+  --color-slate-surface-hover: #1e293b;
+  --color-slate-border: #334155;
+  --color-slate-text: #cbd5e1;
+
   --tactile-shadow-sm: 0 1px 0 0 #000;
   --tactile-shadow-md: 0 2px 0 0 #000;
+  --tactile-shadow-lg: 0 4px 0 0 #000;
 
   --font-heading: "Inter", system-ui, sans-serif;
   --font-heading-weight: 500;

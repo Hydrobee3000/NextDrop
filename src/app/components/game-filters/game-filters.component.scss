@@ -86,22 +86,34 @@
   gap: 5px;
   cursor: pointer;
   font-family: var(--font-heading);
-  font-weight: 500;
+  font-weight: 800;
   font-size: 12px;
   padding: 7px 13px;
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   white-space: nowrap;
-  background: var(--color-surface);
-  border: 1px solid var(--color-divider);
-  color: color-mix(in srgb, var(--color-text) 75%, transparent);
+  background: var(--color-slate-surface);
+  border: 2px solid var(--color-slate-border);
+  color: var(--color-slate-text);
+  box-shadow: var(--tactile-shadow-sm);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 
   app-platform-icon {
     --platform-icon-size: 14px;
   }
 
+  &:hover {
+    background: var(--color-slate-surface-hover);
+    color: var(--color-text);
+  }
+
   &.active {
-    background: color-mix(in srgb, var(--color-accent) 18%, transparent);
-    border-color: var(--color-accent);
-    color: var(--color-accent-100);
+    background: var(--color-lime);
+    border-color: var(--color-slate-surface);
+    color: var(--color-slate-bg);
+    box-shadow: var(--tactile-shadow-md);
+
+    &:hover {
+      background: var(--color-lime-hover);
+    }
   }
 }

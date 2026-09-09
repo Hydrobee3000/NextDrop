@@ -159,13 +159,13 @@
 
     &:hover {
       color: var(--color-text);
-      background: var(--color-neutral-800);
+      background: var(--color-slate-surface-hover);
     }
 
     &.active {
-      color: var(--color-bg);
+      color: var(--color-slate-bg);
       background: var(--color-lime);
-      border: 2px solid var(--color-bg);
+      border: 2px solid var(--color-slate-surface);
       box-shadow: var(--tactile-shadow-md);
       padding: 4px 12px;
 
