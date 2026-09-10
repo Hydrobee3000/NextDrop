@@ -1,4 +1,9 @@
-<app-game-filters titleKey="search.title" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
+<app-game-filters
+  titleKey="search.title"
+  [activeFilter]="activeFilter"
+  [totalCount]="totalCount"
+  (activeFilterChange)="selectFilter($event)"
+/>
 
 <div class="search-input-wrap">
   <svg class="search-input-icon" lucideSearch></svg>
