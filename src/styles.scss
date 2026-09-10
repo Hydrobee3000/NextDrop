@@ -48,6 +48,8 @@
   --tactile-shadow-sm: 0 1px 0 0 #000;
   --tactile-shadow-md: 0 2px 0 0 #000;
   --tactile-shadow-lg: 0 4px 0 0 #000;
+  // Тень "плавающих" шапок/крупных hero-рамок из макета (DESIGN.md: 0 5px 0 0 #000).
+  --tactile-shadow-xl: 0 5px 0 0 #000;
   // Скругление кнопок/фильтров из макета (rounded-xl = 0.75rem).
   --radius-tactile-btn: 12px;
   // Скругление карточек/крупных контейнеров (rounded-2xl = 1rem).
