@@ -3,21 +3,11 @@
   height: 100%;
 }
 
+// Фон/обводка/тень/скругление/hover — общий .tactile-card (см. styles.scss).
 .game-hero {
   height: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  cursor: pointer;
-  background: var(--color-surface);
-  border: 1px solid transparent;
-  box-shadow: var(--shadow-md);
-  transition: border-color 0.15s ease;
-
-  &:hover {
-    border-color: var(--color-accent);
-  }
 }
 
 .game-hero__cover {
@@ -33,7 +23,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, var(--color-surface) 5%, transparent 60%);
+    background: linear-gradient(to top, var(--color-slate-surface) 5%, transparent 60%);
   }
 
   &::before {
@@ -43,7 +33,7 @@
     right: 0;
     bottom: -1px;
     height: 4px;
-    background: var(--color-surface);
+    background: var(--color-slate-surface);
     z-index: 1;
   }
 }
