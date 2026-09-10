@@ -1,4 +1,9 @@
-<app-game-filters titleKey="home.title" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
+<app-game-filters
+  titleKey="home.title"
+  [activeFilter]="activeFilter"
+  [totalCount]="totalCount"
+  (activeFilterChange)="selectFilter($event)"
+/>
 
 @if (games.length > 0) {
   <div class="home-highlight">

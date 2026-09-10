@@ -19,11 +19,32 @@
   gap: var(--space-2);
 }
 
+.game-filters__title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
 .game-filters h2 {
   margin: 0;
   font-size: 26px;
   font-weight: 500;
   letter-spacing: -0.03em;
+}
+
+.game-filters__count {
+  flex: none;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 11px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+  background: var(--color-lime);
+  border: 2px solid var(--color-slate-surface);
+  color: var(--color-slate-bg);
+  box-shadow: var(--tactile-shadow-sm);
 }
 
 .game-filters__rule {

@@ -45,6 +45,10 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'day.few': 'дня',
     'day.many': 'дней',
 
+    'release.one': 'релиз',
+    'release.few': 'релиза',
+    'release.many': 'релизов',
+
     'date.tba': 'Дата уточняется',
   },
   en: {
@@ -89,6 +93,9 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'days.released': 'Already out',
     'day.one': 'day',
     'day.other': 'days',
+
+    'release.one': 'release',
+    'release.other': 'releases',
 
     'date.tba': 'Release date TBA',
   },
