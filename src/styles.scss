@@ -136,6 +136,24 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* — лаймовый бейдж-пилюля (счётчик релизов и т.п.) — общий, чтобы не дублировать
+   в каждом компоненте */
+.tactile-badge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 11px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+  background: var(--color-lime);
+  border: 2px solid var(--color-slate-surface);
+  color: var(--color-slate-bg);
+  box-shadow: var(--tactile-shadow-sm);
+}
+
 /* — tags — */
 .tag {
   display: inline-flex;

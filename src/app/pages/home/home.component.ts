@@ -7,6 +7,7 @@ import { GameHeroSkeletonComponent } from '../../components/game-hero-skeleton/g
 import { GameRowComponent } from '../../components/game-row/game-row.component';
 import { GameRowSkeletonComponent } from '../../components/game-row-skeleton/game-row-skeleton.component';
 import { Game } from '../../models/game';
+import { ReleaseCountPipe } from '../../pipes/release-count.pipe';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { FILTER_PARENT_PLATFORM_ID } from '../../shared/platform-filter';
 import { GamesApiService } from '../../services/games-api.service';
@@ -21,6 +22,7 @@ import { GamesApiService } from '../../services/games-api.service';
     GameHeroSkeletonComponent,
     GameRowComponent,
     GameRowSkeletonComponent,
+    ReleaseCountPipe,
     TranslatePipe,
   ],
   templateUrl: './home.component.html',

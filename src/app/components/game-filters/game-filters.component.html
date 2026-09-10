@@ -4,7 +4,7 @@
       <div class="game-filters__title-group">
         <h2>{{ titleKey() | translate }}</h2>
         @if (totalCount() > 0) {
-          <span class="game-filters__count">{{ totalCount() }} {{ countLabel() }}</span>
+          <span class="tactile-badge">{{ totalCount() | releaseCount }}</span>
         }
       </div>
       <app-language-switcher class="game-filters__language-switcher" />
