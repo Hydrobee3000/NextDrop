@@ -50,6 +50,8 @@
   --tactile-shadow-lg: 0 4px 0 0 #000;
   // Скругление кнопок/фильтров из макета (rounded-xl = 0.75rem).
   --radius-tactile-btn: 12px;
+  // Скругление карточек/крупных контейнеров (rounded-2xl = 1rem).
+  --radius-tactile-card: 16px;
 
   --font-heading: "Inter", system-ui, sans-serif;
   --font-heading-weight: 500;
@@ -115,6 +117,23 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.12;
   letter-spacing: -0.015em;
   margin: 0 0 var(--space-2);
+}
+
+/* — тактильный каркас карточки (фон/обводка/тень/скругление/hover) — общий
+   для game-card/game-row/game-hero, чтобы не дублировать в каждом компоненте */
+.tactile-card {
+  background: var(--color-slate-surface);
+  border: 2px solid var(--color-slate-border);
+  border-radius: var(--radius-tactile-card);
+  box-shadow: var(--tactile-shadow-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-lime);
+    transform: translateY(-2px);
+  }
 }
 
 /* — tags — */

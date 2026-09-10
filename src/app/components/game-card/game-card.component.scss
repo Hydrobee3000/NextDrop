@@ -2,20 +2,10 @@
   display: block;
 }
 
+// Фон/обводка/тень/скругление/hover — общий .tactile-card (см. styles.scss).
 .game-card {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  cursor: pointer;
-  border: 1px solid transparent;
-  overflow: hidden;
-  transition: border-color 0.15s ease;
-
-  &:hover {
-    border-color: var(--color-accent);
-  }
 }
 
 .game-card__cover {
@@ -25,6 +15,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: var(--color-slate-bg);
+  border-bottom: 2px solid var(--color-slate-border);
 }
 
 .game-card__image {
@@ -53,23 +45,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
-  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-tactile-btn);
+  background: color-mix(in srgb, var(--color-slate-bg) 70%, transparent);
+  border: 2px solid var(--color-slate-border);
+  box-shadow: var(--tactile-shadow-sm);
   color: var(--color-text);
   cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 
   svg {
     width: 13px;
     height: 13px;
   }
 
+  &:hover {
+    border-color: var(--color-rose);
+    color: var(--color-rose);
+  }
+
   &.active {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-rose) 20%, var(--color-slate-bg));
+    border-color: var(--color-rose);
+    color: var(--color-rose);
 
     svg {
-      fill: var(--color-accent);
+      fill: var(--color-rose);
     }
   }
 }
@@ -79,17 +79,11 @@
   flex-direction: column;
   gap: var(--space-2);
   padding: var(--space-2) var(--space-3) var(--space-2);
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--color-accent-700) 45%, transparent),
-      color-mix(in srgb, var(--color-neutral-900) 45%, transparent)
-    ),
-    color-mix(in srgb, var(--color-surface) 78%, var(--color-bg));
 }
 
 .game-card__title {
   font-size: 13px;
+  font-weight: 700;
 }
 
 .game-card__meta {
@@ -97,6 +91,9 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-1);
+  margin-top: var(--space-1);
+  padding-top: var(--space-2);
+  border-top: 2px solid var(--color-slate-surface-hover);
 }
 
 .game-card__platforms {
@@ -106,11 +103,11 @@
   min-width: 0;
 
   .tag {
-    background: linear-gradient(135deg, var(--color-accent-700), var(--color-accent-900));
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid var(--color-accent);
-    color: var(--color-accent-100);
+    background: var(--color-slate-surface-hover);
+    border: 2px solid var(--color-slate-border);
+    box-shadow: var(--tactile-shadow-sm);
+    color: var(--color-slate-text);
+    font-weight: 700;
     font-size: 9px;
     padding: 2px 6px;
 
@@ -128,8 +125,15 @@
 
 .game-card__days {
   flex: none;
+  font-family: var(--font-heading);
+  font-weight: 700;
   font-size: 9px;
-  color: var(--color-accent-300);
+  padding: 2px 8px;
+  border-radius: var(--radius-tactile-btn);
+  background: var(--color-slate-surface-hover);
+  border: 2px solid var(--color-slate-border);
+  box-shadow: var(--tactile-shadow-sm);
+  color: var(--color-slate-text);
 }
 
 @media (min-width: 768px) {

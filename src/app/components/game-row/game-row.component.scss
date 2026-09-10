@@ -3,23 +3,14 @@
   height: 100%;
 }
 
+// Фон/обводка/тень/скругление/hover — общий .tactile-card (см. styles.scss).
 .game-row {
   display: flex;
   gap: var(--space-3);
   align-items: stretch;
   min-height: 64px;
   height: 100%;
-  cursor: pointer;
   padding: var(--space-2);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  border: 1px solid transparent;
-  box-shadow: var(--shadow-md);
-  transition: border-color 0.15s ease;
-
-  &:hover {
-    border-color: var(--color-accent);
-  }
 }
 
 .game-row__cover {
