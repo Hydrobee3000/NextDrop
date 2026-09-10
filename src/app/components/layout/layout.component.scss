@@ -74,7 +74,7 @@
 @media (min-width: 768px) {
   .layout {
     display: grid;
-    grid-template-rows: 56px 1fr;
+    grid-template-rows: 68px 1fr;
   }
 
   .layout__nav {
@@ -88,32 +88,41 @@
     align-items: center;
     gap: 28px;
     padding: 0 25px;
-    border-top: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 25%, var(--color-divider));
-    background:
-      linear-gradient(
-        135deg,
-        color-mix(in srgb, var(--color-accent-700) 45%, transparent),
-        color-mix(in srgb, var(--color-neutral-900) 45%, transparent)
-      ),
-      color-mix(in srgb, var(--color-surface) 78%, var(--color-bg));
+    margin: 12px 20px 0;
+    border: 2px solid var(--color-slate-border);
+    border-radius: var(--radius-tactile-card);
+    background: color-mix(in srgb, var(--color-slate-surface) 95%, transparent);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--tactile-shadow-xl);
   }
 
   .layout__brand {
     display: flex;
     align-items: center;
-    gap: var(--space-1);
+    gap: var(--space-2);
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 16px;
     letter-spacing: -0.01em;
   }
 
+  .layout__brand-icon-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--color-lime);
+    border: 2px solid var(--color-slate-surface);
+    border-radius: var(--radius-tactile-btn);
+    box-shadow: var(--tactile-shadow-sm);
+  }
+
   .layout__brand-icon {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
   }
 
   .layout__brand-next {
