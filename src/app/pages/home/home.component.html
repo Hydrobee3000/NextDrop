@@ -1,7 +1,6 @@
 <app-game-filters
   titleKey="home.title"
   [activeFilter]="activeFilter"
-  [totalCount]="totalCount"
   (activeFilterChange)="selectFilter($event)"
 />
 
@@ -16,7 +15,12 @@
     </div>
   </div>
 
-  <h3 class="home-section-title">{{ 'home.sectionTitle' | translate }}</h3>
+  <div class="home-section-title-row">
+    <h3 class="home-section-title">{{ 'home.sectionTitle' | translate }}</h3>
+    @if (totalCount > 0) {
+      <span class="tactile-badge">{{ totalCount | releaseCount }}</span>
+    }
+  </div>
 
   <div class="game-grid">
     @for (game of games; track game.id) {

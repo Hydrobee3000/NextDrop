@@ -16,6 +16,17 @@
   font-weight: 700;
 }
 
+.home-section-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+
+  .home-section-title {
+    margin: 0;
+  }
+}
+
 .home-side-list {
   display: flex;
   flex-direction: column;

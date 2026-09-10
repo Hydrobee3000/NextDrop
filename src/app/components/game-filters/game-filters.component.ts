@@ -1,19 +1,16 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { LanguageSwitcherComponent } from '../language-switcher/language-switcher.component';
 import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
+import { ReleaseCountPipe } from '../../pipes/release-count.pipe';
 import { TranslatePipe } from '../../pipes/translate.pipe';
-import { I18nService } from '../../services/i18n.service';
-import { pluralizeEn, pluralizeRu } from '../../shared/pluralize';
 
 @Component({
   selector: 'app-game-filters',
-  imports: [LanguageSwitcherComponent, PlatformIconComponent, TranslatePipe],
+  imports: [LanguageSwitcherComponent, PlatformIconComponent, ReleaseCountPipe, TranslatePipe],
   templateUrl: './game-filters.component.html',
   styleUrl: './game-filters.component.scss'
 })
 export class GameFiltersComponent {
-  private readonly i18n = inject(I18nService);
-
   titleKey = input.required<string>();
   activeFilter = input.required<string>();
   totalCount = input<number>(0);
@@ -25,12 +22,5 @@ export class GameFiltersComponent {
     if (filter !== this.activeFilter()) {
       this.activeFilterChange.emit(filter);
     }
-  }
-
-  countLabel(): string {
-    const count = this.totalCount();
-    return this.i18n.locale() === 'ru'
-      ? pluralizeRu(count, [this.i18n.t('release.one'), this.i18n.t('release.few'), this.i18n.t('release.many')])
-      : pluralizeEn(count, [this.i18n.t('release.one'), this.i18n.t('release.other')]);
   }
 }

@@ -33,20 +33,6 @@
   letter-spacing: -0.03em;
 }
 
-.game-filters__count {
-  flex: none;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 11px;
-  padding: 3px 11px;
-  border-radius: 999px;
-  white-space: nowrap;
-  background: var(--color-lime);
-  border: 2px solid var(--color-slate-surface);
-  color: var(--color-slate-bg);
-  box-shadow: var(--tactile-shadow-sm);
-}
-
 .game-filters__rule {
   height: 1px;
   margin: 0;
