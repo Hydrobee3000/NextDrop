@@ -40,38 +40,6 @@
   top: 6px;
   right: 6px;
   z-index: 1;
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-tactile-btn);
-  background: color-mix(in srgb, var(--color-slate-bg) 70%, transparent);
-  border: 2px solid var(--color-slate-border);
-  box-shadow: var(--tactile-shadow-sm);
-  color: var(--color-text);
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-
-  svg {
-    width: 13px;
-    height: 13px;
-  }
-
-  &:hover {
-    border-color: var(--color-rose);
-    color: var(--color-rose);
-  }
-
-  &.active {
-    background: color-mix(in srgb, var(--color-rose) 20%, var(--color-slate-bg));
-    border-color: var(--color-rose);
-    color: var(--color-rose);
-
-    svg {
-      fill: var(--color-rose);
-    }
-  }
 }
 
 .game-card__body {

@@ -11,14 +11,7 @@
     <div class="game-row__title-row">
       <div class="game-row__title">{{ game().title }}</div>
 
-      <button
-        class="game-row__favorite"
-        [class.active]="isFavorite()"
-        [attr.aria-label]="favoriteLabel()"
-        (click)="toggleFavorite($event)"
-      >
-        <svg lucideHeart></svg>
-      </button>
+      <app-favorite-button class="game-row__favorite" [game]="game()" />
     </div>
 
     <div class="game-row__meta">

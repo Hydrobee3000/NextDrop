@@ -6,14 +6,7 @@
       <span class="game-card__initials">{{ game().coverInitials }}</span>
     }
 
-    <button
-      class="game-card__favorite"
-      [class.active]="isFavorite()"
-      [attr.aria-label]="favoriteLabel()"
-      (click)="toggleFavorite($event)"
-    >
-      <svg lucideHeart></svg>
-    </button>
+    <app-favorite-button class="game-card__favorite" [game]="game()" />
   </div>
 
   <div class="game-card__body">
