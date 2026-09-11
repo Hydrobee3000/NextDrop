@@ -1,4 +1,25 @@
-<select class="language-switcher" [value]="locale()" (change)="onChange($event)">
-  <option value="ru">RU</option>
-  <option value="en">EN</option>
-</select>
+<button
+  type="button"
+  class="language-switcher__trigger"
+  [class.open]="open()"
+  [attr.aria-expanded]="open()"
+  (click)="toggle()"
+>
+  {{ locale().toUpperCase() }}
+</button>
+
+@if (open()) {
+  <ul class="language-switcher__menu" role="listbox">
+    @for (item of locales; track item) {
+      <li
+        class="language-switcher__option"
+        [class.active]="item === locale()"
+        role="option"
+        [attr.aria-selected]="item === locale()"
+        (click)="select(item)"
+      >
+        {{ item.toUpperCase() }}
+      </li>
+    }
+  </ul>
+}
