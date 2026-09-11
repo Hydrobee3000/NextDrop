@@ -17,8 +17,6 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'favorites.title': 'Мой список',
     'favorites.empty': 'Тут тоже пусто :(',
 
-    'hero.badge': 'Самое ожидаемое',
-
     'detail.release': 'Релиз',
     'detail.close': 'Закрыть',
     'detail.metacritic': 'Metacritic',
@@ -66,8 +64,6 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
 
     'favorites.title': 'My List',
     'favorites.empty': 'Empty here too :(',
-
-    'hero.badge': 'Most anticipated',
 
     'detail.release': 'Release',
     'detail.close': 'Close',
