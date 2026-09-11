@@ -32,7 +32,6 @@
             (pointermove)="onThumbsPointerMove($event, thumbsRow)"
             (pointerup)="onThumbsPointerUp($event, thumbsRow)"
             (pointercancel)="onThumbsPointerUp($event, thumbsRow)"
-            (scroll)="onThumbsScroll(thumbsRow)"
           >
             @for (item of media(); track item; let idx = $index) {
               <button
@@ -44,12 +43,6 @@
               </button>
             }
           </div>
-
-          @if (thumbsScroll().scrollable) {
-            <div class="game-detail-dialog__thumbs-track">
-              <div class="game-detail-dialog__thumbs-fill" [style.width.%]="thumbsScroll().percent"></div>
-            </div>
-          }
         }
 
         <div class="game-detail-dialog__body">

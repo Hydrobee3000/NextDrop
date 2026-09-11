@@ -46,7 +46,7 @@
   position: absolute;
   top: 8px;
   bottom: 8px;
-  right: 3px;
+  right: 4px;
   width: 6px;
   cursor: pointer;
 }
@@ -57,18 +57,16 @@
   width: 4px;
   min-height: 24px;
   border-radius: 2px;
-  background: var(--color-slate-border);
+  background: var(--color-lime);
   opacity: 0.8;
   cursor: grab;
-  transition: background 0.15s ease, opacity 0.15s ease;
+  transition: opacity 0.15s ease;
 
   &:hover {
-    background: var(--color-lime);
     opacity: 1;
   }
 
   &--dragging {
-    background: var(--color-lime);
     cursor: grabbing;
     opacity: 1;
   }
@@ -135,10 +133,23 @@
   padding: var(--space-3) var(--space-4);
   overflow-x: auto;
   cursor: grab;
-  scrollbar-width: none;
+  scrollbar-color: var(--color-lime) transparent;
 
   &::-webkit-scrollbar {
-    display: none;
+    height: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-lime);
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-lime-hover);
   }
 
   &--dragging {
@@ -176,19 +187,6 @@
     opacity: 1;
     box-shadow: 0 0 0 2px var(--color-lime);
   }
-}
-
-.game-detail-dialog__thumbs-track {
-  flex: none;
-  height: 3px;
-  margin: var(--space-2) var(--space-4) 0;
-}
-
-.game-detail-dialog__thumbs-fill {
-  height: 100%;
-  min-width: 6px;
-  border-radius: 2px;
-  background: var(--color-lime);
 }
 
 .game-detail-dialog__body {
