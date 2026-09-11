@@ -11,17 +11,16 @@ import {
   viewChild,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { LucideHeart, LucideX } from '@lucide/angular';
+import { LucideX } from '@lucide/angular';
 import { interval, map, startWith } from 'rxjs';
 
+import { FavoriteButtonComponent } from '../favorite-button/favorite-button.component';
 import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
 import { DaysUntilPipe } from '../../pipes/days-until.pipe';
 import { LocalizedDatePipe } from '../../pipes/localized-date.pipe';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { GameDetails } from '../../models/game';
-import { FavoritesService } from '../../services/favorites.service';
 import { GameDetailService } from '../../services/game-detail.service';
-import { I18nService } from '../../services/i18n.service';
 import { getPlatformIconKind } from '../../shared/platform-icon';
 
 // Порог, начиная с которого показываем кнопку "показать полностью" — точная
@@ -48,11 +47,11 @@ interface DialogScroll {
 @Component({
   selector: 'app-game-detail-modal',
   imports: [
-    LucideHeart,
     LucideX,
     DaysUntilPipe,
     LocalizedDatePipe,
     DecimalPipe,
+    FavoriteButtonComponent,
     PlatformIconComponent,
     TranslatePipe,
   ],
@@ -61,8 +60,6 @@ interface DialogScroll {
 })
 export class GameDetailModalComponent {
   private readonly detailService = inject(GameDetailService);
-  private readonly favoritesService = inject(FavoritesService);
-  private readonly i18n = inject(I18nService);
 
   // Тикает раз в секунду — источник "текущего времени" для обратного отсчёта.
   // RxJS interval + toSignal вместо ручного setInterval: подписка/отписка сами
@@ -167,21 +164,6 @@ export class GameDetailModalComponent {
         this.updateDialogScroll(dialog);
       }
     });
-  }
-
-  isFavorite(id: string): boolean {
-    return this.favoritesService.isFavorite(id);
-  }
-
-  favoriteLabel(id: string): string {
-    return this.i18n.t(this.isFavorite(id) ? 'favorite.remove' : 'favorite.add');
-  }
-
-  toggleFavorite(): void {
-    const game = this.game();
-    if (game) {
-      this.favoritesService.toggle(game);
-    }
   }
 
   iconKind(platform: string): string {

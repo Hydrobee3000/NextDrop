@@ -21,7 +21,29 @@
     height: 13px;
   }
 
+  &[data-size='m'] {
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  &[data-size='l'] {
+    width: 40px;
+    height: 40px;
+    border-color: var(--color-slate-border);
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
   &:hover {
+    background: color-mix(in srgb, var(--color-rose) 20%, var(--color-slate-bg));
     border-color: var(--color-rose);
     box-shadow: var(--tactile-shadow-md);
   }
@@ -31,15 +53,5 @@
     border-color: var(--color-rose);
     box-shadow: var(--tactile-shadow-md);
     color: var(--color-rose);
-  }
-
-  &[data-size='m'] {
-    width: 32px;
-    height: 32px;
-
-    svg {
-      width: 15px;
-      height: 15px;
-    }
   }
 }

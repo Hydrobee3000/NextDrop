@@ -197,6 +197,13 @@
   min-width: 0;
 }
 
+.game-detail-dialog__title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
 .game-detail-dialog__title {
   margin: 0;
   font-size: 20px;
@@ -237,35 +244,6 @@
 
 .game-detail-dialog__favorite-btn {
   flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  padding: 8px 14px;
-  border-radius: var(--radius-tactile-btn);
-  border: 2px solid var(--color-slate-border);
-  background: var(--color-slate-bg);
-  color: var(--color-text);
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 13px;
-  white-space: nowrap;
-  cursor: pointer;
-
-  svg {
-    width: 15px;
-    height: 15px;
-  }
-
-  &.active {
-    border-color: var(--color-rose);
-    background: color-mix(in srgb, var(--color-rose) 14%, transparent);
-    color: var(--color-rose);
-
-    svg {
-      fill: var(--color-rose);
-    }
-  }
 }
 
 .game-detail-dialog__kpi {

@@ -54,7 +54,10 @@
 
         <div class="game-detail-dialog__body">
           <div class="game-detail-dialog__main-head">
-            <h2 class="game-detail-dialog__title">{{ g.title }}</h2>
+            <div class="game-detail-dialog__title-row">
+              <h2 class="game-detail-dialog__title">{{ g.title }}</h2>
+              <app-favorite-button class="game-detail-dialog__favorite-btn" [game]="g" size="l" />
+            </div>
 
             @if (loading()) {
               <span class="game-detail-dialog__byline-skeleton"></span>
@@ -76,15 +79,6 @@
                 </span>
               }
             </div>
-
-            <button
-              class="game-detail-dialog__favorite-btn"
-              [class.active]="isFavorite(g.id)"
-              (click)="toggleFavorite()"
-            >
-              <svg lucideHeart></svg>
-              {{ favoriteLabel(g.id) }}
-            </button>
           </div>
 
           <div class="game-detail-dialog__kpi">

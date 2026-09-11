@@ -3,7 +3,7 @@ import { Game } from '../../models/game';
 import { FavoritesService } from '../../services/favorites.service';
 import { I18nService } from '../../services/i18n.service';
 
-export type FavoriteButtonSize = 's' | 'm';
+export type FavoriteButtonSize = 's' | 'm' | 'l';
 
 @Component({
   selector: 'app-favorite-button',
