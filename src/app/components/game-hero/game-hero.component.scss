@@ -66,9 +66,9 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: var(--color-accent-100);
-  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
-  border: 1px solid var(--color-accent);
+  color: var(--color-lime);
+  background: color-mix(in srgb, var(--color-slate-bg) 55%, transparent);
+  border: 1px solid var(--color-lime);
   padding: 4px 8px;
   border-radius: 20px;
 }
@@ -142,7 +142,7 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 1;
-  color: var(--color-accent-300);
+  color: var(--color-lime);
   white-space: nowrap;
 
   span {

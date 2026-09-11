@@ -28,13 +28,13 @@
   font: inherit;
   font-size: 15px;
   color: var(--color-text);
-  background: var(--color-surface);
-  border: 1px solid var(--color-divider);
-  border-radius: var(--radius-lg);
+  background: var(--color-slate-bg);
+  border: 2px solid var(--color-slate-border);
+  border-radius: var(--radius-tactile-btn);
 
   &:focus {
     outline: none;
-    border-color: var(--color-accent);
+    border-color: var(--color-lime);
   }
 }
 

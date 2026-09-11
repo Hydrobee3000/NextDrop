@@ -27,9 +27,11 @@
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
-  background: var(--color-surface);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  box-shadow: var(--shadow-lg);
+  background: var(--color-slate-surface);
+  border: 2px solid var(--color-slate-border);
+  border-bottom: none;
+  border-radius: var(--radius-tactile-card) var(--radius-tactile-card) 0 0;
+  box-shadow: var(--tactile-shadow-lg);
   animation: game-detail-sheet 0.26s cubic-bezier(0.2, 0.7, 0.3, 1) both;
   // Родной скроллбар скрыт целиком — свой индикатор рисуем поверх
   // (.game-detail-dialog-scrollbar), см. компонент.
@@ -55,7 +57,7 @@
   width: 6px;
   min-height: 24px;
   border-radius: 3px;
-  background: var(--color-accent);
+  background: var(--color-lime);
   opacity: 0.7;
   cursor: grab;
   transition: opacity 0.15s;
@@ -106,9 +108,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
-  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-tactile-btn);
+  background: color-mix(in srgb, var(--color-slate-bg) 55%, transparent);
+  border: 2px solid var(--color-slate-border);
   color: var(--color-text);
   cursor: pointer;
 
@@ -119,7 +121,8 @@
 
   &:hover {
     color: var(--color-text);
-    background: color-mix(in srgb, var(--color-bg) 75%, transparent);
+    background: color-mix(in srgb, var(--color-slate-bg) 75%, transparent);
+    border-color: var(--color-lime);
   }
 }
 
@@ -154,8 +157,8 @@
   border: none;
   border-radius: var(--radius-sm);
   overflow: hidden;
-  background: var(--color-neutral-800);
-  box-shadow: 0 0 0 1px var(--color-neutral-800);
+  background: var(--color-slate-surface-hover);
+  box-shadow: 0 0 0 1px var(--color-slate-border);
   opacity: 0.55;
   cursor: pointer;
   transition: opacity 0.15s, box-shadow 0.15s;
@@ -169,7 +172,7 @@
 
   &--active {
     opacity: 1;
-    box-shadow: 0 0 0 2px var(--color-accent);
+    box-shadow: 0 0 0 2px var(--color-lime);
   }
 }
 
@@ -183,7 +186,7 @@
   height: 100%;
   min-width: 6px;
   border-radius: 2px;
-  background: var(--color-accent);
+  background: var(--color-lime);
 }
 
 .game-detail-dialog__body {
@@ -213,7 +216,7 @@
   height: 11px;
   margin-top: var(--space-2);
   border-radius: var(--radius-sm);
-  background: var(--color-neutral-800);
+  background: var(--color-slate-surface-hover);
   animation: game-detail-skeleton-pulse 1.2s ease-in-out infinite;
 }
 
@@ -239,9 +242,9 @@
   justify-content: center;
   gap: var(--space-2);
   padding: 8px 14px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-divider);
-  background: transparent;
+  border-radius: var(--radius-tactile-btn);
+  border: 2px solid var(--color-slate-border);
+  background: var(--color-slate-bg);
   color: var(--color-text);
   font-family: var(--font-heading);
   font-weight: 600;
@@ -255,12 +258,12 @@
   }
 
   &.active {
-    border-color: var(--color-accent);
-    background: color-mix(in srgb, var(--color-accent) 14%, transparent);
-    color: var(--color-accent-100);
+    border-color: var(--color-rose);
+    background: color-mix(in srgb, var(--color-rose) 14%, transparent);
+    color: var(--color-rose);
 
     svg {
-      fill: var(--color-accent-100);
+      fill: var(--color-rose);
     }
   }
 }
@@ -278,9 +281,9 @@
   justify-content: space-between;
   gap: var(--space-3);
   padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-accent-800);
-  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  border-radius: var(--radius-tactile-btn);
+  border: 2px solid var(--color-slate-border);
+  background: var(--color-slate-surface-hover);
 }
 
 .game-detail-dialog__release-info {
@@ -313,7 +316,7 @@
 
 .game-detail-dialog__release-days {
   font-size: 12.5px;
-  color: var(--color-accent-300);
+  color: var(--color-lime);
 }
 
 .game-detail-dialog__clock {
@@ -331,7 +334,7 @@
   min-width: 38px;
   padding: 5px 6px;
   border-radius: var(--radius-sm);
-  background: var(--color-neutral-800);
+  background: var(--color-slate-surface-hover);
   text-align: center;
 }
 
@@ -341,7 +344,7 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 1;
-  color: var(--color-accent-200);
+  color: var(--color-lime);
 }
 
 .game-detail-dialog__clock-label {
@@ -355,13 +358,13 @@
 
 .game-detail-dialog__score {
   padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-divider);
-  background: var(--color-neutral-900);
+  border-radius: var(--radius-tactile-btn);
+  border: 2px solid var(--color-slate-border);
+  background: var(--color-slate-surface);
 
   &--loading {
     height: 62px;
-    background: var(--color-neutral-800);
+    background: var(--color-slate-surface-hover);
     animation: game-detail-skeleton-pulse 1.2s ease-in-out infinite;
   }
 }
@@ -395,13 +398,13 @@
   height: 4px;
   margin-top: 6px;
   border-radius: 2px;
-  background: var(--color-neutral-800);
+  background: var(--color-slate-surface-hover);
   overflow: hidden;
 }
 
 .game-detail-dialog__score-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--color-accent-600), var(--color-accent-300));
+  background: linear-gradient(90deg, var(--color-lime-hover), var(--color-lime));
 }
 
 .game-detail-dialog__skeleton {
@@ -414,7 +417,7 @@
 .game-detail-dialog__skeleton-line {
   height: 12px;
   border-radius: var(--radius-sm);
-  background: var(--color-neutral-800);
+  background: var(--color-slate-surface-hover);
   animation: game-detail-skeleton-pulse 1.2s ease-in-out infinite;
 
   &--short {
@@ -448,14 +451,14 @@
   padding: 0;
   border: none;
   background: none;
-  color: var(--color-accent-300);
+  color: var(--color-lime);
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 12.5px;
   cursor: pointer;
 
   &:hover {
-    color: var(--color-accent-200);
+    color: var(--color-lime-hover);
   }
 }
 
@@ -466,9 +469,11 @@
   margin-top: var(--space-4);
 
   .tag {
-    background: transparent;
-    border: 1px solid var(--color-divider);
-    color: var(--color-text);
+    background: var(--color-slate-surface-hover);
+    border: 2px solid var(--color-slate-border);
+    box-shadow: var(--tactile-shadow-sm);
+    color: var(--color-slate-text);
+    font-weight: 700;
   }
 }
 
@@ -497,7 +502,8 @@
 
   .game-detail-dialog {
     max-height: 88vh;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-tactile-card);
+    border-bottom: 2px solid var(--color-slate-border);
     animation: game-detail-rise 0.22s cubic-bezier(0.2, 0.7, 0.3, 1) both;
   }
 
