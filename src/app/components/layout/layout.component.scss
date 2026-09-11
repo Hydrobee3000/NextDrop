@@ -132,7 +132,7 @@
   .layout__brand-drop {
     display: inline-block;
     margin-left: 1px;
-    color: #a387ff;
+    color: var(--color-lime);
     transform-origin: left center;
     animation: brand-drop-tilt 2s ease-in-out infinite alternate;
   }
@@ -148,7 +148,7 @@
 
   .layout__nav-items {
     flex-direction: row;
-    gap: 26px;
+    gap: 10px;
   }
 
   .layout__nav-item {
