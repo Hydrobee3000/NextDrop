@@ -40,8 +40,8 @@
   background: linear-gradient(
     90deg,
     transparent,
-    color-mix(in srgb, var(--color-accent) 55%, transparent) 12%,
-    var(--color-divider) 55%,
+    color-mix(in srgb, var(--color-lime) 55%, transparent) 12%,
+    var(--color-slate-border) 55%,
     transparent
   );
 }
