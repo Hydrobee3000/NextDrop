@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, signal } from '@angular/core';
 import { Locale } from '../../models/locale';
 import { I18nService } from '../../services/i18n.service';
 
@@ -10,11 +10,30 @@ import { I18nService } from '../../services/i18n.service';
 })
 export class LanguageSwitcherComponent {
   private readonly i18n = inject(I18nService);
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
 
+  readonly locales: Locale[] = ['ru', 'en'];
   locale = this.i18n.locale;
+  open = signal(false);
 
-  onChange(event: Event): void {
-    const locale = (event.target as HTMLSelectElement).value as Locale;
+  toggle(): void {
+    this.open.update((value) => !value);
+  }
+
+  select(locale: Locale): void {
     this.i18n.setLocale(locale);
+    this.open.set(false);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.elementRef.nativeElement.contains(event.target as Node)) {
+      this.open.set(false);
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.open.set(false);
   }
 }
