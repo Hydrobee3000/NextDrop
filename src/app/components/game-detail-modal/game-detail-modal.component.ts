@@ -33,11 +33,6 @@ interface Countdown {
   minutes: number;
 }
 
-interface ScrollProgress {
-  scrollable: boolean;
-  percent: number;
-}
-
 interface DialogScroll {
   visible: boolean;
   thumbHeightPercent: number;
@@ -99,10 +94,6 @@ export class GameDetailModalComponent {
   // Меньше этого сдвига в пикселях — считаем обычным кликом, не перетаскиванием.
   private readonly DRAG_THRESHOLD_PX = 4;
 
-  private readonly thumbsRow = viewChild<ElementRef<HTMLElement>>('thumbsRow');
-  // Прогресс прокрутки ленты миниатюр (0% — в начале, 100% — долистали до конца).
-  thumbsScroll = signal<ScrollProgress>({ scrollable: false, percent: 0 });
-
   private readonly dialogEl = viewChild<ElementRef<HTMLElement>>('dialogEl');
   // Свой индикатор вертикального скролла модалки — родной скроллбар скрыт совсем,
   // потому что на части систем/браузеров он рисует стрелки, которые никакой CSS
@@ -145,16 +136,7 @@ export class GameDetailModalComponent {
       this.selectedMediaIndex.set(0);
     });
 
-    // Замеряем индикатор прокрутки сразу после того, как лента миниатюр
-    // отрисовалась (появилась в DOM или сменился список игры).
-    afterRenderEffect(() => {
-      const row = this.thumbsRow()?.nativeElement;
-      if (row) {
-        this.updateThumbsScroll(row);
-      }
-    });
-
-    // То же самое для индикатора прокрутки всей модалки — пересчитываем и когда
+    // Индикатор прокрутки всей модалки — пересчитываем, когда
     // контент дозагрузился (details()/loading() меняют высоту содержимого).
     afterRenderEffect(() => {
       this.loading();
@@ -235,22 +217,6 @@ export class GameDetailModalComponent {
 
   // Срабатывает и на драг мышью (row.scrollLeft = ... сам генерирует scroll),
   // и на нативный тач-свайп/колесо — единая точка обновления индикатора.
-  onThumbsScroll(row: HTMLElement): void {
-    this.updateThumbsScroll(row);
-  }
-
-  private updateThumbsScroll(row: HTMLElement): void {
-    const { scrollLeft, scrollWidth, clientWidth } = row;
-    const maxScrollLeft = scrollWidth - clientWidth;
-
-    if (maxScrollLeft <= 0) {
-      this.thumbsScroll.set({ scrollable: false, percent: 0 });
-      return;
-    }
-
-    this.thumbsScroll.set({ scrollable: true, percent: (scrollLeft / maxScrollLeft) * 100 });
-  }
-
   onDialogScroll(dialog: HTMLElement): void {
     this.updateDialogScroll(dialog);
   }
