@@ -87,7 +87,7 @@
     flex-direction: row;
     align-items: center;
     gap: 28px;
-    padding: 0 25px;
+    padding: 0 25px 0 16px;
     margin: 12px 20px 0;
     border: 2px solid var(--color-slate-border);
     border-radius: var(--radius-tactile-card);
@@ -111,18 +111,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     background: var(--color-lime);
     border: 2px solid var(--color-slate-surface);
-    border-radius: var(--radius-tactile-btn);
-    box-shadow: var(--tactile-shadow-sm);
+    border-radius: 8px;
+    box-shadow: var(--tactile-shadow-md);
   }
 
   .layout__brand-icon {
-    width: 16px;
-    height: 16px;
-    filter: brightness(0) invert(1);
+    width: 18px;
+    height: 18px;
+    fill: var(--color-slate-bg);
   }
 
   .layout__brand-next {
