@@ -6,14 +6,7 @@
       <span class="game-hero__initials">{{ game().coverInitials }}</span>
     }
     <span class="game-hero__badge">{{ 'hero.badge' | translate }}</span>
-    <button
-      class="game-hero__favorite"
-      [class.active]="isFavorite()"
-      [attr.aria-label]="favoriteLabel()"
-      (click)="toggleFavorite($event)"
-    >
-      <svg lucideHeart></svg>
-    </button>
+    <app-favorite-button class="game-hero__favorite" [game]="game()" size="m" />
   </div>
 
   <div class="game-hero__body">

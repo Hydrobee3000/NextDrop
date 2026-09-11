@@ -1,0 +1,45 @@
+:host {
+  display: inline-flex;
+}
+
+.favorite-button {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-slate-bg) 70%, transparent);
+  border: 2px solid transparent;
+  color: var(--color-slate-text);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+
+  svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  &:hover {
+    border-color: var(--color-rose);
+    box-shadow: var(--tactile-shadow-md);
+  }
+
+  &.active {
+    background: color-mix(in srgb, var(--color-rose) 20%, var(--color-slate-bg));
+    border-color: var(--color-rose);
+    box-shadow: var(--tactile-shadow-md);
+    color: var(--color-rose);
+  }
+
+  &[data-size='m'] {
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+}

@@ -109,30 +109,6 @@
 
 .game-row__favorite {
   flex: none;
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  background: transparent;
-  border: 1px solid var(--color-divider);
-  color: var(--color-neutral-500);
-  cursor: pointer;
-
-  svg {
-    width: 13px;
-    height: 13px;
-  }
-
-  &.active {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-
-    svg {
-      fill: var(--color-accent);
-    }
-  }
 }
 
 @media (min-width: 768px) {

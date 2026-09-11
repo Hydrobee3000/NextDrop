@@ -78,30 +78,6 @@
   top: 8px;
   right: 8px;
   z-index: 1;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
-  border: 1px solid var(--color-divider);
-  color: var(--color-text);
-  cursor: pointer;
-
-  svg {
-    width: 15px;
-    height: 15px;
-  }
-
-  &.active {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-
-    svg {
-      fill: var(--color-accent);
-    }
-  }
 }
 
 .game-hero__body {
