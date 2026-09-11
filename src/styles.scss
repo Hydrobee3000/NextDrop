@@ -5,7 +5,6 @@
   --color-bg: #161826;
   --color-surface: #232532;
   --color-text: #e9e9ed;
-  --color-accent: #9184d9;
   --color-divider: color-mix(in srgb, #e9e9ed 16%, transparent);
 
   --color-neutral-100: #f3f5fe;
@@ -18,19 +17,9 @@
   --color-neutral-800: #3f424d;
   --color-neutral-900: #292b31;
 
-  --color-accent-100: #f5f4ff;
-  --color-accent-200: #e7e5fe;
-  --color-accent-300: #d2cefd;
-  --color-accent-400: #b5abfc;
-  --color-accent-500: #968ae0;
-  --color-accent-600: #796cbf;
-  --color-accent-700: #5d5294;
-  --color-accent-800: #423a6a;
-  --color-accent-900: #2b2741;
-
   // Палитра "тактильного" стиля (design/makets/obsidian_signal/DESIGN.md) —
   // точные значения макета, обкатываем поэлементно, поэтому пока отдельно от
-  // --color-accent/--color-neutral-*, а не заменяет их.
+  // --color-neutral-*, а не заменяет их.
   --color-lime: #c3f400;
   --color-lime-hover: #b0dc00;
   --color-cyan: #00eefc;
@@ -193,10 +182,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
+  color: var(--color-lime);
+  border-color: var(--color-lime);
 }
 
 .btn-primary:hover {
-  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  background: color-mix(in srgb, var(--color-lime) 12%, transparent);
 }

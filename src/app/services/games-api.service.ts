@@ -9,8 +9,8 @@ import { RawgGame, RawgGameDetail, RawgGameListResponse, RawgScreenshotsResponse
 
 // набор градиентов.
 const COVER_GRADIENTS = [
-  'linear-gradient(135deg, var(--color-accent-800), var(--color-neutral-900))',
-  'linear-gradient(135deg, var(--color-accent-700), var(--color-neutral-900))',
+  'linear-gradient(135deg, var(--color-slate-border), var(--color-slate-bg))',
+  'linear-gradient(135deg, var(--color-slate-surface-hover), var(--color-slate-bg))',
   'linear-gradient(135deg, var(--color-neutral-700), var(--color-neutral-900))',
 ];
 
