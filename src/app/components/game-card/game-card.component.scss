@@ -97,11 +97,41 @@
   font-weight: 700;
   font-size: 9px;
   padding: 2px 8px;
-  border-radius: var(--radius-tactile-btn);
-  background: var(--color-slate-surface-hover);
-  border: 2px solid var(--color-slate-border);
+  border-radius: 999px;
+  border: 2px solid var(--color-ink);
   box-shadow: var(--tactile-shadow-sm);
-  color: var(--color-slate-text);
+  color: var(--color-ink);
+
+  // Яркость заливки затухает от самого скорого релиза (1) к самому дальнему
+  // (7) — цвета от var(--color-cyan)/var(--color-cyan-dim) из DESIGN.md,
+  // дальше затухание к белому, чтобы тёмный ink-текст оставался читаемым.
+  &[data-urgency='1'] {
+    background: var(--color-cyan);
+  }
+
+  &[data-urgency='2'] {
+    background: var(--color-cyan-dim);
+  }
+
+  &[data-urgency='3'] {
+    background: color-mix(in srgb, var(--color-cyan-dim) 80%, white);
+  }
+
+  &[data-urgency='4'] {
+    background: color-mix(in srgb, var(--color-cyan-dim) 60%, white);
+  }
+
+  &[data-urgency='5'] {
+    background: color-mix(in srgb, var(--color-cyan-dim) 45%, white);
+  }
+
+  &[data-urgency='6'] {
+    background: color-mix(in srgb, var(--color-cyan-dim) 30%, white);
+  }
+
+  &[data-urgency='7'] {
+    background: color-mix(in srgb, var(--color-cyan-dim) 18%, white);
+  }
 }
 
 @media (min-width: 768px) {

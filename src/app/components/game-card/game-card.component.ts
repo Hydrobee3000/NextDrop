@@ -7,6 +7,7 @@ import { Game } from '../../models/game';
 import { GameDetailService } from '../../services/game-detail.service';
 import { getPlatformIconKind } from '../../shared/platform-icon';
 import { platformMatchesFilter } from '../../shared/platform-filter';
+import { getReleaseUrgencyTier } from '../../shared/release-urgency';
 
 @Component({
   selector: 'app-game-card',
@@ -26,6 +27,10 @@ export class GameCardComponent {
 
   iconKind(platform: string): string {
     return getPlatformIconKind(platform);
+  }
+
+  urgencyTier(): number {
+    return getReleaseUrgencyTier(this.game().daysUntilRelease);
   }
 
   openDetail(): void {
