@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LucideHouse, LucideSearch, LucideHeart } from '@lucide/angular';
 
 import { LanguageSwitcherComponent } from '../language-switcher/language-switcher.component';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 
 type NavIcon = 'house' | 'search' | 'heart';
@@ -15,7 +16,16 @@ interface NavItem {
 
 @Component({
   selector: 'app-layout',
-  imports: [LucideHouse, LucideSearch, LucideHeart, RouterLink, RouterLinkActive, LanguageSwitcherComponent, TranslatePipe],
+  imports: [
+    LucideHouse,
+    LucideSearch,
+    LucideHeart,
+    RouterLink,
+    RouterLinkActive,
+    LanguageSwitcherComponent,
+    ThemeToggleComponent,
+    TranslatePipe,
+  ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })

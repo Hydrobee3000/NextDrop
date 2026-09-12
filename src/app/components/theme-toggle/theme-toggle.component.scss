@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  cursor: pointer;
+  border-radius: var(--radius-tactile-btn);
+  background: var(--color-slate-bg);
+  border: 2px solid var(--color-lime-text);
+  color: var(--color-lime-text);
+  box-shadow: var(--tactile-shadow-md);
+  transition: border-color 0.15s ease;
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  &:hover {
+    border-color: var(--color-lime-text-hover);
+  }
+}

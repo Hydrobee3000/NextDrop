@@ -6,6 +6,9 @@
   (click)="toggle()"
 >
   {{ locale().toUpperCase() }}
+  <svg class="language-switcher__chevron" viewBox="0 0 24 24" aria-hidden="true">
+    <polyline points="6 9 12 15 18 9" />
+  </svg>
 </button>
 
 @if (open()) {

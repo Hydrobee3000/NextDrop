@@ -28,11 +28,19 @@
   --color-rose: #f43f5e;
 
   // Тёмный slate-фон из макета — темнее и чище наших --color-neutral-*.
+  // Роль "поверхности" — переопределяется под [data-theme='light'].
   --color-slate-bg: #020617;
   --color-slate-surface: #0f172a;
   --color-slate-surface-hover: #1e293b;
   --color-slate-border: #334155;
   --color-slate-text: #cbd5e1;
+
+  // "Чернила" — тёмный текст/обводка на лаймовых и других ярких акцентах
+  --color-ink: #020617;
+
+
+  --color-lime-text: var(--color-lime);
+  --color-lime-text-hover: var(--color-lime-hover);
 
   --tactile-shadow-sm: 0 1px 0 0 #000;
   --tactile-shadow-md: 0 2px 0 0 #000;
@@ -64,6 +72,37 @@
   --shadow-lg: 0 0 0 1px var(--color-neutral-500), 0 16px 40px rgba(0, 0, 0, 0.65);
 }
 
+:root[data-theme='light'] {
+  --color-bg: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-text: #0f172a;
+  --color-divider: color-mix(in srgb, #0f172a 12%, transparent);
+
+  --color-neutral-100: #292b31;
+  --color-neutral-200: #3f424d;
+  --color-neutral-300: #595d6c;
+  --color-neutral-400: #75798c;
+  --color-neutral-500: #9397ab;
+  --color-neutral-600: #b2b6ca;
+  --color-neutral-700: #cfd3e5;
+  --color-neutral-800: #e4e7f5;
+  --color-neutral-900: #f3f5fe;
+
+  --color-slate-bg: #f8f9fa;
+  --color-slate-surface: #ffffff;
+  --color-slate-surface-hover: #f1f5f9;
+  --color-slate-border: #0f172a;
+  --color-slate-text: #475569;
+
+  --tactile-shadow-sm: 0 1px 0 0 #0f172a;
+  --tactile-shadow-md: 0 2px 0 0 #0f172a;
+  --tactile-shadow-lg: 0 4px 0 0 #0f172a;
+  --tactile-shadow-xl: 0 5px 0 0 #0f172a;
+
+  --color-lime-text: #4d7c0f;
+  --color-lime-text-hover: #3f6212;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -80,7 +119,7 @@ body {
   font-size: 15px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  scrollbar-color: var(--color-lime) var(--color-bg);
+  scrollbar-color: var(--color-lime-text) var(--color-bg);
 }
 
 ::-webkit-scrollbar {
@@ -93,13 +132,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-lime);
+  background: var(--color-lime-text);
   border-radius: 20px;
   border: 2px solid var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-lime-hover);
+  background: var(--color-lime-text-hover);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -122,7 +161,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: border-color 0.15s ease, transform 0.15s ease;
 
   &:hover {
-    border-color: var(--color-lime);
+    border-color: var(--color-lime-text);
     transform: translateY(-2px);
   }
 }
@@ -140,8 +179,8 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 999px;
   white-space: nowrap;
   background: var(--color-lime);
-  border: 2px solid var(--color-slate-surface);
-  color: var(--color-slate-bg);
+  border: 2px solid var(--color-ink);
+  color: var(--color-ink);
   box-shadow: var(--tactile-shadow-sm);
 }
 
@@ -182,10 +221,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  color: var(--color-lime);
-  border-color: var(--color-lime);
+  color: var(--color-lime-text);
+  border-color: var(--color-lime-text);
 }
 
 .btn-primary:hover {
-  background: color-mix(in srgb, var(--color-lime) 12%, transparent);
+  background: color-mix(in srgb, var(--color-lime-text) 12%, transparent);
 }

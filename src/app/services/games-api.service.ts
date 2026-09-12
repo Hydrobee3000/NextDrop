@@ -7,11 +7,13 @@ import { environment } from '../../environments/environment';
 import { Game, GameDetails, GamesPage } from '../models/game';
 import { RawgGame, RawgGameDetail, RawgGameListResponse, RawgScreenshotsResponse } from '../models/rawg-game';
 
-// набор градиентов.
+// Набор градиентов — фиксированно тёмные (не завязаны на токены темы),
+// имитируют постер игры и не должны светлеть в светлой теме, иначе текст
+// инициалов поверх (белый) станет нечитаемым.
 const COVER_GRADIENTS = [
-  'linear-gradient(135deg, var(--color-slate-border), var(--color-slate-bg))',
-  'linear-gradient(135deg, var(--color-slate-surface-hover), var(--color-slate-bg))',
-  'linear-gradient(135deg, var(--color-neutral-700), var(--color-neutral-900))',
+  'linear-gradient(135deg, #334155, #020617)',
+  'linear-gradient(135deg, #1e293b, #020617)',
+  'linear-gradient(135deg, #595d6c, #292b31)',
 ];
 
 // Синглтон на всё приложение.

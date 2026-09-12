@@ -57,7 +57,7 @@
   width: 4px;
   min-height: 24px;
   border-radius: 2px;
-  background: var(--color-lime);
+  background: var(--color-lime-text);
   opacity: 0.8;
   cursor: grab;
   transition: opacity 0.15s ease;
@@ -122,7 +122,7 @@
   &:hover {
     color: var(--color-text);
     background: color-mix(in srgb, var(--color-slate-bg) 75%, transparent);
-    border-color: var(--color-lime);
+    border-color: var(--color-lime-text);
   }
 }
 
@@ -133,7 +133,7 @@
   padding: var(--space-3) var(--space-4);
   overflow-x: auto;
   cursor: grab;
-  scrollbar-color: var(--color-lime) transparent;
+  scrollbar-color: var(--color-lime-text) transparent;
 
   &::-webkit-scrollbar {
     height: 3px;
@@ -144,12 +144,12 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--color-lime);
+    background: var(--color-lime-text);
     border-radius: 2px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: var(--color-lime-hover);
+    background: var(--color-lime-text-hover);
   }
 
   &--dragging {
@@ -185,7 +185,7 @@
 
   &--active {
     opacity: 1;
-    box-shadow: 0 0 0 2px var(--color-lime);
+    box-shadow: 0 0 0 2px var(--color-lime-text);
   }
 }
 
@@ -294,7 +294,7 @@
 
 .game-detail-dialog__release-days {
   font-size: 12.5px;
-  color: var(--color-lime);
+  color: var(--color-lime-text);
 }
 
 .game-detail-dialog__clock {
@@ -322,7 +322,7 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 1;
-  color: var(--color-lime);
+  color: var(--color-lime-text);
 }
 
 .game-detail-dialog__clock-label {
@@ -382,7 +382,7 @@
 
 .game-detail-dialog__score-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--color-lime-hover), var(--color-lime));
+  background: linear-gradient(90deg, var(--color-lime-text-hover), var(--color-lime-text));
 }
 
 .game-detail-dialog__skeleton {
@@ -429,14 +429,14 @@
   padding: 0;
   border: none;
   background: none;
-  color: var(--color-lime);
+  color: var(--color-lime-text);
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 12.5px;
   cursor: pointer;
 
   &:hover {
-    color: var(--color-lime-hover);
+    color: var(--color-lime-text-hover);
   }
 }
 

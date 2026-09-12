@@ -4,6 +4,7 @@
 }
 
 .language-switcher__trigger {
+  position: relative;
   cursor: pointer;
   font-family: var(--font-heading);
   font-weight: 700;
@@ -11,24 +12,35 @@
   padding: 6px 22px 6px 10px;
   border-radius: var(--radius-tactile-btn);
   background-color: var(--color-slate-bg);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 6px center;
-  background-size: 11px 11px;
-  border: 2px solid var(--color-lime);
+  border: 2px solid var(--color-lime-text);
   color: var(--color-text);
   box-shadow: var(--tactile-shadow-md);
   transition: border-color 0.15s ease;
 
   &:hover {
-    border-color: var(--color-lime-hover);
+    border-color: var(--color-lime-text-hover);
   }
 
   &.open,
   &:focus-visible {
     outline: none;
-    border-color: var(--color-lime);
+    border-color: var(--color-lime-text);
   }
+}
+
+.language-switcher__chevron {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 11px;
+  height: 11px;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--color-slate-text);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .language-switcher__menu {
@@ -41,7 +53,7 @@
   list-style: none;
   min-width: 100%;
   background: var(--color-slate-bg);
-  border: 2px solid var(--color-lime);
+  border: 2px solid var(--color-lime-text);
   border-radius: var(--radius-tactile-btn);
   box-shadow: var(--tactile-shadow-md);
 }
@@ -63,6 +75,6 @@
 
   &.active {
     background: var(--color-lime);
-    color: var(--color-slate-bg);
+    color: var(--color-ink);
   }
 }

@@ -1,0 +1,7 @@
+<button type="button" class="theme-toggle" (click)="toggle()" [attr.aria-label]="theme() === 'dark' ? 'Light theme' : 'Dark theme'">
+  @if (theme() === 'dark') {
+    <svg lucideSun></svg>
+  } @else {
+    <svg lucideMoon></svg>
+  }
+</button>
