@@ -1,5 +1,14 @@
 :host {
   display: inline-flex;
+  // Тёмная тема: активный (в избранном) лайк по умолчанию выглядит как
+  // раньше выглядел только при наведении — светлую тему не трогаем.
+  --favorite-active-bg: color-mix(in srgb, var(--color-rose) 35%, var(--color-slate-bg));
+  --favorite-active-hover-bg: color-mix(in srgb, var(--color-rose) 50%, var(--color-slate-bg));
+}
+
+:host-context([data-theme='light']) {
+  --favorite-active-bg: color-mix(in srgb, var(--color-rose) 20%, var(--color-slate-bg));
+  --favorite-active-hover-bg: color-mix(in srgb, var(--color-rose) 35%, var(--color-slate-bg));
 }
 
 .favorite-button {
@@ -10,8 +19,9 @@
   width: 26px;
   height: 26px;
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--color-slate-bg) 70%, transparent);
-  border: 2px solid transparent;
+  background: var(--color-slate-surface-hover);
+  border: 2px solid var(--color-slate-border);
+  box-shadow: var(--tactile-shadow-sm);
   color: var(--color-slate-text);
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
@@ -34,7 +44,6 @@
   &[data-size='l'] {
     width: 40px;
     height: 40px;
-    border-color: var(--color-slate-border);
 
     svg {
       width: 18px;
@@ -49,9 +58,13 @@
   }
 
   &.active {
-    background: color-mix(in srgb, var(--color-rose) 20%, var(--color-slate-bg));
+    background: var(--favorite-active-bg);
     border-color: var(--color-rose);
     box-shadow: var(--tactile-shadow-md);
     color: var(--color-rose);
+
+    &:hover {
+      background: var(--favorite-active-hover-bg);
+    }
   }
 }
