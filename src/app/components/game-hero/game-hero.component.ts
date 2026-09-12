@@ -3,7 +3,6 @@ import { Component, inject, input } from '@angular/core';
 import { FavoriteButtonComponent } from '../favorite-button/favorite-button.component';
 import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
 import { DaysUntilPipe } from '../../pipes/days-until.pipe';
-import { LocalizedDatePipe } from '../../pipes/localized-date.pipe';
 import { Game } from '../../models/game';
 import { GameDetailService } from '../../services/game-detail.service';
 import { I18nService } from '../../services/i18n.service';
@@ -13,7 +12,7 @@ import { platformMatchesFilter } from '../../shared/platform-filter';
 
 @Component({
   selector: 'app-game-hero',
-  imports: [FavoriteButtonComponent, DaysUntilPipe, LocalizedDatePipe, PlatformIconComponent],
+  imports: [FavoriteButtonComponent, DaysUntilPipe, PlatformIconComponent],
   templateUrl: './game-hero.component.html',
   styleUrl: './game-hero.component.scss'
 })

@@ -133,12 +133,6 @@
   }
 }
 
-.game-hero__date {
-  font-size: 10px;
-  color: color-mix(in srgb, var(--color-text) 55%, transparent);
-  white-space: nowrap;
-}
-
 @media (min-width: 768px) {
   .game-hero__cover {
     height: 230px;
@@ -166,10 +160,6 @@
     span {
       font-size: 12px;
     }
-  }
-
-  .game-hero__date {
-    font-size: 12px;
   }
 
   .game-hero__platforms .tag .tag__label {
