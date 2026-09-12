@@ -77,11 +77,8 @@
 .game-filters__chips {
   display: flex;
   gap: var(--space-2);
-  // overflow-x: auto неявно выставляет и overflow-y: auto, из-за чего тень
-  // чипов снизу обрезается — компенсируем паддингом + отрицательным
-  // margin, чтобы не сдвинуть саму строку.
-  padding: 4px;
-  margin: -4px;
+  padding: 4px 0;
+  margin: -4px 0;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
