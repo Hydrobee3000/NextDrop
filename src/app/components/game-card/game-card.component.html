@@ -26,7 +26,7 @@
         }
       </div>
 
-      <span class="game-card__days">{{ game().daysUntilRelease | daysUntil }}</span>
+      <span class="game-card__days" [attr.data-urgency]="urgencyTier()">{{ game().daysUntilRelease | daysUntil }}</span>
     </div>
   </div>
 </article>
