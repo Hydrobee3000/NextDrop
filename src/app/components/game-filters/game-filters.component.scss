@@ -40,7 +40,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    color-mix(in srgb, var(--color-lime) 55%, transparent) 12%,
+    color-mix(in srgb, var(--color-lime-text) 55%, transparent) 12%,
     var(--color-slate-border) 55%,
     transparent
   );
@@ -120,8 +120,8 @@
 
   &.active {
     background: var(--color-lime);
-    border-color: var(--color-slate-surface);
-    color: var(--color-slate-bg);
+    border-color: var(--color-ink);
+    color: var(--color-ink);
     box-shadow: var(--tactile-shadow-md);
 
     &:hover {
