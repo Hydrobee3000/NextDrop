@@ -100,11 +100,11 @@
   }
 }
 
+// Общий вид (заливка по уровням urgency) — .tactile-days-badge в styles.scss.
 .game-row__days {
   flex: none;
-  font-size: 11px;
-  color: var(--color-lime-text);
-  white-space: nowrap;
+  font-size: 9px;
+  padding: 2px 8px;
 }
 
 .game-row__favorite {

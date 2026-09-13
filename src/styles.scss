@@ -41,6 +41,7 @@
 
   --color-lime-text: var(--color-lime);
   --color-lime-text-hover: var(--color-lime-hover);
+  --color-cyan-text: var(--color-cyan);
 
   --tactile-shadow-sm: 0 1px 0 0 #000;
   --tactile-shadow-md: 0 2px 0 0 #000;
@@ -101,6 +102,7 @@
 
   --color-lime-text: #4d7c0f;
   --color-lime-text-hover: #3f6212;
+  --color-cyan-text: #0e7490;
 }
 
 * {
@@ -182,6 +184,51 @@ h1, h2, h3, h4, h5, h6 {
   border: 2px solid var(--color-ink);
   color: var(--color-ink);
   box-shadow: var(--tactile-shadow-sm);
+}
+
+/* — cyan-бейдж дней до релиза с уровнями яркости urgency (1 ярче — 7 тусклее) —
+   общий для game-card/game-row/game-hero, размеры/паддинги остаются локальными */
+.tactile-days-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  border-radius: 999px;
+  border: 2px solid var(--color-ink);
+  color: var(--color-ink);
+  box-shadow: var(--tactile-shadow-sm);
+  white-space: nowrap;
+
+  // Яркость заливки затухает от самого скорого релиза (1) к самому дальнему
+  // (7) — цвета от var(--color-cyan)/var(--color-cyan-dim) из DESIGN.md,
+  // дальше затухание к белому, чтобы тёмный ink-текст оставался читаемым.
+  &[data-urgency='1'] {
+    background: var(--color-cyan);
+  }
+
+  &[data-urgency='2'] {
+    background: var(--color-cyan-dim);
+  }
+
+  &[data-urgency='3'] {
+    background: color-mix(in srgb, var(--color-cyan-dim) 80%, white);
+  }
+
+  &[data-urgency='4'] {
+    background: color-mix(in srgb, var(--color-cyan-dim) 60%, white);
+  }
+
+  &[data-urgency='5'] {
+    background: color-mix(in srgb, var(--color-cyan-dim) 45%, white);
+  }
+
+  &[data-urgency='6'] {
+    background: color-mix(in srgb, var(--color-cyan-dim) 30%, white);
+  }
+
+  &[data-urgency='7'] {
+    background: color-mix(in srgb, var(--color-cyan-dim) 18%, white);
+  }
 }
 
 /* — tags — */
