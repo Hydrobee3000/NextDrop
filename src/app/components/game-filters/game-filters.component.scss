@@ -33,19 +33,7 @@
   letter-spacing: -0.03em;
 }
 
-.game-filters__rule {
-  height: 1px;
-  margin: 0;
-  border: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--color-lime-text) 55%, transparent) 12%,
-    var(--color-slate-border) 55%,
-    transparent
-  );
-}
-
+// Общий вид (градиент) — .tactile-rule в styles.scss.
 @media (min-width: 768px) {
   .game-filters__header {
     flex-direction: row;
