@@ -31,6 +31,12 @@ export class FavoritesComponent {
     return this.sortGames(filtered);
   }
 
+  // Общее число избранного — не зависит от активного фильтра платформы,
+  // в отличие от отфильтрованного списка games выше.
+  get totalCount(): number {
+    return this.favoritesService.games().length;
+  }
+
   selectFilter(filter: string): void {
     this.activeFilter = filter;
   }
