@@ -21,6 +21,7 @@
       <span class="tactile-badge">{{ totalCount | releaseCount }}</span>
     }
   </div>
+  <hr class="home-section-rule tactile-rule" />
 
   <div class="game-grid">
     @for (game of games; track game.id) {
@@ -45,6 +46,7 @@
   </div>
 
   <h3 class="home-section-title">{{ 'home.sectionTitle' | translate }}</h3>
+  <hr class="home-section-rule tactile-rule" />
 
   <div class="game-grid">
     @for (card of skeletonCards; track card) {

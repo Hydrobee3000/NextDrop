@@ -231,6 +231,21 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* — тонкая затухающая линия-разделитель под заголовками секций — общая,
+   чтобы не дублировать в каждом компоненте */
+.tactile-rule {
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-lime-text) 55%, transparent) 12%,
+    var(--color-slate-border) 55%,
+    transparent
+  );
+}
+
 /* — tags — */
 .tag {
   display: inline-flex;
