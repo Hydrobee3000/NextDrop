@@ -4,6 +4,99 @@
   flex: 1;
 }
 
+.favorites-sort {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.favorites-sort__label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--color-slate-text);
+}
+
+.favorites-sort__trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 6px 26px 6px 12px;
+  border-radius: var(--radius-tactile-btn);
+  background: var(--color-slate-surface);
+  border: 2px solid var(--color-slate-border);
+  color: var(--color-slate-text);
+  box-shadow: var(--tactile-shadow-sm);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    background: var(--color-slate-surface-hover);
+    color: var(--color-text);
+  }
+
+  &.open {
+    outline: none;
+    border-color: var(--color-lime-text);
+  }
+}
+
+.favorites-sort__chevron {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 11px;
+  height: 11px;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--color-slate-text);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.favorites-sort__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  min-width: 180px;
+  background: var(--color-slate-surface);
+  border: 2px solid var(--color-lime-text);
+  border-radius: var(--radius-tactile-btn);
+  box-shadow: var(--tactile-shadow-md);
+}
+
+.favorites-sort__option {
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 7px 10px;
+  border-radius: calc(var(--radius-tactile-btn) - 4px);
+  color: var(--color-text);
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: var(--color-slate-surface-hover);
+  }
+
+  &.active {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+}
+
 .game-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

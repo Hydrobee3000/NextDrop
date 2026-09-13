@@ -1,6 +1,39 @@
 <app-game-filters titleKey="favorites.title" [activeFilter]="activeFilter" (activeFilterChange)="selectFilter($event)" />
 
 @if (games.length > 0) {
+  <div class="favorites-sort">
+    <span class="favorites-sort__label">{{ 'sort.label' | translate }}</span>
+
+    <button
+      type="button"
+      class="favorites-sort__trigger"
+      [class.open]="sortMenuOpen()"
+      [attr.aria-expanded]="sortMenuOpen()"
+      (click)="toggleSortMenu()"
+    >
+      {{ 'sort.' + sortOrder() | translate }}
+      <svg class="favorites-sort__chevron" viewBox="0 0 24 24" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </button>
+
+    @if (sortMenuOpen()) {
+      <ul class="favorites-sort__menu" role="listbox">
+        @for (option of sortOptions; track option) {
+          <li
+            class="favorites-sort__option"
+            [class.active]="option === sortOrder()"
+            role="option"
+            [attr.aria-selected]="option === sortOrder()"
+            (click)="selectSort(option)"
+          >
+            {{ 'sort.' + option | translate }}
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
   <div class="game-grid">
     @for (game of games; track game.id) {
       <app-game-card [game]="game" [activeFilter]="activeFilter" />
