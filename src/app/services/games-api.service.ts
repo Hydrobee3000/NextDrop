@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Game, GameDetails, GamesPage } from '../models/game';
 import { RawgGame, RawgGameDetail, RawgGameListResponse, RawgScreenshotsResponse } from '../models/rawg-game';
+import { getDaysUntilRelease } from '../shared/days-until-release';
 
 // Набор градиентов — фиксированно тёмные (не завязаны на токены темы),
 // имитируют постер игры и не должны светлеть в светлой теме, иначе текст
@@ -87,13 +88,6 @@ export class GamesApiService {
   }
 
   private toGame(rawgGame: RawgGame, index: number): Game {
-    const releaseDate = rawgGame.released ? new Date(rawgGame.released) : null;
-    // Может быть отрицательным для уже вышедших игр — это нормально,
-    // отличаем "сегодня" (0) от "уже вышла" (< 0) в DaysUntilPipe.
-    const daysUntilRelease = releaseDate
-      ? Math.ceil((releaseDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
-      : 0;
-
     return {
       id: String(rawgGame.id),
       title: rawgGame.name,
@@ -101,7 +95,7 @@ export class GamesApiService {
       coverImageUrl: rawgGame.background_image,
       coverInitials: rawgGame.name.slice(0, 3).toUpperCase(),
       coverGradient: COVER_GRADIENTS[index % COVER_GRADIENTS.length],
-      daysUntilRelease,
+      daysUntilRelease: getDaysUntilRelease(rawgGame.released),
       releaseDate: rawgGame.released,
     };
   }

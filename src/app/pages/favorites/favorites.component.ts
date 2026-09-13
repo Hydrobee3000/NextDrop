@@ -17,10 +17,10 @@ export class FavoritesComponent {
   private readonly favoritesService = inject(FavoritesService);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
-  readonly sortOptions: SortOrder[] = ['saved', 'dateAsc', 'dateDesc', 'alpha'];
+  readonly sortOptions: SortOrder[] = ['dateAsc', 'dateDesc', 'alpha'];
 
   activeFilter = 'all';
-  sortOrder = signal<SortOrder>('saved');
+  sortOrder = signal<SortOrder>('dateAsc');
   sortMenuOpen = signal(false);
 
   get games(): Game[] {
@@ -59,18 +59,21 @@ export class FavoritesComponent {
   private sortGames(games: Game[]): Game[] {
     switch (this.sortOrder()) {
       case 'dateAsc':
-        return [...games].sort((a, b) => this.releaseTime(a) - this.releaseTime(b));
+        return [...games].sort((a, b) => this.compareDates(a, b, 1));
       case 'dateDesc':
-        return [...games].sort((a, b) => this.releaseTime(b) - this.releaseTime(a));
+        return [...games].sort((a, b) => this.compareDates(a, b, -1));
       case 'alpha':
         return [...games].sort((a, b) => a.title.localeCompare(b.title));
-      default:
-        return games;
     }
   }
 
-  // Игры без объявленной даты уходят в конец независимо от направления сортировки.
-  private releaseTime(game: Game): number {
-    return game.releaseDate ? new Date(game.releaseDate).getTime() : Number.POSITIVE_INFINITY;
+  // Игры без объявленной даты всегда уходят в конец — направление применяется
+  // только после этой проверки, иначе при убывании они попадали бы в начало.
+  private compareDates(a: Game, b: Game, direction: 1 | -1): number {
+    if (!a.releaseDate && !b.releaseDate) return 0;
+    if (!a.releaseDate) return 1;
+    if (!b.releaseDate) return -1;
+
+    return direction * (new Date(a.releaseDate).getTime() - new Date(b.releaseDate).getTime());
   }
 }

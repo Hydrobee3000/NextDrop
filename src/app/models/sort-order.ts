@@ -1,1 +1,1 @@
-export type SortOrder = 'saved' | 'dateAsc' | 'dateDesc' | 'alpha';
+export type SortOrder = 'dateAsc' | 'dateDesc' | 'alpha';
