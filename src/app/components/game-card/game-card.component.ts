@@ -5,6 +5,7 @@ import { PlatformIconComponent } from '../platform-icon/platform-icon.component'
 import { DaysUntilPipe } from '../../pipes/days-until.pipe';
 import { Game } from '../../models/game';
 import { GameDetailService } from '../../services/game-detail.service';
+import { getDaysUntilRelease } from '../../shared/days-until-release';
 import { getPlatformIconKind } from '../../shared/platform-icon';
 import { platformMatchesFilter } from '../../shared/platform-filter';
 import { getReleaseUrgencyTier } from '../../shared/release-urgency';
@@ -29,8 +30,15 @@ export class GameCardComponent {
     return getPlatformIconKind(platform);
   }
 
+  // Пересчитываем от releaseDate, а не берём сохранённое значение поля —
+  // у избранных игр оно "замораживается" на момент сохранения и может
+  // устареть, если пользователь заглянул в список спустя время.
+  daysUntilRelease(): number {
+    return getDaysUntilRelease(this.game().releaseDate);
+  }
+
   urgencyTier(): number {
-    return getReleaseUrgencyTier(this.game().daysUntilRelease);
+    return getReleaseUrgencyTier(this.daysUntilRelease());
   }
 
   openDetail(): void {

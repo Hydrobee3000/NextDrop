@@ -17,6 +17,11 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'favorites.title': 'Мой список',
     'favorites.empty': 'Тут тоже пусто :(',
 
+    'sort.label': 'Сортировка',
+    'sort.dateAsc': 'По дате выхода ↑',
+    'sort.dateDesc': 'По дате выхода ↓',
+    'sort.alpha': 'По алфавиту',
+
     'detail.release': 'Релиз',
     'detail.close': 'Закрыть',
     'detail.metacritic': 'Metacritic',
@@ -64,6 +69,11 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
 
     'favorites.title': 'My List',
     'favorites.empty': 'Empty here too :(',
+
+    'sort.label': 'Sort',
+    'sort.dateAsc': 'Soonest first',
+    'sort.dateDesc': 'Latest first',
+    'sort.alpha': 'Alphabetical',
 
     'detail.release': 'Release',
     'detail.close': 'Close',
