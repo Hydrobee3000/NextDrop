@@ -28,7 +28,7 @@
         }
       </div>
 
-      <span class="game-row__days">{{ game().daysUntilRelease | daysUntil }}</span>
+      <span class="game-row__days tactile-days-badge" [attr.data-urgency]="urgencyTier()">{{ game().daysUntilRelease | daysUntil }}</span>
     </div>
   </div>
 </div>
