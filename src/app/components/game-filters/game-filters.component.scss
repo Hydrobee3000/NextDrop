@@ -3,6 +3,7 @@
 }
 
 .game-filters {
+  margin-top: var(--space-3);
   margin-bottom: var(--space-4);
 }
 
@@ -64,9 +65,17 @@
 
 .game-filters__chips {
   display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.game-filters__chip-scroll {
+  display: flex;
   gap: var(--space-2);
   padding: 4px 0;
   margin: -4px 0;
+  min-width: 0;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -74,6 +83,134 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+.game-filters__all-wrap {
+  position: relative;
+  flex: none;
+}
+
+.game-filters__chevron {
+  width: 10px;
+  height: 10px;
+  margin-left: 2px;
+  vertical-align: -1px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.game-filters__exclude-badge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 1;
+  background: #ff8a00;
+  border: 2px solid var(--color-ink);
+  color: var(--color-ink);
+  box-shadow: var(--tactile-shadow-sm);
+  pointer-events: none;
+}
+
+.game-filters__platform-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  min-width: 180px;
+  background: var(--color-slate-surface);
+  border: 2px solid var(--color-lime-text);
+  border-radius: var(--radius-tactile-btn);
+  box-shadow: var(--tactile-shadow-md);
+}
+
+.game-filters__platform-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  padding: 7px 10px;
+  border-radius: calc(var(--radius-tactile-btn) - 4px);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--color-text);
+  white-space: nowrap;
+  transition: background 0.15s ease;
+
+  app-platform-icon {
+    --platform-icon-size: 14px;
+  }
+
+  &:hover {
+    background: var(--color-slate-surface-hover);
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+.game-filters__platform-option--reset {
+  justify-content: center;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 2px solid var(--color-slate-border);
+  border-radius: 0;
+  color: var(--color-lime-text);
+
+  &:hover {
+    color: var(--color-lime-text-hover);
+    background: var(--color-slate-surface-hover);
+  }
+}
+
+.game-filters__platform-checkbox {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid var(--color-slate-border);
+  background: var(--color-slate-bg);
+
+  svg {
+    width: 11px;
+    height: 11px;
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.game-filters__platform-option.checked .game-filters__platform-checkbox {
+  background: var(--color-lime);
+  border-color: var(--color-lime);
 }
 
 .game-filters__chip {
@@ -112,5 +249,65 @@
     &:hover {
       background: var(--color-lime-hover);
     }
+  }
+}
+
+.game-filters__chip--all {
+  padding: 0;
+  gap: 0;
+}
+
+.game-filters__chip-label {
+  padding: 5px 6px 5px 13px;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+.game-filters__chip-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  margin: 0;
+  padding: 0 8px 0 6px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0 calc(var(--radius-tactile-btn) - 2px) calc(var(--radius-tactile-btn) - 2px) 0;
+  transition: background 0.15s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 22%;
+    bottom: 22%;
+    width: 2px;
+    border-radius: 1px;
+    background: var(--color-slate-border);
+    opacity: 0.6;
+  }
+
+  .game-filters__chevron {
+    margin-left: 0;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.08);
+  }
+}
+
+.game-filters__chip--all.active .game-filters__chip-toggle {
+  &::before {
+    background: var(--color-ink);
+    opacity: 0.35;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.12);
   }
 }

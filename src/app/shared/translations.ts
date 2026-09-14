@@ -40,6 +40,10 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'filter.playstation': 'PlayStation',
     'filter.xbox': 'Xbox',
     'filter.switch': 'Switch',
+    'filter.web': 'Web',
+    'filter.apple': 'Apple',
+    'filter.android': 'Android',
+    'filter.selectAll': 'Выбрать все',
 
     'days.today': 'Сегодня',
     'days.tomorrow': 'Завтра',
@@ -93,6 +97,10 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'filter.playstation': 'PlayStation',
     'filter.xbox': 'Xbox',
     'filter.switch': 'Switch',
+    'filter.web': 'Web',
+    'filter.apple': 'Apple',
+    'filter.android': 'Android',
+    'filter.selectAll': 'Select all',
 
     'days.today': 'Today',
     'days.tomorrow': 'Tomorrow',

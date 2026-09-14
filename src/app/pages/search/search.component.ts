@@ -9,7 +9,7 @@ import { GameRowComponent } from '../../components/game-row/game-row.component';
 import { GameRowSkeletonComponent } from '../../components/game-row-skeleton/game-row-skeleton.component';
 import { Game } from '../../models/game';
 import { TranslatePipe } from '../../pipes/translate.pipe';
-import { FILTER_PARENT_PLATFORM_ID } from '../../shared/platform-filter';
+import { buildParentPlatformsParam } from '../../shared/platform-filter';
 import { GamesApiService } from '../../services/games-api.service';
 
 @Component({
@@ -40,6 +40,7 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   readonly skeletonRows = [1, 2, 3];
 
   activeFilter = 'all';
+  excludedPlatforms: string[] = [];
   results: Game[] = [];
   totalCount = 0;
   loading = false;
@@ -84,6 +85,11 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
     this.startSearch(this.currentQuery);
   }
 
+  onExcludedPlatformsChange(excluded: string[]): void {
+    this.excludedPlatforms = excluded;
+    this.startSearch(this.currentQuery);
+  }
+
   // Новый запрос/фильтр — сбрасываем накопленные результаты и грузим первую страницу.
   private startSearch(query: string): void {
     this.currentQuery = query;
@@ -103,7 +109,7 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
     }
 
     this.loading = true;
-    const parentPlatformId = FILTER_PARENT_PLATFORM_ID[this.activeFilter];
+    const parentPlatformId = buildParentPlatformsParam(this.activeFilter, this.excludedPlatforms);
 
     this.gamesApi.searchGames(this.currentQuery, this.page, parentPlatformId).subscribe({
       next: ({ games: newResults, count }) => {
