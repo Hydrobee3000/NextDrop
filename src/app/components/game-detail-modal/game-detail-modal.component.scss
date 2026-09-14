@@ -339,12 +339,6 @@
   border-radius: var(--radius-tactile-btn);
   border: 2px solid var(--color-slate-border);
   background: var(--color-slate-surface);
-
-  &--loading {
-    height: 62px;
-    background: var(--color-slate-surface-hover);
-    animation: game-detail-skeleton-pulse 1.2s ease-in-out infinite;
-  }
 }
 
 .game-detail-dialog__score-label {
@@ -513,11 +507,6 @@
   .game-detail-dialog__score {
     width: 180px;
     flex: none;
-
-    &--loading {
-      height: auto;
-      align-self: stretch;
-    }
   }
 }
 
