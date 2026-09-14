@@ -7,7 +7,10 @@
           <span class="tactile-badge">{{ totalCount() | releaseCount }}</span>
         }
       </div>
-      <app-language-switcher class="game-filters__language-switcher" />
+      <div class="game-filters__mobile-controls">
+        <app-theme-toggle />
+        <app-language-switcher />
+      </div>
     </div>
 
     <hr class="game-filters__rule tactile-rule" />

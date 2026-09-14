@@ -9,13 +9,13 @@
 }
 
 .layout__nav {
-  padding: 0 0 env(safe-area-inset-bottom);
-  background: var(--color-surface);
-  border-top: 1px solid var(--color-divider);
   position: fixed;
   inset-inline: 0;
-  bottom: -1px;
+  bottom: 0;
   z-index: 10;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--color-slate-surface);
+  border-top: 2px solid var(--color-slate-border);
 }
 
 .layout__brand {
@@ -29,46 +29,49 @@
 .layout__nav-items {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  padding: 6px 10px;
 }
 
 .layout__nav-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--space-1);
-  padding: var(--space-2) var(--space-1);
-  color: var(--color-neutral-500);
+  justify-content: center;
+  width: 58px;
+  height: 34px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-tactile-btn);
+  color: var(--color-slate-text);
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 
   svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   &:hover {
     color: var(--color-text);
   }
 
-  &:active {
-    color: var(--color-lime-text);
-  }
-
   &.active {
-    color: var(--color-lime-text);
+    color: var(--color-ink);
+    background: var(--color-lime);
+    border-color: var(--color-ink);
+    box-shadow: var(--tactile-shadow-sm);
   }
 }
 
 .layout__nav-label {
-  font-size: 10px;
+  display: none;
 }
 
 .layout__content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: var(--space-4) var(--space-4) calc(64px + var(--space-4));
+  padding: var(--space-4) var(--space-4) calc(58px + var(--space-4));
 }
 
 @media (min-width: 768px) {
@@ -149,10 +152,12 @@
   .layout__nav-items {
     flex-direction: row;
     gap: 10px;
+    padding: 0;
   }
 
   .layout__nav-item {
-    flex-direction: row;
+    width: auto;
+    height: auto;
     align-items: center;
     padding: 6px 14px;
     border-radius: var(--radius-tactile-btn);
@@ -185,6 +190,7 @@
   }
 
   .layout__nav-label {
+    display: inline;
     font-size: 13.5px;
   }
 

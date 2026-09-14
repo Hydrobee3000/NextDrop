@@ -1,13 +1,14 @@
 import { Component, ElementRef, HostListener, ViewChild, input, output, signal } from '@angular/core';
 import { LanguageSwitcherComponent } from '../language-switcher/language-switcher.component';
 import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 import { ReleaseCountPipe } from '../../pipes/release-count.pipe';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { FILTER_PLATFORM_KEYS } from '../../shared/platform-filter';
 
 @Component({
   selector: 'app-game-filters',
-  imports: [LanguageSwitcherComponent, PlatformIconComponent, ReleaseCountPipe, TranslatePipe],
+  imports: [LanguageSwitcherComponent, PlatformIconComponent, ThemeToggleComponent, ReleaseCountPipe, TranslatePipe],
   templateUrl: './game-filters.component.html',
   styleUrl: './game-filters.component.scss'
 })
