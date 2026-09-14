@@ -2,7 +2,9 @@
   titleKey="favorites.title"
   [activeFilter]="activeFilter"
   [totalCount]="totalCount"
+  [excludedPlatforms]="excludedPlatforms"
   (activeFilterChange)="selectFilter($event)"
+  (excludedPlatformsChange)="onExcludedPlatformsChange($event)"
 />
 
 @if (games.length > 0) {
@@ -41,7 +43,7 @@
 
   <div class="game-grid">
     @for (game of games; track game.id) {
-      <app-game-card [game]="game" [activeFilter]="activeFilter" />
+      <app-game-card [game]="game" [activeFilter]="activeFilter" [excludedPlatforms]="excludedPlatforms" />
     }
   </div>
 } @else {

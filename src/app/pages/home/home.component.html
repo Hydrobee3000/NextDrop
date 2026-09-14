@@ -1,16 +1,18 @@
 <app-game-filters
   titleKey="home.title"
   [activeFilter]="activeFilter"
+  [excludedPlatforms]="excludedPlatforms"
   (activeFilterChange)="selectFilter($event)"
+  (excludedPlatformsChange)="onExcludedPlatformsChange($event)"
 />
 
 @if (games.length > 0) {
   <div class="home-highlight">
-    <app-game-hero [game]="games[0]" [activeFilter]="activeFilter" />
+    <app-game-hero [game]="games[0]" [activeFilter]="activeFilter" [excludedPlatforms]="excludedPlatforms" />
 
     <div class="home-side-list">
       @for (game of games.slice(1, 4); track game.id) {
-        <app-game-row [game]="game" [activeFilter]="activeFilter" />
+        <app-game-row [game]="game" [activeFilter]="activeFilter" [excludedPlatforms]="excludedPlatforms" />
       }
     </div>
   </div>
@@ -25,7 +27,7 @@
 
   <div class="game-grid">
     @for (game of games; track game.id) {
-      <app-game-card [game]="game" [activeFilter]="activeFilter" />
+      <app-game-card [game]="game" [activeFilter]="activeFilter" [excludedPlatforms]="excludedPlatforms" />
     }
 
     @if (loading) {

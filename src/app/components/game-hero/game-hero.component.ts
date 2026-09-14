@@ -8,7 +8,7 @@ import { GameDetailService } from '../../services/game-detail.service';
 import { I18nService } from '../../services/i18n.service';
 import { getPlatformIconKind } from '../../shared/platform-icon';
 import { pluralizeEn, pluralizeRu } from '../../shared/pluralize';
-import { platformMatchesFilter } from '../../shared/platform-filter';
+import { platformIsActive } from '../../shared/platform-filter';
 
 @Component({
   selector: 'app-game-hero',
@@ -22,6 +22,7 @@ export class GameHeroComponent {
 
   game = input.required<Game>();
   activeFilter = input<string>('all');
+  excludedPlatforms = input<string[]>([]);
 
   daysWord(): string {
     const days = this.game().daysUntilRelease;
@@ -31,7 +32,7 @@ export class GameHeroComponent {
   }
 
   matchesFilter(platform: string): boolean {
-    return platformMatchesFilter(platform, this.activeFilter());
+    return platformIsActive(platform, this.activeFilter(), this.excludedPlatforms());
   }
 
   iconKind(platform: string): string {

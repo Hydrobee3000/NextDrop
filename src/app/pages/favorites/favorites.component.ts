@@ -5,7 +5,7 @@ import { Game } from '../../models/game';
 import { SortOrder } from '../../models/sort-order';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { FavoritesService } from '../../services/favorites.service';
-import { platformMatchesFilter } from '../../shared/platform-filter';
+import { gameMatchesPlatformFilter } from '../../shared/platform-filter';
 
 @Component({
   selector: 'app-favorites',
@@ -20,13 +20,14 @@ export class FavoritesComponent {
   readonly sortOptions: SortOrder[] = ['dateAsc', 'dateDesc', 'alpha'];
 
   activeFilter = 'all';
+  excludedPlatforms: string[] = [];
   sortOrder = signal<SortOrder>('dateAsc');
   sortMenuOpen = signal(false);
 
   get games(): Game[] {
     const filtered = this.favoritesService
       .games()
-      .filter((game) => game.platforms.some((platform) => platformMatchesFilter(platform, this.activeFilter)));
+      .filter((game) => gameMatchesPlatformFilter(game.platforms, this.activeFilter, this.excludedPlatforms));
 
     return this.sortGames(filtered);
   }
@@ -39,6 +40,10 @@ export class FavoritesComponent {
 
   selectFilter(filter: string): void {
     this.activeFilter = filter;
+  }
+
+  onExcludedPlatformsChange(excluded: string[]): void {
+    this.excludedPlatforms = excluded;
   }
 
   toggleSortMenu(): void {

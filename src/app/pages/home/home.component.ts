@@ -9,7 +9,7 @@ import { GameRowSkeletonComponent } from '../../components/game-row-skeleton/gam
 import { Game } from '../../models/game';
 import { ReleaseCountPipe } from '../../pipes/release-count.pipe';
 import { TranslatePipe } from '../../pipes/translate.pipe';
-import { FILTER_PARENT_PLATFORM_ID } from '../../shared/platform-filter';
+import { buildParentPlatformsParam } from '../../shared/platform-filter';
 import { GamesApiService } from '../../services/games-api.service';
 
 @Component({
@@ -42,6 +42,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   readonly skeletonCards = [1, 2, 3, 4];
 
   activeFilter = 'all';
+  excludedPlatforms: string[] = [];
   games: Game[] = [];
   totalCount = 0;
   loading = true;
@@ -79,6 +80,15 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     }
 
     this.activeFilter = filter;
+    this.resetAndReload();
+  }
+
+  onExcludedPlatformsChange(excluded: string[]): void {
+    this.excludedPlatforms = excluded;
+    this.resetAndReload();
+  }
+
+  private resetAndReload(): void {
     this.page = 1;
     this.hasMore = true;
     this.games = [];
@@ -94,7 +104,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
     this.fetching = true;
     this.loading = true;
-    const parentPlatformId = FILTER_PARENT_PLATFORM_ID[this.activeFilter];
+    const parentPlatformId = buildParentPlatformsParam(this.activeFilter, this.excludedPlatforms);
 
     this.gamesApi.getUpcomingGames(this.page, parentPlatformId).subscribe({
       next: ({ games: newGames, count }) => {

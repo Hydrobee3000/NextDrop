@@ -13,18 +13,73 @@
     <hr class="game-filters__rule tactile-rule" />
 
     <div class="game-filters__chips">
-      @for (filter of filters; track filter) {
-        <span
-          class="game-filters__chip"
-          [class.active]="filter === activeFilter()"
-          (click)="select(filter)"
-        >
-          @if (filter !== 'all') {
-            <app-platform-icon [platform]="filter" />
-          }
-          {{ 'filter.' + filter | translate }}
+      <div class="game-filters__all-wrap" #allWrap>
+        <span class="game-filters__chip game-filters__chip--all" [class.active]="activeFilter() === 'all'">
+          <span class="game-filters__chip-label" (click)="select('all')">{{ 'filter.all' | translate }}</span>
+          <button
+            type="button"
+            class="game-filters__chip-toggle"
+            [attr.aria-expanded]="allMenuOpen()"
+            (click)="toggleAllMenu($event)"
+          >
+            <svg class="game-filters__chevron" viewBox="0 0 24 24" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
         </span>
-      }
+
+        @if (excludedPlatforms().length > 0) {
+          <span class="game-filters__exclude-badge">{{ excludedPlatforms().length }}</span>
+        }
+
+        @if (allMenuOpen()) {
+          <ul class="game-filters__platform-menu" role="listbox">
+            @for (key of excludablePlatforms; track key) {
+              <li
+                class="game-filters__platform-option"
+                [class.checked]="isPlatformIncluded(key)"
+                [class.disabled]="isLastIncluded(key)"
+                role="option"
+                [attr.aria-selected]="isPlatformIncluded(key)"
+                (click)="togglePlatform(key)"
+              >
+                <span class="game-filters__platform-checkbox">
+                  @if (isPlatformIncluded(key)) {
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  }
+                </span>
+                <app-platform-icon [platform]="key" />
+                {{ 'filter.' + key | translate }}
+              </li>
+            }
+
+            @if (excludedPlatforms().length > 0) {
+              <li
+                class="game-filters__platform-option game-filters__platform-option--reset"
+                role="option"
+                (click)="selectAllPlatforms()"
+              >
+                {{ 'filter.selectAll' | translate }}
+              </li>
+            }
+          </ul>
+        }
+      </div>
+
+      <div class="game-filters__chip-scroll">
+        @for (filter of filters; track filter) {
+          <span
+            class="game-filters__chip"
+            [class.active]="filter === activeFilter()"
+            (click)="select(filter)"
+          >
+            <app-platform-icon [platform]="filter" />
+            {{ 'filter.' + filter | translate }}
+          </span>
+        }
+      </div>
     </div>
   </div>
 </div>
