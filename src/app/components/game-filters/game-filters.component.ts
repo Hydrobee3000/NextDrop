@@ -26,12 +26,11 @@ export class GameFiltersComponent {
 
   allMenuOpen = signal(false);
 
+  // Выбор конкретного чипса (включая "Все") не трогает список исключённых платформ —
+  // он должен переживать переключение фильтра и сбрасываться только через "Выбрать все".
   select(filter: string): void {
     if (filter !== this.activeFilter()) {
       this.activeFilterChange.emit(filter);
-    }
-    if (this.excludedPlatforms().length > 0) {
-      this.excludedPlatformsChange.emit([]);
     }
     this.allMenuOpen.set(false);
   }
