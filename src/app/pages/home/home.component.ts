@@ -11,6 +11,7 @@ import { ReleaseCountPipe } from '../../pipes/release-count.pipe';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { buildParentPlatformsParam } from '../../shared/platform-filter';
 import { GamesApiService } from '../../services/games-api.service';
+import { PlatformFilterService } from '../../services/platform-filter.service';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,7 @@ import { GamesApiService } from '../../services/games-api.service';
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
   private readonly gamesApi = inject(GamesApiService);
+  private readonly platformFilter = inject(PlatformFilterService);
   private observer?: IntersectionObserver;
   private page = 1;
   private hasMore = true;
@@ -41,11 +43,17 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   readonly skeletonRows = [1, 2, 3];
   readonly skeletonCards = [1, 2, 3, 4];
 
-  activeFilter = 'all';
-  excludedPlatforms: string[] = [];
   games: Game[] = [];
   totalCount = 0;
   loading = true;
+
+  get activeFilter(): string {
+    return this.platformFilter.activeFilter();
+  }
+
+  get excludedPlatforms(): string[] {
+    return this.platformFilter.excludedPlatforms();
+  }
 
   /**
    * Дожидается рендера шаблона.
@@ -79,12 +87,12 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    this.activeFilter = filter;
+    this.platformFilter.setActiveFilter(filter);
     this.resetAndReload();
   }
 
   onExcludedPlatformsChange(excluded: string[]): void {
-    this.excludedPlatforms = excluded;
+    this.platformFilter.setExcludedPlatforms(excluded);
     this.resetAndReload();
   }
 

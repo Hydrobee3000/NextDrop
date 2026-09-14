@@ -5,6 +5,7 @@ import { Game } from '../../models/game';
 import { SortOrder } from '../../models/sort-order';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { FavoritesService } from '../../services/favorites.service';
+import { PlatformFilterService } from '../../services/platform-filter.service';
 import { gameMatchesPlatformFilter } from '../../shared/platform-filter';
 
 @Component({
@@ -15,14 +16,21 @@ import { gameMatchesPlatformFilter } from '../../shared/platform-filter';
 })
 export class FavoritesComponent {
   private readonly favoritesService = inject(FavoritesService);
+  private readonly platformFilter = inject(PlatformFilterService);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly sortOptions: SortOrder[] = ['dateAsc', 'dateDesc', 'alpha'];
 
-  activeFilter = 'all';
-  excludedPlatforms: string[] = [];
   sortOrder = signal<SortOrder>('dateAsc');
   sortMenuOpen = signal(false);
+
+  get activeFilter(): string {
+    return this.platformFilter.activeFilter();
+  }
+
+  get excludedPlatforms(): string[] {
+    return this.platformFilter.excludedPlatforms();
+  }
 
   get games(): Game[] {
     const filtered = this.favoritesService
@@ -39,11 +47,11 @@ export class FavoritesComponent {
   }
 
   selectFilter(filter: string): void {
-    this.activeFilter = filter;
+    this.platformFilter.setActiveFilter(filter);
   }
 
   onExcludedPlatformsChange(excluded: string[]): void {
-    this.excludedPlatforms = excluded;
+    this.platformFilter.setExcludedPlatforms(excluded);
   }
 
   toggleSortMenu(): void {

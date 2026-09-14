@@ -11,6 +11,7 @@ import { Game } from '../../models/game';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { buildParentPlatformsParam } from '../../shared/platform-filter';
 import { GamesApiService } from '../../services/games-api.service';
+import { PlatformFilterService } from '../../services/platform-filter.service';
 
 @Component({
   selector: 'app-search',
@@ -27,6 +28,7 @@ import { GamesApiService } from '../../services/games-api.service';
 })
 export class SearchComponent implements AfterViewInit, OnDestroy {
   private readonly gamesApi = inject(GamesApiService);
+  private readonly platformFilter = inject(PlatformFilterService);
   private observer?: IntersectionObserver;
   private querySub?: Subscription;
   private currentQuery = '';
@@ -39,11 +41,17 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   readonly queryControl = new FormControl('', { nonNullable: true });
   readonly skeletonRows = [1, 2, 3];
 
-  activeFilter = 'all';
-  excludedPlatforms: string[] = [];
   results: Game[] = [];
   totalCount = 0;
   loading = false;
+
+  get activeFilter(): string {
+    return this.platformFilter.activeFilter();
+  }
+
+  get excludedPlatforms(): string[] {
+    return this.platformFilter.excludedPlatforms();
+  }
 
   ngAfterViewInit(): void {
     this.querySub = this.queryControl.valueChanges
@@ -81,12 +89,12 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   }
 
   selectFilter(filter: string): void {
-    this.activeFilter = filter;
+    this.platformFilter.setActiveFilter(filter);
     this.startSearch(this.currentQuery);
   }
 
   onExcludedPlatformsChange(excluded: string[]): void {
-    this.excludedPlatforms = excluded;
+    this.platformFilter.setExcludedPlatforms(excluded);
     this.startSearch(this.currentQuery);
   }
 
