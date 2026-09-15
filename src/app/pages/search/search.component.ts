@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { LucideSearch } from '@lucide/angular';
+import { LucideSearch, LucideX } from '@lucide/angular';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, startWith } from 'rxjs/operators';
 
@@ -18,6 +18,7 @@ import { PlatformFilterService } from '../../services/platform-filter.service';
   imports: [
     ReactiveFormsModule,
     LucideSearch,
+    LucideX,
     GameFiltersComponent,
     GameRowComponent,
     GameRowSkeletonComponent,
@@ -86,6 +87,10 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.observer?.disconnect();
     this.querySub?.unsubscribe();
+  }
+
+  clearQuery(): void {
+    this.queryControl.setValue('');
   }
 
   selectFilter(filter: string): void {

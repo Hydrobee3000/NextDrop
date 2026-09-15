@@ -13,6 +13,7 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'search.title': 'Поиск игры',
     'search.placeholder': 'Введите название игры',
     'search.empty': 'Ничего не нашлось :(',
+    'search.clear': 'Очистить поиск',
 
     'favorites.title': 'Мой список',
     'favorites.empty': 'Тут тоже пусто :(',
@@ -70,6 +71,7 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'search.title': 'Search games',
     'search.placeholder': 'Enter a game name',
     'search.empty': 'Nothing found :(',
+    'search.clear': 'Clear search',
 
     'favorites.title': 'My List',
     'favorites.empty': 'Empty here too :(',

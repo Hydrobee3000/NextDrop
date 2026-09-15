@@ -8,13 +8,23 @@
 />
 
 <div class="search-input-wrap">
-  <svg class="search-input-icon" lucideSearch></svg>
+  <svg class="search-input-icon" [class.search-input-icon--active]="queryControl.value" lucideSearch></svg>
   <input
     class="search-input"
     type="text"
     [attr.placeholder]="'search.placeholder' | translate"
     [formControl]="queryControl"
   />
+  @if (queryControl.value) {
+    <button
+      type="button"
+      class="search-input-clear"
+      [attr.aria-label]="'search.clear' | translate"
+      (click)="clearQuery()"
+    >
+      <svg lucideX></svg>
+    </button>
+  }
 </div>
 
 @if (results.length > 0) {

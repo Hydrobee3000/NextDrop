@@ -20,11 +20,16 @@
   height: 16px;
   color: color-mix(in srgb, var(--color-text) 55%, transparent);
   pointer-events: none;
+  transition: color 0.15s ease;
+
+  &--active {
+    color: var(--color-lime-text);
+  }
 }
 
 .search-input {
   width: 100%;
-  padding: 10px 14px 10px 38px;
+  padding: 10px 38px 10px 38px;
   font: inherit;
   font-size: 15px;
   color: var(--color-text);
@@ -35,6 +40,37 @@
   &:focus {
     outline: none;
     border-color: var(--color-lime-text);
+  }
+}
+
+.search-input-clear {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-slate-surface-hover);
+  border: 2px solid var(--color-slate-border);
+  box-shadow: var(--tactile-shadow-sm);
+  color: var(--color-slate-text);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  &:hover {
+    border-color: var(--color-lime-text);
+    color: var(--color-lime-text);
+    box-shadow: var(--tactile-shadow-md);
   }
 }
 
