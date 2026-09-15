@@ -27,7 +27,7 @@
 
     <div class="game-hero__countdown">
       @if (game().daysUntilRelease < 2) {
-        <span class="game-hero__days">{{ game().daysUntilRelease | daysUntil }}</span>
+        <span class="game-hero__days" [class.game-hero__days--released]="game().daysUntilRelease < 0">{{ game().daysUntilRelease | daysUntil }}</span>
       } @else {
         <span class="game-hero__days">{{ game().daysUntilRelease }} <span>{{ daysWord() }}</span></span>
       }
