@@ -26,6 +26,9 @@
   --color-cyan-dim: #00c9db;
   --color-peach: #ffb59a;
   --color-rose: #f43f5e;
+  // Не из DESIGN.md — добавлен отдельно, чтобы "уже вышла" визуально отличалась
+  // от голубых urgency-тиров предстоящих релизов.
+  --color-orange: #ff8a00;
 
   // Тёмный slate-фон из макета — темнее и чище наших --color-neutral-*.
   // Роль "поверхности" — переопределяется под [data-theme='light'].
@@ -42,6 +45,7 @@
   --color-lime-text: var(--color-lime);
   --color-lime-text-hover: var(--color-lime-hover);
   --color-cyan-text: var(--color-cyan);
+  --color-orange-text: var(--color-orange);
 
   --tactile-shadow-sm: 0 1px 0 0 #000;
   --tactile-shadow-md: 0 2px 0 0 #000;
@@ -103,6 +107,7 @@
   --color-lime-text: #4d7c0f;
   --color-lime-text-hover: #3f6212;
   --color-cyan-text: #0e7490;
+  --color-orange-text: #c2410c;
 }
 
 * {
@@ -198,6 +203,12 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-ink);
   box-shadow: var(--tactile-shadow-sm);
   white-space: nowrap;
+
+  // Уже вышедшие игры (daysUntilRelease < 0) — отдельный оранжевый цвет,
+  // чтобы не сливаться с самым ярким голубым тиром предстоящих релизов.
+  &[data-urgency='0'] {
+    background: var(--color-orange);
+  }
 
   // Яркость заливки затухает от самого скорого релиза (1) к самому дальнему
   // (7) — цвета от var(--color-cyan)/var(--color-cyan-dim) из DESIGN.md,
