@@ -1,16 +1,24 @@
+/**
+ * Уровень "срочности" релиза для цвета бейджа:
+ * - 0 — уже вышла
+ * - 1 — сегодня/завтра
+ * - 2 — на этой неделе
+ * - 3 — в этом месяце
+ * - 4 — в ближайшие 3 месяца
+ * - 5 — в ближайшие полгода
+ * - 6 — в ближайший год
+ * - 7 — дальше года
+ */
 export type ReleaseUrgencyTier = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
-/**
- * Уровень "срочности" релиза по количеству дней — 0 уже вышла (оранжевый),
- * 1 самый скорый (ярче), 7 самый дальний (тусклее).
- */
+/** Определяет {@link ReleaseUrgencyTier} по количеству дней до релиза. */
 export function getReleaseUrgencyTier(daysUntilRelease: number): ReleaseUrgencyTier {
-  if (daysUntilRelease < 0) return 0;
-  if (daysUntilRelease < 2) return 1;
-  if (daysUntilRelease < 7) return 2;
-  if (daysUntilRelease < 30) return 3;
-  if (daysUntilRelease < 90) return 4;
-  if (daysUntilRelease < 180) return 5;
-  if (daysUntilRelease < 365) return 6;
-  return 7;
+  if (daysUntilRelease < 0) return 0; // уже вышла
+  if (daysUntilRelease < 2) return 1; // сегодня/завтра
+  if (daysUntilRelease < 7) return 2; // на этой неделе
+  if (daysUntilRelease < 30) return 3; // в этом месяце
+  if (daysUntilRelease < 90) return 4; // в ближайшие 3 месяца
+  if (daysUntilRelease < 180) return 5; // в ближайшие полгода
+  if (daysUntilRelease < 365) return 6; // в ближайший год
+  return 7; // дальше года
 }
