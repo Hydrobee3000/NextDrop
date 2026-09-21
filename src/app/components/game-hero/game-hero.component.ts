@@ -1,9 +1,10 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 
 import { FavoriteButtonComponent } from '../favorite-button/favorite-button.component';
 import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
 import { DaysUntilPipe } from '../../pipes/days-until.pipe';
 import { Game } from '../../models/game';
+import { FavoritesService } from '../../services/favorites.service';
 import { GameDetailService } from '../../services/game-detail.service';
 import { I18nService } from '../../services/i18n.service';
 import { getPlatformIconKind } from '../../shared/platform-icon';
@@ -19,10 +20,17 @@ import { platformIsActive } from '../../shared/platform-filter';
 export class GameHeroComponent {
   private readonly detailService = inject(GameDetailService);
   private readonly i18n = inject(I18nService);
+  private readonly favoritesService = inject(FavoritesService);
 
   game = input.required<Game>();
   activeFilter = input<string>('all');
   excludedPlatforms = input<string[]>([]);
+
+  // Держит сохранённую запись избранного (если она есть) в актуальном состоянии —
+  // иначе снимок Game "замораживается" на момент добавления и расходится с RAWG.
+  constructor() {
+    effect(() => this.favoritesService.sync(this.game()));
+  }
 
   daysWord(): string {
     const days = this.game().daysUntilRelease;

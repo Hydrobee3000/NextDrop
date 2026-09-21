@@ -34,4 +34,13 @@ export class FavoritesService {
         : [...list, game]
     );
   }
+
+  // Обновляет сохранённую запись избранного свежими данными, если игра уже в избранном.
+  sync(game: Game): void {
+    this.favorites.update((list) =>
+      list.some((favorite) => favorite.id === game.id)
+        ? list.map((favorite) => (favorite.id === game.id ? game : favorite))
+        : list
+    );
+  }
 }
