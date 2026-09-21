@@ -1,9 +1,10 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 
 import { FavoriteButtonComponent } from '../favorite-button/favorite-button.component';
 import { PlatformIconComponent } from '../platform-icon/platform-icon.component';
 import { DaysUntilPipe } from '../../pipes/days-until.pipe';
 import { Game } from '../../models/game';
+import { FavoritesService } from '../../services/favorites.service';
 import { GameDetailService } from '../../services/game-detail.service';
 import { getPlatformIconKind } from '../../shared/platform-icon';
 import { platformIsActive } from '../../shared/platform-filter';
@@ -17,10 +18,16 @@ import { getReleaseUrgencyTier } from '../../shared/release-urgency';
 })
 export class GameRowComponent {
   private readonly detailService = inject(GameDetailService);
+  private readonly favoritesService = inject(FavoritesService);
 
   game = input.required<Game>();
   activeFilter = input<string>('all');
   excludedPlatforms = input<string[]>([]);
+
+  // Держит сохранённую запись избранного в актуальном состоянии.
+  constructor() {
+    effect(() => this.favoritesService.sync(this.game()));
+  }
 
   matchesFilter(platform: string): boolean {
     return platformIsActive(platform, this.activeFilter(), this.excludedPlatforms());
