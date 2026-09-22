@@ -27,9 +27,10 @@ export interface RawgGameListResponse {
 }
 
 /**
- * Ответ RAWG API по деталям одной игры (GET /games/{id}).
+ * Ответ RAWG API по деталям одной игры (GET /games/{id}) — содержит все базовые
+ * поля RawgGame (id, name, released...) плюс расширенные поля ниже.
  */
-export interface RawgGameDetail {
+export interface RawgGameDetail extends RawgGame {
   /** Описание игры без HTML-разметки. */
   description_raw: string;
   /** Жанры. */
