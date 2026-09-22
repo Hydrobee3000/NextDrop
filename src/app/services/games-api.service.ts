@@ -69,6 +69,14 @@ export class GamesApiService {
     );
   }
 
+  // Свежие базовые данные по одной игре.
+  getGame(id: string): Observable<Game> {
+    const params = { key: environment.rawgApiKey };
+    return this.http
+      .get<RawgGameDetail>(`${this.baseUrl}/${id}`, { params })
+      .pipe(map((detail) => this.toGame(detail, 0)));
+  }
+
   getGameDetails(id: string): Observable<GameDetails> {
     const params = { key: environment.rawgApiKey };
 

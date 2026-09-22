@@ -1,10 +1,11 @@
-import { Component, ElementRef, HostListener, inject, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, inject, signal } from '@angular/core';
 import { GameCardComponent } from '../../components/game-card/game-card.component';
 import { GameFiltersComponent } from '../../components/game-filters/game-filters.component';
 import { Game } from '../../models/game';
 import { SortOrder } from '../../models/sort-order';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { FavoritesService } from '../../services/favorites.service';
+import { GamesApiService } from '../../services/games-api.service';
 import { PlatformFilterService } from '../../services/platform-filter.service';
 import { gameMatchesPlatformFilter } from '../../shared/platform-filter';
 
@@ -14,8 +15,9 @@ import { gameMatchesPlatformFilter } from '../../shared/platform-filter';
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss'
 })
-export class FavoritesComponent {
+export class FavoritesComponent implements OnInit {
   private readonly favoritesService = inject(FavoritesService);
+  private readonly gamesApi = inject(GamesApiService);
   private readonly platformFilter = inject(PlatformFilterService);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
@@ -23,6 +25,17 @@ export class FavoritesComponent {
 
   sortOrder = signal<SortOrder>('dateAsc');
   sortMenuOpen = signal(false);
+
+  // При заходе на страницу подтягиваем свежие данные по каждой избранной игре.
+  ngOnInit(): void {
+    for (const game of this.favoritesService.games()) {
+      this.gamesApi.getGame(game.id).subscribe({
+        next: (fresh) => this.favoritesService.sync(fresh),
+        error: () => {
+        },
+      });
+    }
+  }
 
   get activeFilter(): string {
     return this.platformFilter.activeFilter();
