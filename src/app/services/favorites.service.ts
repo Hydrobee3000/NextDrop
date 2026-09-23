@@ -38,9 +38,15 @@ export class FavoritesService {
   // Обновляет сохранённую запись избранного свежими данными, если игра уже в избранном.
   sync(game: Game): void {
     this.favorites.update((list) =>
-      list.some((favorite) => favorite.id === game.id)
-        ? list.map((favorite) => (favorite.id === game.id ? game : favorite))
-        : list
+      list.map((favorite) => (favorite.id === game.id ? this.mergeFresh(favorite, game) : favorite))
     );
+  }
+
+  // Детальный эндпоинт RAWG для TBA-игр всегда отдаёт released: null.
+  private mergeFresh(existing: Game, fresh: Game): Game {
+    if (fresh.releaseDate === null && existing.releaseDate !== null) {
+      return { ...fresh, releaseDate: existing.releaseDate, daysUntilRelease: existing.daysUntilRelease, isTba: true };
+    }
+    return fresh;
   }
 }

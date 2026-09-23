@@ -39,12 +39,13 @@ export class GameCardComponent {
   }
 
   // Пересчет от releaseDate.
-  daysUntilRelease(): number {
+  daysUntilRelease(): number | null {
     return getDaysUntilRelease(this.game().releaseDate);
   }
 
-  urgencyTier(): number {
-    return getReleaseUrgencyTier(this.daysUntilRelease());
+  urgencyTier(): number | 'tba' {
+    const days = this.daysUntilRelease();
+    return days === null ? 'tba' : getReleaseUrgencyTier(days);
   }
 
   openDetail(): void {

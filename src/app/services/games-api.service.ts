@@ -105,6 +105,7 @@ export class GamesApiService {
       coverGradient: COVER_GRADIENTS[index % COVER_GRADIENTS.length],
       daysUntilRelease: getDaysUntilRelease(rawgGame.released),
       releaseDate: rawgGame.released,
+      isTba: rawgGame.tba,
     };
   }
 }

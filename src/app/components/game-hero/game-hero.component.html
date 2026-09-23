@@ -26,10 +26,11 @@
     </div>
 
     <div class="game-hero__countdown">
-      @if (game().daysUntilRelease < 2) {
-        <span class="game-hero__days" [class.game-hero__days--released]="game().daysUntilRelease < 0">{{ game().daysUntilRelease | daysUntil }}</span>
+      @let days = game().daysUntilRelease;
+      @if (days === null || days < 2) {
+        <span class="game-hero__days" [class.game-hero__days--released]="(days ?? 0) < 0">{{ days | daysUntil:game().isTba }}</span>
       } @else {
-        <span class="game-hero__days">{{ game().daysUntilRelease }} <span>{{ daysWord() }}</span></span>
+        <span class="game-hero__days">{{ game().isTba ? '~' : '' }}{{ days }} <span>{{ daysWord() }}</span></span>
       }
     </div>
   </div>

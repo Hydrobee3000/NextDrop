@@ -1,10 +1,9 @@
 /**
- * Дней до релиза на текущий момент. Может быть отрицательным для уже вышедших игр —
- * это нормально, отличаем "сегодня" (0) от "уже вышла" (< 0) в DaysUntilPipe.
+ * Дней до релиза на текущий момент, или null если дата вообще неизвестна.
  */
-export function getDaysUntilRelease(releaseDate: string | null): number {
+export function getDaysUntilRelease(releaseDate: string | null): number | null {
   if (!releaseDate) {
-    return 0;
+    return null;
   }
 
   return Math.ceil((new Date(releaseDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24));

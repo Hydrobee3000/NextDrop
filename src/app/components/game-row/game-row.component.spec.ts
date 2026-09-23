@@ -14,6 +14,7 @@ function buildGame(overrides: Partial<Game> = {}): Game {
     coverGradient: 'linear-gradient(135deg, #000, #111)',
     daysUntilRelease: 5,
     releaseDate: null,
+    isTba: false,
     ...overrides,
   };
 }
@@ -95,5 +96,13 @@ describe('GameRowComponent', () => {
 
     const badge: HTMLElement | null = fixture.nativeElement.querySelector('.game-row__days');
     expect(badge?.getAttribute('data-urgency')).toBe('1');
+  });
+
+  it('shows a "tba" badge with "???" when there is no release date at all', () => {
+    create(buildGame({ daysUntilRelease: null }));
+
+    const badge: HTMLElement | null = fixture.nativeElement.querySelector('.game-row__days');
+    expect(badge?.getAttribute('data-urgency')).toBe('tba');
+    expect(badge?.textContent?.trim()).toBe('???');
   });
 });

@@ -14,10 +14,12 @@ export interface Game {
   coverInitials: string;
   /** Градиент для обложки-заглушки. */
   coverGradient: string;
-  /** Дней до релиза. */
-  daysUntilRelease: number;
+  /** Дней до релиза, или null если дата вообще неизвестна. */
+  daysUntilRelease: number | null;
   /** Дата релиза (YYYY-MM-DD), или null если не объявлена — форматируется под текущий язык через LocalizedDatePipe. */
   releaseDate: string | null;
+  /** RAWG считает дату релиза неподтверждённой (может быть true даже при заданном releaseDate). */
+  isTba: boolean;
 }
 
 /**

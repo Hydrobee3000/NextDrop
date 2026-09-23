@@ -79,9 +79,9 @@
               <div class="game-detail-dialog__release-info">
                 <span class="game-detail-dialog__release-label">{{ 'detail.release' | translate }}</span>
                 <div class="game-detail-dialog__release-row">
-                  <span class="game-detail-dialog__release-date">{{ g.releaseDate | localizedDate }}</span>
+                  <span class="game-detail-dialog__release-date">{{ g.isTba && g.releaseDate ? '~' : '' }}{{ g.releaseDate | localizedDate }}</span>
                   @if (!countdown()) {
-                    <span class="game-detail-dialog__release-days">{{ g.daysUntilRelease | daysUntil }}</span>
+                    <span class="game-detail-dialog__release-days">{{ g.daysUntilRelease | daysUntil:g.isTba }}</span>
                   }
                 </div>
               </div>

@@ -14,6 +14,7 @@ const TEST_GAME: Game = {
   coverGradient: 'linear-gradient(135deg, #000, #111)',
   daysUntilRelease: 5,
   releaseDate: '2026-01-01',
+  isTba: false,
 };
 
 describe('FavoriteButtonComponent', () => {
