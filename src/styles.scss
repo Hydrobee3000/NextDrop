@@ -210,6 +210,13 @@ h1, h2, h3, h4, h5, h6 {
     background: var(--color-orange);
   }
 
+  // Дата вообще неизвестна (TBA у RAWG, released: null) — нейтральный серый,
+  // не путаем ни со срочностью, ни с "уже вышла".
+  &[data-urgency='tba'] {
+    background: var(--color-slate-border);
+    color: var(--color-slate-text);
+  }
+
   // Яркость заливки затухает от самого скорого релиза (1) к самому дальнему
   // (7) — цвета от var(--color-cyan)/var(--color-cyan-dim) из DESIGN.md,
   // дальше затухание к белому, чтобы тёмный ink-текст оставался читаемым.

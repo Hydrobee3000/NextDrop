@@ -10,8 +10,8 @@ describe('getDaysUntilRelease', () => {
     jasmine.clock().uninstall();
   });
 
-  it('returns 0 when there is no release date', () => {
-    expect(getDaysUntilRelease(null)).toBe(0);
+  it('returns null when there is no release date', () => {
+    expect(getDaysUntilRelease(null)).toBeNull();
   });
 
   it('returns 0 when the release date is today', () => {

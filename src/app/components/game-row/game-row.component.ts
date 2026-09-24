@@ -37,8 +37,9 @@ export class GameRowComponent {
     return getPlatformIconKind(platform);
   }
 
-  urgencyTier(): number {
-    return getReleaseUrgencyTier(this.game().daysUntilRelease);
+  urgencyTier(): number | 'tba' {
+    const days = this.game().daysUntilRelease;
+    return days === null ? 'tba' : getReleaseUrgencyTier(days);
   }
 
   openDetail(): void {

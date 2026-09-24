@@ -32,8 +32,9 @@ export class GameHeroComponent {
     effect(() => this.favoritesService.sync(this.game()));
   }
 
+  // Вызывается из шаблона только когда daysUntilRelease уже не null (см. @if в шаблоне).
   daysWord(): string {
-    const days = this.game().daysUntilRelease;
+    const days = this.game().daysUntilRelease ?? 0;
     return this.i18n.locale() === 'ru'
       ? pluralizeRu(days, [this.i18n.t('day.one'), this.i18n.t('day.few'), this.i18n.t('day.many')])
       : pluralizeEn(days, [this.i18n.t('day.one'), this.i18n.t('day.other')]);

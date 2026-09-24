@@ -26,7 +26,7 @@
         }
       </div>
 
-      <span class="game-card__days tactile-days-badge" [attr.data-urgency]="urgencyTier()">{{ daysUntilRelease() | daysUntil }}</span>
+      <span class="game-card__days tactile-days-badge" [attr.data-urgency]="urgencyTier()">{{ daysUntilRelease() | daysUntil:game().isTba }}</span>
     </div>
   </div>
 </article>
