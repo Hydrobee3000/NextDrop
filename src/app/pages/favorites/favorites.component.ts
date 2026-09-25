@@ -7,6 +7,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
 import { FavoritesService } from '../../services/favorites.service';
 import { GamesApiService } from '../../services/games-api.service';
 import { PlatformFilterService } from '../../services/platform-filter.service';
+import { getDaysUntilRelease } from '../../shared/days-until-release';
 import { gameMatchesPlatformFilter } from '../../shared/platform-filter';
 
 @Component({
@@ -25,6 +26,7 @@ export class FavoritesComponent implements OnInit {
 
   sortOrder = signal<SortOrder>('dateAsc');
   sortMenuOpen = signal(false);
+  releasedSectionOpen = signal(false);
 
   // При заходе на страницу подтягиваем свежие данные по каждой избранной игре.
   ngOnInit(): void {
@@ -45,12 +47,20 @@ export class FavoritesComponent implements OnInit {
     return this.platformFilter.excludedPlatforms();
   }
 
+  // Ожидаемые игры — основной грид.
   get games(): Game[] {
-    const filtered = this.favoritesService
+    return this.sortGames(this.filteredGames.filter((game) => !this.isReleased(game)));
+  }
+
+  // Уже вышедшие — отдельный сворачиваемый блок, не смешиваем с ожидаемыми.
+  get releasedGames(): Game[] {
+    return this.sortGames(this.filteredGames.filter((game) => this.isReleased(game)));
+  }
+
+  private get filteredGames(): Game[] {
+    return this.favoritesService
       .games()
       .filter((game) => gameMatchesPlatformFilter(game.platforms, this.activeFilter, this.excludedPlatforms));
-
-    return this.sortGames(filtered);
   }
 
   // Общее число избранного — не зависит от активного фильтра платформы,
@@ -69,6 +79,10 @@ export class FavoritesComponent implements OnInit {
 
   toggleSortMenu(): void {
     this.sortMenuOpen.update((open) => !open);
+  }
+
+  toggleReleasedSection(): void {
+    this.releasedSectionOpen.update((open) => !open);
   }
 
   selectSort(order: SortOrder): void {
@@ -107,5 +121,10 @@ export class FavoritesComponent implements OnInit {
     if (!b.releaseDate) return -1;
 
     return direction * (new Date(a.releaseDate).getTime() - new Date(b.releaseDate).getTime());
+  }
+
+  private isReleased(game: Game): boolean {
+    const days = getDaysUntilRelease(game.releaseDate);
+    return days !== null && days < 0;
   }
 }

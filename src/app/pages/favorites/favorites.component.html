@@ -7,7 +7,7 @@
   (excludedPlatformsChange)="onExcludedPlatformsChange($event)"
 />
 
-@if (games.length > 0) {
+@if (games.length > 0 || releasedGames.length > 0) {
   <div class="favorites-sort">
     <span class="favorites-sort__label">{{ 'sort.label' | translate }}</span>
 
@@ -41,11 +41,43 @@
     }
   </div>
 
-  <div class="game-grid">
-    @for (game of games; track game.id) {
-      <app-game-card [game]="game" [activeFilter]="activeFilter" [excludedPlatforms]="excludedPlatforms" />
-    }
-  </div>
+  @if (releasedGames.length > 0) {
+    <div class="favorites-released">
+      <button
+        type="button"
+        class="favorites-released__toggle"
+        [attr.aria-expanded]="releasedSectionOpen()"
+        (click)="toggleReleasedSection()"
+      >
+        <svg
+          class="favorites-released__chevron"
+          [class.favorites-released__chevron--open]="releasedSectionOpen()"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+        {{ 'favorites.released' | translate }}
+        <span class="tactile-badge">{{ releasedGames.length }}</span>
+      </button>
+
+      @if (releasedSectionOpen()) {
+        <div class="game-grid favorites-released__grid">
+          @for (game of releasedGames; track game.id) {
+            <app-game-card [game]="game" [activeFilter]="activeFilter" [excludedPlatforms]="excludedPlatforms" />
+          }
+        </div>
+      }
+    </div>
+  }
+
+  @if (games.length > 0) {
+    <div class="game-grid">
+      @for (game of games; track game.id) {
+        <app-game-card [game]="game" [activeFilter]="activeFilter" [excludedPlatforms]="excludedPlatforms" />
+      }
+    </div>
+  }
 } @else {
   <p class="favorites-empty">{{ 'favorites.empty' | translate }}</p>
 }
