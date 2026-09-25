@@ -17,6 +17,7 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
 
     'favorites.title': 'Мой список',
     'favorites.empty': 'Тут тоже пусто :(',
+    'favorites.released': 'Уже вышли',
 
     'sort.label': 'Сортировка',
     'sort.dateAsc': 'По дате выхода ↑',
@@ -76,6 +77,7 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
 
     'favorites.title': 'My List',
     'favorites.empty': 'Empty here too :(',
+    'favorites.released': 'Already released',
 
     'sort.label': 'Sort',
     'sort.dateAsc': 'Soonest first',
