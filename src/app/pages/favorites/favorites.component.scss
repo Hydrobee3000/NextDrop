@@ -109,6 +109,10 @@
 
 .favorites-released {
   margin-bottom: var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-slate-bg);
+  border: 2px solid var(--color-slate-border);
+  border-radius: var(--radius-tactile-card);
 }
 
 .favorites-released__toggle {
