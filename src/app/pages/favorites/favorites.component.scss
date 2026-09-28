@@ -110,8 +110,10 @@
 .favorites-released {
   margin-bottom: var(--space-6);
   padding: var(--space-3) var(--space-4);
-  background: var(--color-slate-bg);
-  border: 2px solid var(--color-slate-border);
+  // Лёгкий оранжевый оттенок (тот же акцент, что у "уже вышла") — заметен
+  // в обеих темах, в отличие от чисто нейтральных slate-тонов.
+  background: color-mix(in srgb, var(--color-orange) 15%, var(--color-slate-surface));
+  border: 2px solid color-mix(in srgb, var(--color-orange) 50%, var(--color-slate-border));
   border-radius: var(--radius-tactile-card);
 }
 
