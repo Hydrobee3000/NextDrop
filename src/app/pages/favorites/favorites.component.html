@@ -67,6 +67,20 @@
             <app-game-card [game]="game" [activeFilter]="activeFilter" [excludedPlatforms]="excludedPlatforms" />
           }
         </div>
+
+        @if (releasedGames.length > 6) {
+          <button
+            type="button"
+            class="favorites-released__toggle favorites-released__toggle--bottom"
+            [attr.aria-expanded]="releasedSectionOpen()"
+            [attr.aria-label]="'detail.showLess' | translate"
+            (click)="toggleReleasedSection()"
+          >
+            <svg class="favorites-released__chevron favorites-released__chevron--open" viewBox="0 0 24 24" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+        }
       }
     </div>
   }
