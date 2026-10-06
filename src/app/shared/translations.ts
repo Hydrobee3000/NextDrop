@@ -26,6 +26,7 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
 
     'detail.release': 'Релиз',
     'detail.close': 'Закрыть',
+    'detail.expandImage': 'Открыть изображение на весь экран',
     'detail.metacritic': 'Metacritic',
     'detail.showMore': 'Показать полностью',
     'detail.showLess': 'Свернуть',
@@ -86,6 +87,7 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
 
     'detail.release': 'Release',
     'detail.close': 'Close',
+    'detail.expandImage': 'View image fullscreen',
     'detail.metacritic': 'Metacritic',
     'detail.showMore': 'Show more',
     'detail.showLess': 'Show less',
