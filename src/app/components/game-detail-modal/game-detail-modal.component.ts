@@ -69,6 +69,7 @@ export class GameDetailModalComponent {
 
   descriptionExpanded = signal(false);
   selectedMediaIndex = signal(0);
+  imageFullscreen = signal(false);
 
   // Обложка + подгруженные скриншоты — единая галерея: первый кадр всегда обложка,
   // если она есть, дальше скриншоты в порядке ответа RAWG.
@@ -134,6 +135,7 @@ export class GameDetailModalComponent {
       this.game();
       this.descriptionExpanded.set(false);
       this.selectedMediaIndex.set(0);
+      this.imageFullscreen.set(false);
     });
 
     // Индикатор прокрутки всей модалки — пересчитываем, когда
@@ -166,6 +168,15 @@ export class GameDetailModalComponent {
 
   selectMedia(index: number): void {
     this.selectedMediaIndex.set(index);
+  }
+
+  openImageFullscreen(event: Event): void {
+    event.stopPropagation();
+    this.imageFullscreen.set(true);
+  }
+
+  closeImageFullscreen(): void {
+    this.imageFullscreen.set(false);
   }
 
   // Перетаскивание мышью для ленты миниатюр, как нативный тач-свайп на телефоне
@@ -293,6 +304,10 @@ export class GameDetailModalComponent {
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
+    if (this.imageFullscreen()) {
+      this.closeImageFullscreen();
+      return;
+    }
     this.close();
   }
 }
