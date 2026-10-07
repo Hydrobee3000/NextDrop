@@ -197,7 +197,31 @@
 
   @if (imageFullscreen() && heroImage(); as fullscreenImage) {
     <div class="image-fullscreen-backdrop" (click)="closeImageFullscreen()">
+      @if (media().length > 1) {
+        <button
+          class="image-fullscreen-nav image-fullscreen-nav--prev"
+          (click)="onPrevImageClick($event)"
+          [attr.aria-label]="'detail.prevImage' | translate"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <polyline points="15 6 9 12 15 18" />
+          </svg>
+        </button>
+      }
+
       <img class="image-fullscreen-img" [src]="fullscreenImage" [alt]="g.title" (click)="$event.stopPropagation()" />
+
+      @if (media().length > 1) {
+        <button
+          class="image-fullscreen-nav image-fullscreen-nav--next"
+          (click)="onNextImageClick($event)"
+          [attr.aria-label]="'detail.nextImage' | translate"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <polyline points="9 6 15 12 9 18" />
+          </svg>
+        </button>
+      }
 
       <button
         class="image-fullscreen-close"
