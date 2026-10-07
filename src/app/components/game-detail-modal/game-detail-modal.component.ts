@@ -179,6 +179,38 @@ export class GameDetailModalComponent {
     this.imageFullscreen.set(false);
   }
 
+  onPrevImageClick(event: Event): void {
+    event.stopPropagation();
+    this.shiftImage(-1);
+  }
+
+  onNextImageClick(event: Event): void {
+    event.stopPropagation();
+    this.shiftImage(1);
+  }
+
+  @HostListener('document:keydown.arrowleft')
+  onArrowLeftKey(): void {
+    if (this.imageFullscreen()) {
+      this.shiftImage(-1);
+    }
+  }
+
+  @HostListener('document:keydown.arrowright')
+  onArrowRightKey(): void {
+    if (this.imageFullscreen()) {
+      this.shiftImage(1);
+    }
+  }
+
+  private shiftImage(delta: number): void {
+    const count = this.media().length;
+    if (count < 2) {
+      return;
+    }
+    this.selectedMediaIndex.update((index) => (index + delta + count) % count);
+  }
+
   // Перетаскивание мышью для ленты миниатюр, как нативный тач-свайп на телефоне
   // (сам тач не трогаем — у него уже есть родной скролл). Указатель захватываем
   // (setPointerCapture) только когда сдвиг превысил порог, то есть это точно драг,

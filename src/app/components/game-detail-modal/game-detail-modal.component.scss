@@ -615,3 +615,54 @@
     border-color: var(--color-lime-text);
   }
 }
+
+.image-fullscreen-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-tactile-btn);
+  background: color-mix(in srgb, var(--color-slate-bg) 70%, transparent);
+  border: 2px solid var(--color-slate-border);
+  color: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+
+  svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &:hover {
+    border-color: var(--color-lime-text);
+  }
+
+  &--prev {
+    left: var(--space-4);
+  }
+
+  &--next {
+    right: var(--space-4);
+  }
+}
+
+@media (min-width: 768px) {
+  .image-fullscreen-nav {
+    &--prev {
+      left: var(--space-6);
+    }
+
+    &--next {
+      right: var(--space-6);
+    }
+  }
+}
