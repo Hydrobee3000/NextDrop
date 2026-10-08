@@ -87,6 +87,7 @@ export class GameDetailModalComponent {
     return media[Math.min(this.selectedMediaIndex(), media.length - 1)];
   });
 
+
   isDraggingThumbs = signal(false);
   private dragPointerId: number | null = null;
   private dragStartX = 0;
@@ -96,10 +97,6 @@ export class GameDetailModalComponent {
   private readonly DRAG_THRESHOLD_PX = 4;
 
   private readonly dialogEl = viewChild<ElementRef<HTMLElement>>('dialogEl');
-  // Свой индикатор вертикального скролла модалки — родной скроллбар скрыт совсем,
-  // потому что на части систем/браузеров он рисует стрелки, которые никакой CSS
-  // (::-webkit-scrollbar-button) не убирает — вероятно, принудительный классический
-  // скроллбар ОС, игнорирующий кастомные стили.
   dialogScroll = signal<DialogScroll>({ visible: false, thumbHeightPercent: 100, thumbTopPercent: 0 });
 
   isDraggingScrollbar = signal(false);

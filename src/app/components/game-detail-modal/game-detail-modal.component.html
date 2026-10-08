@@ -230,6 +230,20 @@
       >
         <svg lucideX></svg>
       </button>
+
+      @if (media().length > 1) {
+        <div class="image-fullscreen-dots" (click)="$event.stopPropagation()">
+          @for (item of media(); track item; let index = $index) {
+            <button
+              type="button"
+              class="image-fullscreen-dot"
+              [class.image-fullscreen-dot--active]="index === selectedMediaIndex()"
+              [attr.aria-label]="('detail.goToImage' | translate) + ' ' + (index + 1)"
+              (click)="selectMedia(index)"
+            ></button>
+          }
+        </div>
+      }
     </div>
   }
 }
