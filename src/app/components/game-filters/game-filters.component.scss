@@ -3,7 +3,7 @@
 }
 
 .game-filters {
-  margin-top: var(--space-3);
+  margin-top: var(--space-1);
   margin-bottom: var(--space-4);
 }
 
@@ -43,6 +43,10 @@
 
 // Общий вид (градиент) — .tactile-rule в styles.scss.
 @media (min-width: 768px) {
+  .game-filters {
+    margin-top: var(--space-3);
+  }
+
   .game-filters__header {
     flex-direction: row;
     flex-wrap: wrap;
