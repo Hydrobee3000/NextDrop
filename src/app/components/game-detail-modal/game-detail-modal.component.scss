@@ -88,6 +88,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  cursor: zoom-in;
 }
 
 .game-detail-dialog__initials {
@@ -504,6 +505,10 @@
 }
 
 @media (min-width: 768px) {
+  .game-detail-dialog__expand {
+    display: none;
+  }
+
   .game-detail-backdrop {
     align-items: center;
     padding: var(--space-6);
