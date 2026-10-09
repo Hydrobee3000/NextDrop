@@ -9,7 +9,12 @@
       >
         <div class="game-detail-dialog__hero" [style.background]="g.coverGradient">
           @if (heroImage(); as imageUrl) {
-            <img class="game-detail-dialog__image" [src]="imageUrl" [alt]="g.title" />
+            <img
+              class="game-detail-dialog__image"
+              [src]="imageUrl"
+              [alt]="g.title"
+              (click)="openImageFullscreen($event)"
+            />
 
             <button
               class="game-detail-dialog__expand"
