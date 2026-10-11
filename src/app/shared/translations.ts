@@ -19,6 +19,11 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'favorites.empty': 'Тут тоже пусто :(',
     'favorites.released': 'Уже вышли',
 
+    'notFound.title': 'Страница не найдена',
+    'notFound.text': 'Возможно, ссылка устарела или в ней опечатка.',
+    'notFound.home': 'На главную',
+    'notFound.imageAlt': 'Джойстик с отсоединённым кабелем',
+
     'sort.label': 'Сортировка',
     'sort.dateAsc': 'По дате выхода ↑',
     'sort.dateDesc': 'По дате выхода ↓',
@@ -82,6 +87,11 @@ export const TRANSLATIONS: Record<Locale, Record<string, string>> = {
     'favorites.title': 'My List',
     'favorites.empty': 'Empty here too :(',
     'favorites.released': 'Already released',
+
+    'notFound.title': 'Page not found',
+    'notFound.text': 'The link may be outdated or have a typo.',
+    'notFound.home': 'Back to home',
+    'notFound.imageAlt': 'A game controller with an unplugged cable',
 
     'sort.label': 'Sort',
     'sort.dateAsc': 'Soonest first',

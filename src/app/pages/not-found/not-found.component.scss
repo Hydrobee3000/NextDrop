@@ -1,0 +1,175 @@
+:host {
+  display: flex;
+  flex: 1;
+}
+
+.not-found {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding-block: var(--space-6);
+  text-align: center;
+}
+
+.not-found__code {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: var(--color-slate-text);
+}
+
+.not-found__title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.not-found__text {
+  margin: 0;
+  max-width: 34ch;
+  color: var(--color-slate-text);
+}
+
+.not-found__home {
+  margin-top: var(--space-2);
+  padding: 8px 16px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-ink);
+  background: var(--color-lime);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-tactile-btn);
+  box-shadow: var(--tactile-shadow-md);
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: var(--color-lime-hover);
+  }
+}
+
+.nf-illustration {
+  width: min(320px, 100%);
+  height: auto;
+  overflow: visible;
+
+  --nf-ink: var(--color-ink);
+  --nf-body: var(--color-lime);
+  --nf-eye: #fff;
+  --nf-cyan: var(--color-cyan);
+  --nf-orange: var(--color-orange);
+  --nf-rose: var(--color-rose);
+  --nf-light: #cbd5e1;
+}
+
+.nf-ground {
+  fill: color-mix(in srgb, var(--color-text) 14%, transparent);
+}
+
+.nf-cable {
+  fill: none;
+  stroke: var(--color-slate-text);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.nf-plug-body {
+  fill: var(--nf-body);
+  stroke: var(--nf-ink);
+  stroke-width: 3.5;
+}
+
+.nf-plug-prong {
+  fill: var(--nf-light);
+  stroke: var(--nf-ink);
+  stroke-width: 2;
+}
+
+.nf-sparks path {
+  fill: none;
+  stroke: var(--nf-orange);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.nf-pad-shadow {
+  fill: var(--nf-ink);
+}
+
+.nf-pad {
+  fill: var(--nf-body);
+  stroke: var(--nf-ink);
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+.nf-dpad {
+  fill: var(--nf-ink);
+}
+
+.nf-btn {
+  stroke: var(--nf-ink);
+  stroke-width: 3;
+
+  &--cyan {
+    fill: var(--nf-cyan);
+  }
+
+  &--orange {
+    fill: var(--nf-orange);
+  }
+
+  &--rose {
+    fill: var(--nf-rose);
+  }
+
+  &--light {
+    fill: var(--nf-light);
+  }
+}
+
+.nf-eye-white {
+  fill: var(--nf-eye);
+  stroke: var(--nf-ink);
+  stroke-width: 4;
+}
+
+.nf-pupil {
+  fill: var(--nf-ink);
+}
+
+.nf-brow,
+.nf-mouth {
+  fill: none;
+  stroke: var(--nf-ink);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nf-question text {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  stroke: var(--nf-ink);
+  stroke-width: 4;
+  paint-order: stroke;
+  stroke-linejoin: round;
+}
+
+.nf-q--lime {
+  fill: var(--nf-body);
+}
+
+.nf-q--cyan {
+  fill: var(--nf-cyan);
+}
