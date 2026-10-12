@@ -29,7 +29,7 @@
 
 .search-input {
   width: 100%;
-  padding: 10px 38px 10px 38px;
+  padding: 10px 44px 10px 38px;
   font: inherit;
   font-size: 15px;
   color: var(--color-text);
@@ -46,7 +46,7 @@
 .search-input-clear {
   position: absolute;
   top: 50%;
-  right: 6px;
+  right: 12px;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
