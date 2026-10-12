@@ -14,15 +14,6 @@
   text-align: center;
 }
 
-.not-found__code {
-  margin: var(--space-2) 0 0;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  color: var(--color-slate-text);
-}
-
 .not-found__title {
   margin: 0;
   font-size: 26px;
@@ -157,19 +148,119 @@
   stroke-linejoin: round;
 }
 
-.nf-question text {
+.nf-questions text {
   font-family: var(--font-heading);
   font-weight: 900;
+  text-rendering: geometricPrecision;
   stroke: var(--nf-ink);
   stroke-width: 4;
   paint-order: stroke;
   stroke-linejoin: round;
 }
 
-.nf-q--lime {
+.nf-digit {
+  stroke: var(--nf-ink);
+  stroke-width: 6;
+  paint-order: stroke;
+  stroke-linejoin: round;
+
+  &--orange {
+    fill: var(--nf-orange);
+  }
+
+  &--lime {
+    fill: var(--nf-body);
+  }
+}
+
+.nf-q-lime {
   fill: var(--nf-body);
 }
 
-.nf-q--cyan {
+.nf-q-cyan {
   fill: var(--nf-cyan);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nf-bob {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: nf-bob 4s ease-in-out infinite alternate;
+
+    &--four-late {
+      animation-duration: 5.2s;
+      animation-delay: -4.5s;
+    }
+
+    &--zero {
+      animation-delay: -2s;
+    }
+  }
+
+  .nf-q {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+    animation: nf-rise 4.5s ease-out infinite backwards;
+
+    text {
+      animation: nf-sway 1.9s ease-in-out infinite alternate;
+    }
+
+    &--2 {
+      animation-delay: -1.5s;
+
+      text {
+        animation-duration: 2.3s;
+      }
+    }
+
+    &--3 {
+      animation-delay: -3s;
+
+      text {
+        animation-duration: 2.1s;
+      }
+    }
+  }
+}
+
+@keyframes nf-bob {
+  from {
+    transform: translateY(-5px) scale(1);
+  }
+
+  to {
+    transform: translateY(5px) scale(1.04);
+  }
+}
+
+@keyframes nf-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.6);
+  }
+
+  15% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1);
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-56px) scale(1);
+  }
+}
+
+@keyframes nf-sway {
+  from {
+    transform: translateX(-7px);
+  }
+
+  to {
+    transform: translateX(7px);
+  }
 }

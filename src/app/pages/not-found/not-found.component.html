@@ -1,5 +1,5 @@
 <section class="not-found">
-  <svg class="nf-illustration" viewBox="0 0 320 240" role="img" [attr.aria-label]="'notFound.imageAlt' | translate">
+  <svg class="nf-illustration" viewBox="0 -60 320 300" role="img" [attr.aria-label]="'notFound.imageAlt' | translate">
     <ellipse class="nf-ground" cx="150" cy="222" rx="96" ry="9" />
 
     <g class="nf-float">
@@ -47,13 +47,25 @@
       <path class="nf-mouth" d="M140 157 q5 -5 10 0 t10 0" />
     </g>
 
-    <g class="nf-question">
-      <text class="nf-q--lime" x="52" y="80" font-size="42">?</text>
-      <text class="nf-q--cyan" x="90" y="54" font-size="26" transform="rotate(12 98 46)">?</text>
+    <g class="nf-digits">
+      <g class="nf-bob nf-bob--four"><path class="nf-digit nf-digit--orange" transform="translate(106 -6)" fill-rule="evenodd" d="M19 -47 H4 L-22 -17 V-6 H4 V0 H19 V-6 H25 V-17 H19 Z M4 -35 L-12 -17 H4 Z" /></g>
+      <g class="nf-bob nf-bob--zero"><path class="nf-digit nf-digit--lime" transform="translate(160 -6)" fill-rule="evenodd" d="M-19 -24 a19 24 0 1 0 38 0 a19 24 0 1 0 -38 0 Z M-8 -24 a8 13 0 1 0 16 0 a8 13 0 1 0 -16 0 Z" /></g>
+      <g class="nf-bob nf-bob--four-late"><path class="nf-digit nf-digit--orange" transform="translate(214 -6)" fill-rule="evenodd" d="M19 -47 H4 L-22 -17 V-6 H4 V0 H19 V-6 H25 V-17 H19 Z M4 -35 L-12 -17 H4 Z" /></g>
+    </g>
+
+    <g class="nf-questions">
+      <g transform="translate(104 92)">
+        <g class="nf-q nf-q--1"><text class="nf-q-lime" font-size="30" text-anchor="middle">?</text></g>
+      </g>
+      <g transform="translate(126 92) rotate(10)">
+        <g class="nf-q nf-q--2"><text class="nf-q-cyan" font-size="22" text-anchor="middle">?</text></g>
+      </g>
+      <g transform="translate(142 92)">
+        <g class="nf-q nf-q--3"><text class="nf-q-lime" font-size="26" text-anchor="middle">?</text></g>
+      </g>
     </g>
   </svg>
 
-  <p class="not-found__code">404</p>
   <h1 class="not-found__title">{{ 'notFound.title' | translate }}</h1>
   <p class="not-found__text">{{ 'notFound.text' | translate }}</p>
   <a class="not-found__home" routerLink="/">{{ 'notFound.home' | translate }}</a>
