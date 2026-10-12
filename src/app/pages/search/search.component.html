@@ -47,6 +47,8 @@
   </div>
 } @else if (queryControl.value.trim()) {
   <p class="search-empty">{{ 'search.empty' | translate }}</p>
+} @else {
+  <app-search-idle class="search-idle" />
 }
 
 <div #scrollSentinel class="search-scroll-sentinel"></div>

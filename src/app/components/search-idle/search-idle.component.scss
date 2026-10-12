@@ -1,0 +1,130 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.si-illustration {
+  width: min(340px, 100%);
+  height: auto;
+  overflow: visible;
+
+  --si-ink: var(--color-ink);
+  --si-body: var(--color-lime);
+  --si-eye: #fff;
+  --si-cyan: var(--color-cyan);
+  --si-orange: var(--color-orange);
+  --si-rose: var(--color-rose);
+  --si-light: #cbd5e1;
+}
+
+.si-ground {
+  fill: color-mix(in srgb, var(--color-text) 14%, transparent);
+}
+
+.si-cable {
+  fill: none;
+  stroke: var(--color-slate-text);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.si-handle {
+  fill: var(--si-orange);
+  stroke: var(--si-ink);
+  stroke-width: 3.5;
+}
+
+.si-rim {
+  fill: var(--si-body);
+  stroke: var(--si-ink);
+  stroke-width: 4;
+}
+
+.si-glass {
+  fill: color-mix(in srgb, var(--si-cyan) 35%, var(--color-bg));
+  stroke: var(--si-ink);
+  stroke-width: 3.5;
+}
+
+.si-glare {
+  fill: none;
+  stroke: var(--si-eye);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.si-pad-shadow {
+  fill: var(--si-ink);
+}
+
+.si-pad {
+  fill: var(--si-body);
+  stroke: var(--si-ink);
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+.si-dpad {
+  fill: var(--si-ink);
+}
+
+.si-btn {
+  stroke: var(--si-ink);
+  stroke-width: 3;
+
+  &--cyan {
+    fill: var(--si-cyan);
+  }
+
+  &--orange {
+    fill: var(--si-orange);
+  }
+
+  &--rose {
+    fill: var(--si-rose);
+  }
+
+  &--light {
+    fill: var(--si-light);
+  }
+}
+
+.si-eye-white {
+  fill: var(--si-eye);
+  stroke: var(--si-ink);
+  stroke-width: 4;
+}
+
+.si-pupil {
+  fill: var(--si-ink);
+}
+
+.si-brow,
+.si-mouth {
+  fill: none;
+  stroke: var(--si-ink);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+// Точка вращения — конец ручки, где к ней подходит кабель.
+.si-magnifier {
+  transform-origin: 304px 156px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .si-magnifier {
+    animation: si-sway 3s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes si-sway {
+  from {
+    transform: rotate(-8deg);
+  }
+
+  to {
+    transform: rotate(4deg);
+  }
+}

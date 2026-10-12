@@ -7,6 +7,7 @@ import { debounceTime, distinctUntilChanged, startWith } from 'rxjs/operators';
 import { GameFiltersComponent } from '../../components/game-filters/game-filters.component';
 import { GameRowComponent } from '../../components/game-row/game-row.component';
 import { GameRowSkeletonComponent } from '../../components/game-row-skeleton/game-row-skeleton.component';
+import { SearchIdleComponent } from '../../components/search-idle/search-idle.component';
 import { Game } from '../../models/game';
 import { TranslatePipe } from '../../pipes/translate.pipe';
 import { buildParentPlatformsParam } from '../../shared/platform-filter';
@@ -22,6 +23,7 @@ import { PlatformFilterService } from '../../services/platform-filter.service';
     GameFiltersComponent,
     GameRowComponent,
     GameRowSkeletonComponent,
+    SearchIdleComponent,
     TranslatePipe,
   ],
   templateUrl: './search.component.html',
