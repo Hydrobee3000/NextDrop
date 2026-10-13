@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, inject } fr
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LucideSearch, LucideX } from '@lucide/angular';
 import { Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, startWith } from 'rxjs/operators';
+import { debounceTime, startWith, tap } from 'rxjs/operators';
 
 import { GameFiltersComponent } from '../../components/game-filters/game-filters.component';
 import { GameRowComponent } from '../../components/game-row/game-row.component';
@@ -34,6 +34,7 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   private readonly platformFilter = inject(PlatformFilterService);
   private observer?: IntersectionObserver;
   private querySub?: Subscription;
+  private requestSub?: Subscription;
   private currentQuery = '';
   private page = 1;
   private hasMore = true;
@@ -58,7 +59,11 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.querySub = this.queryControl.valueChanges
-      .pipe(startWith(''), debounceTime(300), distinctUntilChanged())
+      .pipe(
+        startWith(''),
+        tap(() => this.cancelRequest()),
+        debounceTime(300)
+      )
       .subscribe((query) => this.startSearch(query.trim()));
 
     this.observer = new IntersectionObserver(
@@ -89,6 +94,7 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.observer?.disconnect();
     this.querySub?.unsubscribe();
+    this.requestSub?.unsubscribe();
   }
 
   clearQuery(): void {
@@ -107,6 +113,7 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
 
   // Новый запрос/фильтр — сбрасываем накопленные результаты и грузим первую страницу.
   private startSearch(query: string): void {
+    this.cancelRequest();
     this.currentQuery = query;
     this.page = 1;
     this.hasMore = true;
@@ -118,6 +125,13 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  // Отписка от HttpClient-запроса прерывает сам HTTP-запрос, и его ответ уже не попадёт в results.
+  private cancelRequest(): void {
+    this.requestSub?.unsubscribe();
+    this.requestSub = undefined;
+    this.loading = false;
+  }
+
   private loadMore(): void {
     if (this.loading || !this.hasMore || !this.currentQuery) {
       return;
@@ -126,7 +140,7 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
     this.loading = true;
     const parentPlatformId = buildParentPlatformsParam(this.activeFilter, this.excludedPlatforms);
 
-    this.gamesApi.searchGames(this.currentQuery, this.page, parentPlatformId).subscribe({
+    this.requestSub = this.gamesApi.searchGames(this.currentQuery, this.page, parentPlatformId).subscribe({
       next: ({ games: newResults, count }) => {
         this.results = [...this.results, ...newResults];
         this.totalCount = count;
