@@ -1,10 +1,10 @@
 :host {
-  display: flex;
-  justify-content: center;
+  display: block;
 }
 
 .si-illustration {
-  width: min(340px, 100%);
+  display: block;
+  width: 100%;
   height: auto;
   overflow: visible;
 

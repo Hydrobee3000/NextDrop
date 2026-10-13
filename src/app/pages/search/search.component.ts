@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, ViewChild, afterRender, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { LucideSearch, LucideX } from '@lucide/angular';
+import { LucideX } from '@lucide/angular';
 import { Subscription } from 'rxjs';
 import { debounceTime, startWith, tap } from 'rxjs/operators';
 
@@ -18,7 +18,6 @@ import { PlatformFilterService } from '../../services/platform-filter.service';
   selector: 'app-search',
   imports: [
     ReactiveFormsModule,
-    LucideSearch,
     LucideX,
     GameFiltersComponent,
     GameRowComponent,
@@ -32,6 +31,7 @@ import { PlatformFilterService } from '../../services/platform-filter.service';
 export class SearchComponent implements AfterViewInit, OnDestroy {
   private readonly gamesApi = inject(GamesApiService);
   private readonly platformFilter = inject(PlatformFilterService);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private observer?: IntersectionObserver;
   private querySub?: Subscription;
   private requestSub?: Subscription;
@@ -42,12 +42,23 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   // Пустой div внизу страницы, за которым следит IntersectionObserver.
   @ViewChild('scrollSentinel') private scrollSentinel?: ElementRef<HTMLElement>;
 
+  // Картинка живёт в одном месте, а переезжает между двумя «якорями»: свободной областью (запрос пустой) и слотом справа от инпута.
+  @ViewChild(SearchIdleComponent, { read: ElementRef }) private mascot?: ElementRef<HTMLElement>;
+  @ViewChild('mascotSlot') private mascotSlot?: ElementRef<HTMLElement>;
+  @ViewChild('idleArea') private idleArea?: ElementRef<HTMLElement>;
+  private mascotAnimated = false;
+
   readonly queryControl = new FormControl('', { nonNullable: true });
   readonly skeletonRows = [1, 2, 3];
 
   results: Game[] = [];
   totalCount = 0;
   loading = false;
+
+  constructor() {
+    // После каждой отрисовки idleArea могла появиться или исчезнуть — переставляем картинку.
+    afterRender(() => this.placeMascot());
+  }
 
   get activeFilter(): string {
     return this.platformFilter.activeFilter();
@@ -91,6 +102,11 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
     this.observer.observe(element);
   }
 
+  @HostListener('window:resize')
+  onResize(): void {
+    this.placeMascot();
+  }
+
   ngOnDestroy(): void {
     this.observer?.disconnect();
     this.querySub?.unsubscribe();
@@ -122,6 +138,29 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
 
     if (query) {
       this.loadMore();
+    }
+  }
+
+  private placeMascot(): void {
+    const mascot = this.mascot?.nativeElement;
+    const anchor = (this.idleArea ?? this.mascotSlot)?.nativeElement;
+    if (!mascot || !anchor) {
+      return;
+    }
+
+    const hostRect = this.host.nativeElement.getBoundingClientRect();
+    const box = anchor.getBoundingClientRect();
+    const width = mascot.offsetWidth;
+    const height = mascot.offsetHeight;
+    const scale = Math.min(1, box.width / width, box.height / height);
+    const x = box.left - hostRect.left + (box.width - width * scale) / 2;
+    const y = box.top - hostRect.top + (box.height - height * scale) / 2;
+    mascot.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+
+    // Первую расстановку делаем без анимации, иначе картинка выезжала бы из левого верхнего угла.
+    if (!this.mascotAnimated) {
+      this.mascotAnimated = true;
+      requestAnimationFrame(() => mascot.classList.add('search-mascot--animated'));
     }
   }
 

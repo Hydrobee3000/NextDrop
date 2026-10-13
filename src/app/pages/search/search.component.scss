@@ -1,4 +1,5 @@
 :host {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -11,25 +12,19 @@
   margin-bottom: var(--space-6);
 }
 
-.search-input-icon {
+.search-mascot-slot {
   position: absolute;
   top: 50%;
-  left: 14px;
+  left: 10px;
+  width: 68px;
+  height: 30px;
   transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  color: color-mix(in srgb, var(--color-text) 55%, transparent);
   pointer-events: none;
-  transition: color 0.15s ease;
-
-  &--active {
-    color: var(--color-lime-text);
-  }
 }
 
 .search-input {
   width: 100%;
-  padding: 10px 44px 10px 38px;
+  padding: 10px 44px 10px 86px;
   font: inherit;
   font-size: 15px;
   color: var(--color-text);
@@ -96,9 +91,24 @@
   color: color-mix(in srgb, var(--color-text) 55%, transparent);
 }
 
-.search-idle {
+.search-idle-area {
   flex: 1;
-  align-items: center;
+  min-height: 200px;
+}
+
+.search-mascot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 340px;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .search-mascot--animated {
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 }
 
 .search-scroll-sentinel {
