@@ -8,7 +8,7 @@
 />
 
 <div class="search-input-wrap">
-  <svg class="search-input-icon" [class.search-input-icon--active]="queryControl.value" lucideSearch></svg>
+  <div #mascotSlot class="search-mascot-slot"></div>
   <input
     class="search-input"
     type="text"
@@ -48,7 +48,9 @@
 } @else if (queryControl.value.trim()) {
   <p class="search-empty">{{ 'search.empty' | translate }}</p>
 } @else {
-  <app-search-idle class="search-idle" />
+  <div #idleArea class="search-idle-area"></div>
 }
 
 <div #scrollSentinel class="search-scroll-sentinel"></div>
+
+<app-search-idle class="search-mascot" />
