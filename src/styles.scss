@@ -165,11 +165,12 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: var(--tactile-shadow-lg);
   overflow: hidden;
   cursor: pointer;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 
   &:hover {
     border-color: var(--color-lime-text);
-    transform: translateY(-2px);
+    transform: translateY(2px);
+    box-shadow: var(--tactile-shadow-md);
   }
 }
 
