@@ -54,6 +54,8 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   results: Game[] = [];
   totalCount = 0;
   loading = false;
+  // Текст введён, но debounce ещё не отпустил запрос — показываем скелетоны, а не «Ничего не нашлось».
+  pending = false;
 
   constructor() {
     // После каждой отрисовки idleArea могла появиться или исчезнуть — переставляем картинку.
@@ -72,7 +74,10 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
     this.querySub = this.queryControl.valueChanges
       .pipe(
         startWith(''),
-        tap(() => this.cancelRequest()),
+        tap((query) => {
+          this.cancelRequest();
+          this.pending = query.trim() !== '';
+        }),
         debounceTime(300)
       )
       .subscribe((query) => this.startSearch(query.trim()));
@@ -130,6 +135,7 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   // Новый запрос/фильтр — сбрасываем накопленные результаты и грузим первую страницу.
   private startSearch(query: string): void {
     this.cancelRequest();
+    this.pending = false;
     this.currentQuery = query;
     this.page = 1;
     this.hasMore = true;

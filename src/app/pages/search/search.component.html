@@ -39,7 +39,7 @@
       }
     }
   </div>
-} @else if (loading) {
+} @else if (loading || pending) {
   <div class="search-results">
     @for (row of skeletonRows; track row) {
       <app-game-row-skeleton />
