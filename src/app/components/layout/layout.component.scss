@@ -179,9 +179,8 @@
     &.active {
       color: var(--color-ink);
       background: var(--color-lime);
-      border: 2px solid var(--color-ink);
+      border-color: var(--color-ink);
       box-shadow: var(--tactile-shadow-md);
-      padding: 4px 12px;
 
       &:hover {
         background: var(--color-lime-hover);
