@@ -41,8 +41,8 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
 
   // Пустой div внизу страницы, за которым следит IntersectionObserver.
   @ViewChild('scrollSentinel') private scrollSentinel?: ElementRef<HTMLElement>;
+  @ViewChild('searchInput') private searchInput?: ElementRef<HTMLInputElement>;
 
-  // Картинка живёт в одном месте, а переезжает между двумя «якорями»: свободной областью (запрос пустой) и слотом справа от инпута.
   @ViewChild(SearchIdleComponent, { read: ElementRef }) private mascot?: ElementRef<HTMLElement>;
   @ViewChild('mascotSlot') private mascotSlot?: ElementRef<HTMLElement>;
   @ViewChild('idleArea') private idleArea?: ElementRef<HTMLElement>;
@@ -71,6 +71,11 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    // Только там, где есть мышь: на тач-устройствах фокус открыл бы клавиатуру на пол-экрана при каждом заходе.
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      this.searchInput?.nativeElement.focus();
+    }
+
     this.querySub = this.queryControl.valueChanges
       .pipe(
         startWith(''),
