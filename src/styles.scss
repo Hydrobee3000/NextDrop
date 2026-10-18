@@ -127,6 +127,12 @@ body {
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   scrollbar-color: var(--color-lime-text) var(--color-bg);
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M4 3v18l5-4.5 3.3 7.5 3.3-1.4-3.2-7.3H19z' fill='%23c3f400' stroke='%23020617' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") 4 3, auto;
+}
+
+input,
+textarea {
+  cursor: text;
 }
 
 ::-webkit-scrollbar {
