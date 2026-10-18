@@ -21,7 +21,9 @@ npx ng test --watch=false --browsers=ChromeHeadless
 npx ng test --include src/app/path/to/file.spec.ts --watch=false --browsers=ChromeHeadless
 ```
 
-`ng test` needs the `CHROME_BIN` environment variable pointing to Chrome. CI (`.github/workflows/ci.yml`) runs the typecheck and the build on every PR.
+`ng test` needs the `CHROME_BIN` environment variable pointing to Chrome.
+
+CI (`.github/workflows/ci.yml`, job `build`) runs the typecheck, the unit tests and the build on every PR. The `Protect main` ruleset blocks merging a PR into `main` until this check is green, so run all three locally before pushing.
 
 The build warns that `game-detail-modal.component.scss` exceeds its budget. This is known and not an error.
 
@@ -57,7 +59,7 @@ Issues, commits, PRs and documentation are written in English.
 
 1. **Issue.** Conventional-commit style title, lowercase after the type, no scope: `feat: …`, `fix: …`, `style: …`, `test: …`, `docs: …`. The body briefly says what needs to be done, not how. Assign it and add it to the `NextDrop` project.
 2. **Branch** off an up-to-date `main`: `<type>/<issue-number>-<slug>`, e.g. `feat/322-search-mascot-dock`. No changes directly on `main`.
-3. **Changes** belong to that issue only, with no unrelated edits. Before committing, run the typecheck and the build, plus tests when logic changed.
+3. **Changes** belong to that issue only, with no unrelated edits. Before committing, run the typecheck, the tests and the build.
 4. **Commit:** `<type>: <description> (#<issue-number>)`.
 5. **PR:** the same title as the issue. The body briefly lists what changed and ends with `Closes #<issue-number>`. Don't describe how it was verified ("tests pass", "checked in the browser"). Assign it and add it to the `NextDrop` project.
 6. **Merge:** squash with branch deletion (`gh pr merge <N> --squash --delete-branch`).
