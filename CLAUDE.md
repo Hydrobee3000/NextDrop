@@ -27,6 +27,10 @@ CI (`.github/workflows/ci.yml`, job `build`) runs the typecheck, the unit tests 
 
 The build warns that `game-detail-modal.component.scss` exceeds its budget. This is known and not an error.
 
+## Browser checks
+
+`.mcp.json` connects the Playwright MCP server (pinned version, headless, isolated profile). Use it to check UI changes in a real browser against the dev server: typing, hovering, navigating, both themes, mobile width. Screenshots alone don't show interactions or animations.
+
 ## Structure
 
 - `src/app/pages/`: pages (`home`, `search`, `favorites`, `not-found`).
