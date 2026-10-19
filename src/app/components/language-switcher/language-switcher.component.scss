@@ -5,7 +5,7 @@
 
 .language-switcher__trigger {
   position: relative;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 11px;
@@ -60,7 +60,7 @@
 }
 
 .language-switcher__option {
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 11px;

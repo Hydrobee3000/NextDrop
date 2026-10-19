@@ -23,7 +23,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 12px;
@@ -77,7 +77,7 @@
 }
 
 .favorites-sort__option {
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: 12px;
@@ -121,7 +121,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 13px;

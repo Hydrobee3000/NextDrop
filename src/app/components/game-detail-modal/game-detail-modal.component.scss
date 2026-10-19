@@ -48,7 +48,7 @@
   bottom: 8px;
   right: 4px;
   width: 6px;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 }
 
 .game-detail-dialog-scrollbar-thumb {
@@ -154,7 +154,7 @@
   background: color-mix(in srgb, var(--color-slate-bg) 55%, transparent);
   border: 2px solid var(--color-slate-border);
   color: var(--color-text);
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 
   svg {
     width: 17px;
@@ -215,7 +215,7 @@
   background: var(--color-slate-surface-hover);
   box-shadow: 0 0 0 1px var(--color-slate-border);
   opacity: 0.55;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   transition: opacity 0.15s, box-shadow 0.15s;
 
   img {
@@ -469,7 +469,7 @@
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 12.5px;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 
   &:hover {
     color: var(--color-lime-text-hover);
@@ -608,7 +608,7 @@
   background: color-mix(in srgb, var(--color-slate-bg) 70%, transparent);
   border: 2px solid var(--color-slate-border);
   color: #fff;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   transition: border-color 0.15s ease;
 
   svg {
@@ -634,7 +634,7 @@
   background: color-mix(in srgb, var(--color-slate-bg) 70%, transparent);
   border: 2px solid var(--color-slate-border);
   color: #fff;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   transition: border-color 0.15s ease;
 
   svg {
@@ -689,7 +689,7 @@
   border: none;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.35);
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   transition: background 0.15s ease;
 
   &:hover {

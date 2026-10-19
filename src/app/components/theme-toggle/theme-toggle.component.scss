@@ -9,7 +9,7 @@
   width: 30px;
   height: 30px;
   padding: 0;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   border-radius: var(--radius-tactile-btn);
   background: var(--color-slate-bg);
   border: 2px solid var(--color-lime-text);

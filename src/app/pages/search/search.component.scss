@@ -55,7 +55,7 @@
   border: 2px solid var(--color-slate-border);
   box-shadow: var(--tactile-shadow-sm);
   color: var(--color-slate-text);
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
 
   svg {
