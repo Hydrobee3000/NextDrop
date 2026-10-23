@@ -41,6 +41,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Playwright MCP page snapshots and console logs
+/.playwright-mcp
+
 # Design references (not part of the app)
 /design
 *.dc.html
