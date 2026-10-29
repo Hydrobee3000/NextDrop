@@ -70,6 +70,19 @@ Issues, commits, PRs and documentation are written in English.
 
 **Never add AI attribution to commits or PRs** (`Co-Authored-By: Claude …`, "Generated with Claude Code" and the like), even if a tool adds it by default.
 
+## Agent pipeline
+
+Project subagents live in `.claude/agents/`. Each runs with its own empty context and sees only the task text and this file, so write the task text with everything it needs.
+
+1. **Issue and branch** are created first (see Workflow).
+2. **`implementer`** makes the change and runs the typecheck, tests and build. It never commits.
+3. **`reviewer`** (read-only) reviews the diff against this file and reports findings. Fix valid findings by running `implementer` again with the findings as the task.
+4. The maintainer looks at the result after the review.
+5. **`tester`** writes the unit tests for the change and proves they catch regressions.
+6. Commit, PR and merge, once the full suite is green.
+
+Each new task starts from step 1 with fresh agents; nothing carries over except what is in the repo.
+
 ## AI review of PRs
 
 When reviewing a PR, check first:
